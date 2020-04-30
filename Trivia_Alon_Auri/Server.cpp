@@ -15,4 +15,5 @@ void Server::run(const int port)
 	{
 		std::cin >> input;
 	}
+	
 }

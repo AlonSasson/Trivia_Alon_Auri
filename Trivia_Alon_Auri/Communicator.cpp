@@ -60,14 +60,17 @@ void Communicator::bindAndListen(const int port)
 // starts handling requests from clients
 void Communicator::startHandleRequests(const int port)
 {
-	SOCKET client_socket;
+	SOCKET clientSocket;
 
 	bindAndListen(port); 
 	while (true) // accept new clients that join and send them to handler
 	{
-		client_socket = ::accept(this->m_serverSocket, NULL, NULL);
-		this->m_clients[client_socket] = (IRequestHandler*)(new LoginRequestHandler()); // add client socket and request handler to client map
-		thread(&Communicator::handleNewClient, this, client_socket).detach(); 
+		clientSocket = ::accept(this->m_serverSocket, NULL, NULL);
+		if (clientSocket == INVALID_SOCKET) // if client couldn't be accepted
+			throw exception(__FUNCTION__ " - Failed to accept client");
+		cout << "Client accepted!" << endl;
+		this->m_clients[clientSocket] = (IRequestHandler*)(new LoginRequestHandler()); // add client socket and request handler to client map
+		thread(&Communicator::handleNewClient, this, clientSocket).detach();
 	}
 }
 
@@ -76,23 +79,23 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	string data;
 	char buffer[DATA_SIZE];
-
-	if (clientSocket == INVALID_SOCKET)
-	{
-		cerr << "Failed to accept client";
-		_exit(1);
-	}
-	cout << "Client accepted!" << endl;
-
+	
 	data = "Hello";
 	if (send(clientSocket, data.c_str(), data.size(), NULL) == INVALID_SOCKET) // if sending the data failed
+	{
 		cerr << "Failed to send data to client";
+		_exit(1);
+	}
 
 	if (recv(clientSocket, buffer, DATA_SIZE, NULL) == INVALID_SOCKET) // if recieving the data failed
+	{
 		cerr << "Failed to read data from socket";
+		_exit(1);
+	}
 	data = buffer;
+	data = data.substr(0, DATA_SIZE);
 
-	cout << "Client" + std::to_string(clientSocket) + ": " + data << endl;
+	cout << "Client " + std::to_string(clientSocket) + ": " + data << endl;
 
 }
 
