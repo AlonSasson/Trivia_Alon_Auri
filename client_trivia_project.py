@@ -107,8 +107,9 @@ def main():
         else:
             print("Error, invalid message")
             continue
-        # data = receive_response(sock)
-        # print(data)
+        data = json.loads(receive_response(sock)) #turn json data into string
+        data = json.loads(data) # turn string to dictionary
+        print(data)
     sock.close()
 
 if __name__ == "__main__":
