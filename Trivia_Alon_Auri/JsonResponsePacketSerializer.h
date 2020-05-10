@@ -10,7 +10,7 @@ public:
 	/*
 		serialize login response 
 	*/
-	static char* serializeResponse(ns::LoginResponse respone)
+	static char* serializeResponse(LoginResponse respone)
 	{
 		nlohmann::json j = respone;
 		char* buffer = new char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
@@ -22,7 +22,7 @@ public:
 	/*
 		serialize sign up response
 	*/
-	static char* serializeResponse(ns::SignupResponse respone)
+	static char* serializeResponse(SignupResponse respone)
 	{
 		nlohmann::json j = respone;
 		char* buffer = new char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
@@ -34,7 +34,7 @@ public:
 	/*
 		serialize error response 
 	*/
-	static char* serializeResponse(ns::ErrorResponse respone)
+	static char* serializeResponse(ErrorResponse respone)
 	{
 		nlohmann::json j = respone;
 		char* buffer = new char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
@@ -50,16 +50,14 @@ private:
 	static char* convertToGetLength(int len)
 	{
 		char* buffer = new char[4];
-		int count = 0;
+		int i = 0;
 		const int byteSize = 256;
 		int addToBuffer;
-		while (len > 0)
+		for (i = 0; i < 4 ; i++)
 		{
 			addToBuffer = len % byteSize;
 			len /= byteSize;
-			buffer[3 - count] = addToBuffer;
-			count++;
-
+			buffer[3 - i] = addToBuffer;
 		}
 		return buffer;
 	}
