@@ -9,10 +9,11 @@ LEN_SIZE = 4
 
 USERNAME = "username"
 PASSWORD = "password"
-EMAIL = "mail"
+EMAIL = "email"
 
-SIGNUP_CODE = 100
-LOGIN_CODE = 110
+EXIT_CODE = 0
+SIGNUP_CODE = 1
+LOGIN_CODE = 2
 
 """ Deserialize response data buffer into json data
     :param data_buffer (bytes): response data from server
@@ -76,6 +77,14 @@ def send_signup_request(sock):
     json_data = json.dumps({USERNAME: username, PASSWORD: password, EMAIL: email})
     send_request(SIGNUP_CODE, sock, json_data)
 
+""" Prints the choice menu"""
+def print_menu():
+    print(""" Please choose one of these options:
+0. Exit
+1. Signup
+2. Login 
+""")
+
 def main():
     try:
         sock = socket.socket(socket.AF_INET , socket.SOCK_STREAM)
@@ -85,13 +94,22 @@ def main():
     except Exception as e:
         print("problem to connect to server: ", e)
         return -1
-    #data = receive_response(sock)
-    #print(data)
-    send_login_request(sock)
-    send_signup_request(sock)
+    while True:
+        print_menu()
+        choice = int(input())
+        if choice == EXIT_CODE:
+            print("Goodbye.")
+            break
+        elif choice == SIGNUP_CODE:
+            send_signup_request(sock)
+        elif choice == LOGIN_CODE:
+            send_login_request(sock)
+        else:
+            print("Error, invalid message")
+            continue
+        # data = receive_response(sock)
+        # print(data)
     sock.close()
-
-
 
 if __name__ == "__main__":
     main()
