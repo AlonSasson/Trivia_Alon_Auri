@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{D3B3BAF3-3356-4379-9985-C86FDA77BF1B}</ProjectGuid>
+    <ProjectGuid>{E73155E9-4206-4DDB-AC29-000A5BFAE61A}</ProjectGuid>
     <RootNamespace>TriviaAlonAuri</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -123,13 +123,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Helper.h" />
+    <ClInclude Include="Communicator.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="JsonRequestPacketDeserializer.h" />
+    <ClInclude Include="RequestHandlers.h" />
+    <ClInclude Include="Requests.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="WSAInitializer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="Communicator.cpp" />
+    <ClCompile Include="JsonRequestPacketDeserializer.cpp" />
+    <ClCompile Include="Requests.cpp" />
     <ClCompile Include="Server.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="WSAInitializer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
