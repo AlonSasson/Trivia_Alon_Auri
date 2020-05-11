@@ -1,3 +1,4 @@
+#pragma once
 #include "RequestHandlers.h"
 #include <WinSock2.h>
 #include <Windows.h>
@@ -15,6 +16,7 @@ public:
 	
 private:
 	void handleNewClient(SOCKET clientSocket); // handles requests from a client
+	unsigned int decodeRequestLen(char* buffer); // converts the request length from bytes to int
 
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	SOCKET m_serverSocket;

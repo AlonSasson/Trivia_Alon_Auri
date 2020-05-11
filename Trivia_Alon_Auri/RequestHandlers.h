@@ -1,4 +1,7 @@
-
+#pragma once
+#include "Requests.h"
+#include <ctime>
+#include <iostream>
 
 class IRequestHandler
 {
@@ -9,3 +12,4 @@ class LoginRequestHandler
 {
 	// empty
 };
+
