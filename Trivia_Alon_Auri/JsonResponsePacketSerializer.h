@@ -3,6 +3,10 @@
 #include "json.hpp"
 #include "Respone.h"
 
+#define ERROR_MSG_ID 0
+#define SIGN_UP_ID 1
+#define LOGIN_ID 2
+
 #define LENGTH_OF_CONST_PACKET_DATA 5
 class JsonResponsePacketSerializer
 {
@@ -14,7 +18,7 @@ public:
 	{
 		nlohmann::json j = respone;
 		char* buffer = new char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
-		buffer[0] = 1;
+		buffer[0] = LOGIN_ID;
 		std::memcpy((buffer + 1) , convertToGetLength(j.dump().length()) , 4);
 		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
 		return buffer;
@@ -26,7 +30,7 @@ public:
 	{
 		nlohmann::json j = respone;
 		char* buffer = new char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
-		buffer[0] = 2;
+		buffer[0] = SIGN_UP_ID;
 		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
 		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
 		return buffer;
@@ -38,7 +42,7 @@ public:
 	{
 		nlohmann::json j = respone;
 		char* buffer = new char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
-		buffer[0] = 3;
+		buffer[0] = LOGIN_ID;
 		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
 		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
 		return buffer;
