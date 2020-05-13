@@ -37,6 +37,7 @@ Communicator::~Communicator()
 		for (it = this->m_clients.begin(); it != this->m_clients.end(); it++) // close all client sockets
 		{
 			closesocket(it->first);
+			delete it->second;
 		}
 	}
 	catch (...) {}
@@ -75,7 +76,7 @@ void Communicator::startHandleRequests(const int port)
 		if (clientSocket == INVALID_SOCKET) // if client couldn't be accepted
 			cerr << __FUNCTION__ " - Failed to accept client" << endl;
 		cout << "Client accepted!" << endl;
-		this->m_clients[clientSocket] = (IRequestHandler*)(new LoginRequestHandler()); // add client socket and request handler to client map
+		this->m_clients[clientSocket] = new LoginRequestHandler(); // add client socket and request handler to client map
 		thread(&Communicator::handleNewClient, this, clientSocket).detach();
 	}
 }
@@ -87,53 +88,54 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 	time_t receivalTime;
 	char * buffer;
 	RequestInfo requestInfo;
+	RequestResult requestResult;
 	
 	while (true)
 	{
 		buffer = new char[CODE_SIZE];
 		if (recv(clientSocket, buffer, CODE_SIZE, NULL) == INVALID_SOCKET) // if recieving the code failed
+		{
 			cerr << "Failed to read code from socket\n";
-			
+			delete[] buffer;
+			break;
+		}	
 		requestInfo.receivalTime = time(&receivalTime);
 		requestInfo.id = buffer[0];
-		if (requestInfo.id != 110 && requestInfo.id != 100)
+
+		buffer = new char[LEN_SIZE];
+		if (recv(clientSocket, buffer, LEN_SIZE, NULL) == INVALID_SOCKET) // if recieving the length failed
 		{
-			closesocket(clientSocket);
-			cerr << "Client " << clientSocket << " Disconnected" << endl;
+			cerr << "Failed to read code from socket\n";
 			delete[] buffer;
 			break;
 		}
-		
-		buffer = new char[LEN_SIZE];
-		if (recv(clientSocket, buffer, LEN_SIZE, NULL) == INVALID_SOCKET) // if recieving the length failed
-			cerr << "Failed to read length from socket\n";
 		len = decodeRequestLen(buffer);
 		delete[] buffer;
 
 		buffer = new char[len];
 		requestInfo.buffer = new char[len+1];
 		if (recv(clientSocket, buffer, len, NULL) == INVALID_SOCKET) // if recieving the json data failed
-			cerr << "Failed to read json data from socket\n";
+		{
+			cerr << "Failed to read code from socket\n";
+			delete[] buffer;
+			break;
+		}
 		std::memcpy(requestInfo.buffer, buffer, len); // deep copy json data
 		requestInfo.buffer[len] = NULL;
 		delete[] buffer;
 
-		if (requestInfo.id == 110)
-		{
-			LoginRequest req = JsonRequestPacketDeserializer::deserializeLoginRequest(requestInfo.buffer);
-			cout << req.username << " " << req.password << endl;
-		}
-		else if (requestInfo.id == 100)
-		{
-			SignupRequest req = JsonRequestPacketDeserializer::deserializeSignupRequest(requestInfo.buffer);
-			cout << req.username << " " << req.password << " " << req.email << endl;
-		}
-		delete[] requestInfo.buffer;		
-		
-		//if (send(clientSocket, buffer, len, NULL) == INVALID_SOCKET) // if sending the data failed
-			//cerr << "Failed to send data to client";
+		requestResult = m_clients[clientSocket]->handleRequest(requestInfo); // send the request to the client's current handler
+		delete m_clients[clientSocket];
+		m_clients[clientSocket] = requestResult.newHandler; // set the client's new handler
+		delete[] requestInfo.buffer;
+
+		len = CODE_SIZE + LEN_SIZE + decodeRequestLen(&requestResult.response[CODE_SIZE]) ; // get response length
+		if (send(clientSocket, requestResult.response, len, NULL) == INVALID_SOCKET) // if sending the data failed
+			cerr << "Failed to send data to client";
+		delete[] requestResult.response;
 	}
-	
+	closesocket(clientSocket);
+	cerr << "Client " << clientSocket << " Disconnected" << endl;
 
 }
 
