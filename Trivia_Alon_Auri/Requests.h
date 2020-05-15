@@ -14,6 +14,9 @@ typedef struct SignupRequest
 	std::string username;
 	std::string password;
 	std::string email;
+	std::string address;
+	std::string phoneNumber;
+	std::string birthDate;
 
 } SignupRequest;
 
@@ -21,7 +24,7 @@ typedef struct RequestInfo
 {
 	int id;
 	time_t receivalTime;
-	char* buffer;
+	unsigned char* buffer;
 } RequestInfo;
 
 

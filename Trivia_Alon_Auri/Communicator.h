@@ -16,7 +16,7 @@ public:
 	
 private:
 	void handleNewClient(SOCKET clientSocket); // handles requests from a client
-	unsigned int decodeRequestLen(char* buffer); // converts the request length from bytes to int
+	unsigned int decodeRequestLen(unsigned char* buffer); // converts the request length from bytes to int
 
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	SOCKET m_serverSocket;

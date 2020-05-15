@@ -86,14 +86,14 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	unsigned int len = 0;
 	time_t receivalTime;
-	char * buffer;
+	unsigned char * buffer;
 	RequestInfo requestInfo;
 	RequestResult requestResult;
 	
 	while (true)
 	{
-		buffer = new char[CODE_SIZE];
-		if (recv(clientSocket, buffer, CODE_SIZE, NULL) == INVALID_SOCKET) // if recieving the code failed
+		buffer = new unsigned char[CODE_SIZE];
+		if (recv(clientSocket, (char* )buffer, CODE_SIZE, NULL) == INVALID_SOCKET) // if recieving the code failed
 		{
 			cerr << "Failed to read code from socket\n";
 			delete[] buffer;
@@ -102,8 +102,8 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		requestInfo.receivalTime = time(&receivalTime);
 		requestInfo.id = buffer[0];
 
-		buffer = new char[LEN_SIZE];
-		if (recv(clientSocket, buffer, LEN_SIZE, NULL) == INVALID_SOCKET) // if recieving the length failed
+		buffer = new unsigned char[LEN_SIZE];
+		if (recv(clientSocket, (char*)buffer, LEN_SIZE, NULL) == INVALID_SOCKET) // if recieving the length failed
 		{
 			cerr << "Failed to read code from socket\n";
 			delete[] buffer;
@@ -112,9 +112,9 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		len = decodeRequestLen(buffer);
 		delete[] buffer;
 
-		buffer = new char[len];
-		requestInfo.buffer = new char[len+1];
-		if (recv(clientSocket, buffer, len, NULL) == INVALID_SOCKET) // if recieving the json data failed
+		buffer = new unsigned char[len];
+		requestInfo.buffer = new unsigned char[len+1];
+		if (recv(clientSocket, (char*)buffer, len, NULL) == INVALID_SOCKET) // if recieving the json data failed
 		{
 			cerr << "Failed to read code from socket\n";
 			delete[] buffer;
@@ -130,7 +130,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		delete[] requestInfo.buffer;
 
 		len = CODE_SIZE + LEN_SIZE + decodeRequestLen(&requestResult.response[CODE_SIZE]) ; // get response length
-		if (send(clientSocket, requestResult.response, len, NULL) == INVALID_SOCKET) // if sending the data failed
+		if (send(clientSocket, (char*)requestResult.response, len, NULL) == INVALID_SOCKET) // if sending the data failed
 			cerr << "Failed to send data to client";
 		delete[] requestResult.response;
 	}
@@ -140,7 +140,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 }
 
 // converts the request length from bytes to int
-unsigned int Communicator::decodeRequestLen(char* buffer)
+unsigned int Communicator::decodeRequestLen(unsigned char* buffer)
 {
 	int i = 0;
 	unsigned int len = 0;
