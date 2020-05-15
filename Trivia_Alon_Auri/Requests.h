@@ -1,8 +1,7 @@
 #pragma once
 #include "json.hpp"
-#include <ctime>
-#include <string>
 
+#include <string>
 typedef struct LoginRequest
 {
 	std::string username;
@@ -24,6 +23,7 @@ typedef struct RequestInfo
 	time_t receivalTime;
 	char* buffer;
 } RequestInfo;
+
 
 // convert json data to a request struct
 

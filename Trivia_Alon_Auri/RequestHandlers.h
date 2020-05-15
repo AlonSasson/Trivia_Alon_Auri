@@ -3,13 +3,24 @@
 #include <ctime>
 #include <iostream>
 
+class IRequestHandler;
+typedef struct RequestResult
+{
+	char* response;
+	IRequestHandler* newHandler;
+}RequestResult;
+
 class IRequestHandler
 {
-	// empty
+public:
+	virtual bool isRequestRelevant(RequestInfo request) = 0;
+	virtual RequestResult handleRequest(RequestInfo request) = 0;
 };
 
-class LoginRequestHandler
+class LoginRequestHandler : public IRequestHandler
 {
-	// empty
+public:
+	bool isRequestRelevant(RequestInfo request);
+	RequestResult handleRequest(RequestInfo request);
 };
 

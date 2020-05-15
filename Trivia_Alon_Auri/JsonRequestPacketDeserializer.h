@@ -1,6 +1,9 @@
 #pragma once
 #include "Requests.h"
 
+#define SIGN_UP_ID 1
+#define LOGIN_ID 2
+
 class JsonRequestPacketDeserializer
 {
 public:
