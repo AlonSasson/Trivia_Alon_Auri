@@ -5,9 +5,9 @@
 
 #define EXIT_MSG "EXIT"
 
-Server::Server()
+Server::Server():
+	m_database(new mongoDB), m_handlerFactory(m_database), m_communicator(m_handlerFactory)
 {
-	this->m_database = new mongoDB;
 }
 
 Server::~Server()

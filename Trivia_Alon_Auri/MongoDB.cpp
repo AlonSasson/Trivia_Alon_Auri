@@ -48,7 +48,7 @@ void mongoDB::open()
 	mongocxx::instance inst{};
 	mongocxx::client* client = new mongocxx::client{ mongocxx::uri{} };
 	this->client = client;
-	this->db = (*client)["mydb"];
+	this->db = (*client)["TriviaProjectDB"];
 	this->db["User"];
 }
 

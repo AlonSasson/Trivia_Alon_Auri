@@ -19,7 +19,8 @@ using std::exception;
 
 
 // C'TOR
-Communicator::Communicator()
+Communicator::Communicator(RequestHandlerFactory& handlerFactory):
+	m_handlerFactory(handlerFactory)
 {
 	this->m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
@@ -76,7 +77,7 @@ void Communicator::startHandleRequests(const int port)
 		if (clientSocket == INVALID_SOCKET) // if client couldn't be accepted
 			cerr << __FUNCTION__ " - Failed to accept client" << endl;
 		cout << "Client accepted!" << endl;
-		this->m_clients[clientSocket] = new LoginRequestHandler(); // add client socket and request handler to client map
+		this->m_clients[clientSocket] = this->m_handlerFactory.createLoginRequestHandler(); // add client socket and request handler to client map
 		thread(&Communicator::handleNewClient, this, clientSocket).detach();
 	}
 }
@@ -134,6 +135,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			cerr << "Failed to send data to client";
 		delete[] requestResult.response;
 	}
+	this->m_clients.erase(clientSocket); // remove client from client list
 	closesocket(clientSocket);
 	cerr << "Client " << clientSocket << " Disconnected" << endl;
 
