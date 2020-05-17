@@ -20,13 +20,16 @@ LoginManager::LoginManager(IDatabase* database)
 // logs in a user
 unsigned int LoginManager::login(std::string username, std::string password)
 {
+	this->m_dbLock.lock(); // lock when accessing db
 	if (this->m_database->doesPasswordMatch(username, password))
 	{
+		this->m_dbLock.unlock();
 		this->m_loggedUsers.push_back(LoggedUser(username));
 		return OK;
 	}
 	else
 	{
+		this->m_dbLock.unlock();
 		return WRONG_DETAILS;
 	}
 }
@@ -39,14 +42,19 @@ unsigned int LoginManager::signup(std::string username, std::string password, st
 	if (infoValidationResult != OK) // if the info wasn't valid
 		return infoValidationResult;
 
+	this->m_dbLock.lock(); // lock when accessing db
 	if (this->m_database->addNewUser(username, password, email, address, phoneNumber, birthDate))
 	{
+		this->m_dbLock.unlock(); 
+		this->m_loggedUsers.push_back(LoggedUser(username));
 		return OK;
 	}
 	else
 	{
+		this->m_dbLock.unlock();
 		return USERS_ALREADY_EXIST;
 	}
+		
 
 }
 
@@ -66,10 +74,6 @@ unsigned int LoginManager::logout(std::string username)
 	if (userExist == false) //if the user name was not found return much status code
 	{
 		return USER_DOESNT_EXIST;
-	}
-	else
-	{
-		return OK;
 	}
 	return OK;
 }

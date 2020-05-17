@@ -1,8 +1,10 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <mutex>
 #include "LoggedUser.h"
 #include "IdataBase.h"
+
 class LoginManager
 {
 public:
@@ -14,4 +16,5 @@ private:
 	unsigned int validateInfo(std::string password, std::string email, std::string address, std::string phoneNumber, std::string birthDate);
 	std::vector<LoggedUser> m_loggedUsers;
 	IDatabase* m_database;
+	std::mutex m_dbLock;
 };

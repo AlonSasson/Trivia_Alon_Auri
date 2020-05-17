@@ -1,5 +1,5 @@
 #pragma once
-#include "RequestHandlers.h"
+#include "RequestHandlerFactory.h"
 #include <WinSock2.h>
 #include <Windows.h>
 #include <map>
@@ -8,7 +8,7 @@
 class Communicator
 {
 public:
-	Communicator(); // C'TOR
+	Communicator(RequestHandlerFactory& handlerFactory); // C'TOR
 	~Communicator(); // D'TOR
 
 	void bindAndListen(const int port); // bind and listen on server socket
@@ -20,4 +20,5 @@ private:
 
 	std::map<SOCKET, IRequestHandler*> m_clients;
 	SOCKET m_serverSocket;
+	RequestHandlerFactory& m_handlerFactory;
 };
