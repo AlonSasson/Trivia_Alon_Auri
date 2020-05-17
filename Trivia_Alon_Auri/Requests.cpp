@@ -13,5 +13,8 @@ void from_json(const json& j, LoginRequest& request) {
 void from_json(const json& j, SignupRequest& request) {
 	j.at("username").get_to(request.username);
 	j.at("password").get_to(request.password);
-	j.at("email").get_to(request.email);
-} 
+	j.at("mail").get_to(request.email);
+	j.at("address").get_to(request.address);
+	j.at("phone_number").get_to(request.phoneNumber);
+	j.at("birthday").get_to(request.birthDate);
+}

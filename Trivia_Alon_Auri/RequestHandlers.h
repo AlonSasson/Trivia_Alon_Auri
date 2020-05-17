@@ -6,7 +6,7 @@
 class IRequestHandler;
 typedef struct RequestResult
 {
-	char* response;
+	unsigned char* response;
 	IRequestHandler* newHandler;
 }RequestResult;
 

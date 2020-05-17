@@ -7,6 +7,6 @@
 class JsonRequestPacketDeserializer
 {
 public:
-	static LoginRequest deserializeLoginRequest(char* buffer); // deserializes json from requests into structs
-	static SignupRequest deserializeSignupRequest(char* buffer);
+	static LoginRequest deserializeLoginRequest(unsigned char* buffer); // deserializes json from requests into structs
+	static SignupRequest deserializeSignupRequest(unsigned char* buffer);
 };

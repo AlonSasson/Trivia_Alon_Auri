@@ -27,5 +27,5 @@ void Server::run(const int port)
 	{
 		std::cin >> input;
 	}
-	m_database->close();
+	this->m_database->close();
 }

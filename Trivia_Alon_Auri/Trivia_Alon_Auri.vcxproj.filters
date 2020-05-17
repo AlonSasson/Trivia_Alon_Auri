@@ -42,10 +42,10 @@
     <ClInclude Include="Respone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDatabase.h">
+    <ClInclude Include="LoginManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MongoDB.h">
+    <ClInclude Include="LoggedUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,7 +71,10 @@
     <ClCompile Include="RequestHandlers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MongoDB.cpp">
+    <ClCompile Include="LoginManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggedUser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
