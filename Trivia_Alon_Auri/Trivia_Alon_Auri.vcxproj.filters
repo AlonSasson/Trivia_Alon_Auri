@@ -45,6 +45,15 @@
     <ClInclude Include="LoginManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IdataBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MongoDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggedUser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Server.cpp">
@@ -69,6 +78,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LoginManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mongoDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggedUser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

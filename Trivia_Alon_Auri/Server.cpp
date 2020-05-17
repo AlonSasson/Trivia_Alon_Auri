@@ -1,3 +1,4 @@
+#include "MongoDB.h"
 #include "Server.h"
 #include <thread>
 #include <iostream>
@@ -15,5 +16,5 @@ void Server::run(const int port)
 	{
 		std::cin >> input;
 	}
-	
+	this->m_database->close();
 }

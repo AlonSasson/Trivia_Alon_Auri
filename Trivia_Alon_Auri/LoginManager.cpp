@@ -7,15 +7,28 @@
 #define PHONE_REGEX "^0\\d{1,2}-\\d+$"
 #define BIRTHDAY_REGEX "^(?:(?:\\d{2}\\.){2}|(?:\\d{2}\\/){2})\\d{4}$"
 
-enum resultCodes{ERROR, OK, PASSWORD_INVALID, EMAIL_INVALID, ADDRESS_INVALID, PHONE_INVALID, BIRTHDAY_INVALID};
+enum resultCodes{ERROR, OK, PASSWORD_INVALID, EMAIL_INVALID, ADDRESS_INVALID, PHONE_INVALID, BIRTHDAY_INVALID, WRONG_DETAILS, USERS_ALREADY_EXIST, USER_DOESNT_EXIST};
 
 
 using std::regex;
 
+LoginManager::LoginManager(IDatabase* database)
+	: m_database(database)
+{
+}
+
 // logs in a user
 unsigned int LoginManager::login(std::string username, std::string password)
 {
-	return OK;
+	if (this->m_database->doesPasswordMatch(username, password))
+	{
+		this->online_users.push_back(LoggedUser(username));
+		return OK;
+	}
+	else
+	{
+		return WRONG_DETAILS;
+	}
 }
 
 // signs up a user
@@ -26,13 +39,39 @@ unsigned int LoginManager::signup(std::string username, std::string password, st
 	if (infoValidationResult != OK) // if the info wasn't valid
 		return infoValidationResult;
 
+	if (this->m_database->addNewUser(username, password, email, address, phoneNumber, birthDate))
+	{
+		this->online_users.push_back(LoggedUser(username));
+		return OK;
+	}
+	else
+	{
+		return USERS_ALREADY_EXIST;
+	}
 
-	return OK;
 }
 
 // logs out a user
 unsigned int LoginManager::logout(std::string username)
 {
+	std::vector<LoggedUser>::iterator it;
+	bool userExist = false;
+	for (it = this->online_users.begin(); it != this->online_users.end() && !userExist; it++) //go over the whole vector
+	{
+		if (it->getUserName() == username) //check if the user name exist 
+		{
+			userExist = true;
+			this->online_users.erase(it); //if user name exist the program erase it
+		}
+	}
+	if (userExist == false) //if the user name was not found return much status code
+	{
+		return USER_DOESNT_EXIST;
+	}
+	else
+	{
+		return OK;
+	}
 	return OK;
 }
 
