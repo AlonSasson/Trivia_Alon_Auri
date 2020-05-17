@@ -5,9 +5,20 @@
 
 #define EXIT_MSG "EXIT"
 
+Server::Server()
+{
+	this->m_database = new mongoDB;
+}
+
+Server::~Server()
+{
+	delete this->m_database;
+}
+
 // runs server with a given port
 void Server::run(const int port)
 {
+	m_database->open();
 	std::thread t_connector(&Communicator::startHandleRequests, m_communicator, port); // start handling requests
 	t_connector.detach();
 	std::string input = "";

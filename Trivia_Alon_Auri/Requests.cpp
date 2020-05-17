@@ -1,4 +1,7 @@
 #include "Requests.h"
+#include <cstdint>
+#include <iostream>
+#include <vector>
 
 using nlohmann::json;
 
