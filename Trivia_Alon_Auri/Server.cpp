@@ -5,6 +5,16 @@
 
 #define EXIT_MSG "EXIT"
 
+Server::Server()
+{
+	this->m_database = new mongoDB;
+}
+
+Server::~Server()
+{
+	delete this->m_database;
+}
+
 // runs server with a given port
 void Server::run(const int port)
 {
