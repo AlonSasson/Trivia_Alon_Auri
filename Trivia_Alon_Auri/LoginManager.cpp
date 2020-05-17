@@ -22,7 +22,7 @@ unsigned int LoginManager::login(std::string username, std::string password)
 {
 	if (this->m_database->doesPasswordMatch(username, password))
 	{
-		this->online_users.push_back(LoggedUser(username));
+		this->m_loggedUsers.push_back(LoggedUser(username));
 		return OK;
 	}
 	else
@@ -41,7 +41,6 @@ unsigned int LoginManager::signup(std::string username, std::string password, st
 
 	if (this->m_database->addNewUser(username, password, email, address, phoneNumber, birthDate))
 	{
-		this->online_users.push_back(LoggedUser(username));
 		return OK;
 	}
 	else
@@ -56,12 +55,12 @@ unsigned int LoginManager::logout(std::string username)
 {
 	std::vector<LoggedUser>::iterator it;
 	bool userExist = false;
-	for (it = this->online_users.begin(); it != this->online_users.end() && !userExist; it++) //go over the whole vector
+	for (it = this->m_loggedUsers.begin(); it != this->m_loggedUsers.end() && !userExist; it++) //go over the whole vector
 	{
 		if (it->getUserName() == username) //check if the user name exist 
 		{
 			userExist = true;
-			this->online_users.erase(it); //if user name exist the program erase it
+			this->m_loggedUsers.erase(it); //if user name exist the program erase it
 		}
 	}
 	if (userExist == false) //if the user name was not found return much status code

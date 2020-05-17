@@ -12,6 +12,6 @@ public:
 	unsigned int logout(std::string username);
 private:
 	unsigned int validateInfo(std::string password, std::string email, std::string address, std::string phoneNumber, std::string birthDate);
-	std::vector<LoggedUser> online_users;
+	std::vector<LoggedUser> m_loggedUsers;
 	IDatabase* m_database;
 };
