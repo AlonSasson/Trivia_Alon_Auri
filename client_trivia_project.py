@@ -9,11 +9,18 @@ LEN_SIZE = 4
 
 USERNAME = "username"
 PASSWORD = "password"
-EMAIL = "email"
+EMAIL = "mail"
+ADDRESS = "address"
+PHONE_NUMBER = "phone_number"
+BIRTH_DATE = "birthday"
 
 EXIT_CODE = 0
 SIGNUP_CODE = 1
 LOGIN_CODE = 2
+
+status_codes = {0: 'Error', 1: 'OK', 2: 'Invalid password', 3: 'Invalid email',
+                4: 'Invalid address', 5: 'Invalid phone number', 6: 'Invalid birth date',
+                7: 'Username or password incorrect', 8: 'User already exists', 9: "User doesn't exist"}
 
 """ Deserialize response data buffer into json data
     :param data_buffer (bytes): response data from server
@@ -42,9 +49,9 @@ def receive_response(sock):
     try:
         code = sock.recv(CODE_SIZE)
         code = int.from_bytes(code, byteorder='big')
-        len = sock.recv(LEN_SIZE)
-        len = int.from_bytes(len, byteorder='big')
-        data_buffer = sock.recv(len)
+        length = sock.recv(LEN_SIZE)
+        length = int.from_bytes(length, byteorder='big')
+        data_buffer = sock.recv(length)
     except Exception as e:
         print("Couldn't get response from server: ", e)
     return deserialize_response(data_buffer)
@@ -73,8 +80,12 @@ def send_login_request(sock):
 def send_signup_request(sock):
     username = input("Please choose a username: ")
     password = input("Please choose a password: ")
-    email = input("Please choose an email address: ")
-    json_data = json.dumps({USERNAME: username, PASSWORD: password, EMAIL: email})
+    email = input("Please enter an email address: ")
+    address = input("Please enter a home address (Street, Apt, City): ")
+    phone_number = input("Please enter a phone number: ")
+    birth_date = input("Please choose a birth date DD/MM/YYYY or DD.MM.YYYY: ")
+    json_data = json.dumps({USERNAME: username, PASSWORD: password, EMAIL: email,
+                            ADDRESS: address, PHONE_NUMBER: phone_number, BIRTH_DATE: birth_date})
     send_request(SIGNUP_CODE, sock, json_data)
 
 """ Prints the choice menu"""
@@ -110,6 +121,8 @@ def main():
         data = json.loads(receive_response(sock)) #turn json data into string
         data = json.loads(data) # turn string to dictionary
         print(data)
+        status = data.get('status', 0)
+        print('status: ' + status_codes.get(status))
     sock.close()
 
 if __name__ == "__main__":
