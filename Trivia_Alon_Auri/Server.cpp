@@ -5,11 +5,6 @@
 
 #define EXIT_MSG "EXIT"
 
-Server::Server():
-	m_database(new mongoDB), m_handlerFactory(m_database), m_communicator(m_handlerFactory)
-{
-}
-
 Server::~Server()
 {
 	delete this->m_database;
@@ -19,7 +14,7 @@ Server::~Server()
 void Server::run(const int port)
 {
 	m_database->open();
-	std::thread t_connector(&Communicator::startHandleRequests, m_communicator, port); // start handling requests
+	std::thread t_connector(&Communicator::startHandleRequests, this->m_communicator, port); // start handling requests
 	t_connector.detach();
 	std::string input = "";
 
@@ -28,4 +23,16 @@ void Server::run(const int port)
 		std::cin >> input;
 	}
 	this->m_database->close();
+}
+
+Server& Server::getInstance()
+{
+	static Server instance;
+	return instance;
+}
+
+Server::Server() :
+	m_database((IDatabase*)mongoDB::getInstance()), m_communicator(this->m_database)
+{
+
 }

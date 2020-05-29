@@ -18,3 +18,9 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(unsigned c
 	json j = json::parse(data);
 	return  j.get<SignupRequest>();
 }
+
+JsonRequestPacketDeserializer& JsonRequestPacketDeserializer::getInstance()
+{
+	static JsonRequestPacketDeserializer instance;
+	return instance;
+}

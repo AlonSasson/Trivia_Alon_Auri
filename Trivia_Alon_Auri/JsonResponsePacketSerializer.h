@@ -12,14 +12,14 @@ class JsonResponsePacketSerializer
 {
 public:
 	/*
-		serialize login response 
+		serialize login response
 	*/
 	static unsigned char* serializeResponse(LoginResponse respone)
 	{
 		nlohmann::json j = respone;
 		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
 		buffer[0] = LOGIN_ID;
-		std::memcpy((buffer + 1) , convertToGetLength(j.dump().length()) , 4);
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
 		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
 		return buffer;
 	}
@@ -36,7 +36,7 @@ public:
 		return buffer;
 	}
 	/*
-		serialize error response 
+		serialize error response
 	*/
 	static unsigned char* serializeResponse(ErrorResponse respone)
 	{
@@ -47,6 +47,15 @@ public:
 		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
 		return buffer;
 	}
+
+	static JsonResponsePacketSerializer& getInstance()
+	{
+		static JsonResponsePacketSerializer instance;
+		return instance;
+	}
+	JsonResponsePacketSerializer(JsonResponsePacketSerializer const&) = delete;
+	void operator=(JsonResponsePacketSerializer const&) = delete;
+
 private:
 	/*
 	the function get the length of the jason and convert it to char*
@@ -57,7 +66,7 @@ private:
 		int i = 0;
 		const int byteSize = 256;
 		int addToBuffer;
-		for (i = 0; i < 4 ; i++)
+		for (i = 0; i < 4; i++)
 		{
 			addToBuffer = len % byteSize;
 			len /= byteSize;
@@ -65,4 +74,5 @@ private:
 		}
 		return buffer;
 	}
+	JsonResponsePacketSerializer() {}
 };

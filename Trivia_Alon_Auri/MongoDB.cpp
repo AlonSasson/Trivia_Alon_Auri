@@ -48,7 +48,7 @@ void mongoDB::open()
 	mongocxx::instance inst{};
 	mongocxx::client* client = new mongocxx::client{ mongocxx::uri{} };
 	this->client = client;
-	this->db = (*client)["TriviaProjectDB"];
+	this->db = (*client)["mydb"];
 	this->db["User"];
 }
 
@@ -56,4 +56,10 @@ void mongoDB::open()
 void mongoDB::close()
 {
 	delete this->client;
+}
+
+mongoDB* mongoDB::getInstance()
+{
+	static mongoDB* instance = new mongoDB();
+	return instance;
 }

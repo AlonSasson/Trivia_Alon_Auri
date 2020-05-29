@@ -12,10 +12,6 @@ enum resultCodes{ERROR, OK, PASSWORD_INVALID, EMAIL_INVALID, ADDRESS_INVALID, PH
 
 using std::regex;
 
-LoginManager::LoginManager(IDatabase* database)
-	: m_database(database)
-{
-}
 
 // logs in a user
 unsigned int LoginManager::login(std::string username, std::string password)
@@ -78,6 +74,8 @@ unsigned int LoginManager::logout(std::string username)
 	return OK;
 }
 
+
+
 // uses regex checks to make sure the signup info is valid, returns OK if all are valid
 unsigned int LoginManager::validateInfo(std::string password, std::string email, std::string address, std::string phoneNumber, std::string birthDate)
 {
@@ -100,3 +98,9 @@ unsigned int LoginManager::validateInfo(std::string password, std::string email,
 
 	return OK;
 }
+
+LoginManager& LoginManager::getInstance(IDatabase* database)
+{
+		static LoginManager instance(database);
+		return instance;
+	}

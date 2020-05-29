@@ -8,11 +8,17 @@ class MenuRequestHandler;
 class RequestHandlerFactory
 {
 private:
-	LoginManager m_loginManager;
-	IDatabase*  m_database;
+
+	IDatabase* m_database;
+	RequestHandlerFactory(IDatabase* database) : m_database(database) {}
 public:
-	RequestHandlerFactory(IDatabase* database);
+
 	LoginRequestHandler* createLoginRequestHandler();
 	MenuRequestHandler* createMenuRequestHandler();
 	LoginManager& getLoginManager();
+
+	static RequestHandlerFactory& getInstance(IDatabase* database);
+
+	RequestHandlerFactory(RequestHandlerFactory const&) = delete;
+	void operator=(RequestHandlerFactory const&) = delete;
 };

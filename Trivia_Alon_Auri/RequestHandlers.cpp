@@ -10,13 +10,13 @@ RequestResult LoginRequestHandler::login(RequestInfo request)
 	LoginResponse response; 
 	LoginRequest loginRequest = JsonRequestPacketDeserializer::deserializeLoginRequest(request.buffer);
 
-	response.status = this->m_loginManager.login(loginRequest.username, loginRequest.password); // get status from login into database
+	response.status = m_loginManager.login(loginRequest.username, loginRequest.password); // get status from login into database
 	loginResult.response = JsonResponsePacketSerializer::serializeResponse(response);
 
-	if(response.status == OK)
-		loginResult.newHandler = this->m_handlerFactory.createMenuRequestHandler(); // move on to next state
+	if (response.status == OK)
+		loginResult.newHandler = m_handlerFactory.createMenuRequestHandler(); // move on to next state
 	else
-		loginResult.newHandler = this->m_handlerFactory.createLoginRequestHandler(); // stay in the same state
+		loginResult.newHandler = m_handlerFactory.createLoginRequestHandler(); // stay in the same state
 	return loginResult;
 }
 
@@ -27,20 +27,15 @@ RequestResult LoginRequestHandler::signup(RequestInfo request)
 	SignupResponse response; 
 	SignupRequest signupRequest = JsonRequestPacketDeserializer::deserializeSignupRequest(request.buffer);
 	
-	response.status = this->m_loginManager.signup(signupRequest.username, signupRequest.password, signupRequest.email,
+	response.status = m_loginManager.signup(signupRequest.username, signupRequest.password, signupRequest.email,
 												  signupRequest.address, signupRequest.phoneNumber, signupRequest.birthDate); // get status from signup into database
 	signupResult.response = JsonResponsePacketSerializer::serializeResponse(response);
 
 	if (response.status == OK)
-		signupResult.newHandler = this->m_handlerFactory.createMenuRequestHandler(); // move on to next state
+		signupResult.newHandler = m_handlerFactory.createMenuRequestHandler(); // move on to next state
 	else
-		signupResult.newHandler = this->m_handlerFactory.createLoginRequestHandler(); // stay in the same state
+		signupResult.newHandler =m_handlerFactory.createLoginRequestHandler(); // stay in the same state
 	return signupResult;
-}
-
-LoginRequestHandler::LoginRequestHandler(RequestHandlerFactory& handlerFactory):
-	m_handlerFactory(handlerFactory), m_loginManager(handlerFactory.getLoginManager())
-{
 }
 
 /*
@@ -77,6 +72,12 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo request)
 	}	
 	return packetToReturn;
 }
+
+LoginRequestHandler::LoginRequestHandler(RequestHandlerFactory& handlerFactory):
+	m_handlerFactory(handlerFactory), m_loginManager(handlerFactory.getLoginManager())
+{
+}
+
 
 bool MenuRequestHandler::isRequestRelevant(RequestInfo request)
 {

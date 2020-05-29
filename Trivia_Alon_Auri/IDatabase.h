@@ -3,7 +3,6 @@
 class IDatabase
 {
 public:
-	virtual ~IDatabase() = default;
 
 	// queries
 	virtual bool doesUserExist(std::string username) = 0;
@@ -15,4 +14,5 @@ public:
 	//data base related
 	virtual void open() = 0;
 	virtual void close() = 0;
+
 };

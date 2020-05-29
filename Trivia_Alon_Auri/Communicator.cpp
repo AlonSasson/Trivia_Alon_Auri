@@ -18,15 +18,15 @@ using std::exception;
 #define BYTE_SIZE 256
 
 
-// C'TOR
-Communicator::Communicator(RequestHandlerFactory& handlerFactory):
-	m_handlerFactory(handlerFactory)
+Communicator::Communicator(IDatabase* database) : m_database(database)
 {
 	this->m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
 	if (this->m_serverSocket == INVALID_SOCKET) // if the socket was invalid
 		throw exception(__FUNCTION__ " - socket");
+
 }
+
 
 // D'TOR
 Communicator::~Communicator()
@@ -77,7 +77,7 @@ void Communicator::startHandleRequests(const int port)
 		if (clientSocket == INVALID_SOCKET) // if client couldn't be accepted
 			cerr << __FUNCTION__ " - Failed to accept client" << endl;
 		cout << "Client accepted!" << endl;
-		this->m_clients[clientSocket] = this->m_handlerFactory.createLoginRequestHandler(); // add client socket and request handler to client map
+		this->m_clients[clientSocket] = RequestHandlerFactory::getInstance(this->m_database).createLoginRequestHandler(); // add client socket and request handler to client map
 		thread(&Communicator::handleNewClient, this, clientSocket).detach();
 	}
 }

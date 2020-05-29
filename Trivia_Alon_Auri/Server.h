@@ -1,16 +1,21 @@
 #pragma once
 #include "Communicator.h"
 #include "IDatabase.h"
-#include "RequestHandlerFactory.h"
 
 class Server
 {
 public:
-	Server(); 
 	~Server();
+
 	void run(const int port);  // runs server with a given port
+
+	static Server& getInstance();
+
+	Server(Server const&) = delete;
+	void operator=(Server const&) = delete;
+
 private:
-	Communicator m_communicator;
 	IDatabase* m_database;
-	RequestHandlerFactory m_handlerFactory;
+	Communicator m_communicator;
+	Server();
 };
