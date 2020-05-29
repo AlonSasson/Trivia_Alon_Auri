@@ -50,6 +50,7 @@ void mongoDB::open()
 	this->client = client;
 	this->db = (*client)["mydb"];
 	this->db["User"];
+	system("python ..\\triviaQuestions.py"); // get random questions
 }
 
 // deletes the client
