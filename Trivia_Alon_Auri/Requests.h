@@ -27,8 +27,29 @@ typedef struct RequestInfo
 	unsigned char* buffer;
 } RequestInfo;
 
+typedef struct CreateRoomRequest
+{
+	std::string roomName;
+	unsigned int maxUsers;
+	unsigned int questionCount;
+	unsigned int answerTimeout;
+}CreateRoomRequest;
+
+typedef struct GetPlayersInRoomRequest
+{
+	unsigned int roomId;
+}GetPlayersInRoomRequest;
+
+typedef struct JoinRoomRequest
+{
+	unsigned int roomId;
+}JoinRoomRequest;
+
 
 // convert json data to a request struct
 
 void from_json(const nlohmann::json& j, LoginRequest& request);
 void from_json(const nlohmann::json& j, SignupRequest& request);
+void from_json(const nlohmann::json& j, CreateRoomRequest& request);
+void from_json(const nlohmann::json& j, GetPlayersInRoomRequest& request);
+void from_json(const nlohmann::json& j, JoinRoomRequest& request);
