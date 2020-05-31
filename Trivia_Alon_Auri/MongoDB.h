@@ -14,7 +14,7 @@ class mongoDB : public IDatabase
 private:
 	mongocxx::database db;
 	mongocxx::client* client;
-	mongoDB() {}
+	mongoDB() {this->client = nullptr; }
 public:
 
 	bool doesUserExist(std::string username);
@@ -28,5 +28,6 @@ public:
 	static mongoDB* getInstance();
 	mongoDB(mongoDB const&) = delete;
 	void operator=(mongoDB const&) = delete;
+	std::list<Question> getQuestions(int questionsNum);
 
 };

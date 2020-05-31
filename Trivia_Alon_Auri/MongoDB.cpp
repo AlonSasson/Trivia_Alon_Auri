@@ -1,6 +1,7 @@
 #include "MongoDB.h"
 #include <iostream>
 #include "json.hpp"
+#include <ctime>
 
 /*
 check if user name exist in db
@@ -63,4 +64,37 @@ mongoDB* mongoDB::getInstance()
 {
 	static mongoDB* instance = new mongoDB();
 	return instance;
+}
+
+// gets random questions from the database
+std::list<Question> mongoDB::getQuestions(int questionsNum)
+{
+	int id = 0;
+	int i = 0;
+	std::list<Question> questions;
+	std::vector<unsigned int> questionIds;
+	auto collection = this->db["Questions"];
+	bsoncxx::stdx::optional<bsoncxx::document::value> result;
+	std::string answers;
+	nlohmann::json answersJson;
+
+	srand(time(NULL));
+	for (i = 0; i < questionsNum; i++) // get the amount of questions needed
+	{
+		do // continue until you get a new question id
+		{
+			id = rand() % QUESTIONS_NUM;
+		} 
+		while (find(questionIds.begin(), questionIds.end(), id) != questionIds.end()); 
+		questionIds.push_back(id);
+
+		bsoncxx::builder::stream::document document{};
+		document << "id" << id;
+		result = collection.find_one(document.view()); // find question with the random id
+		answers = bsoncxx::to_json(*result);
+		answersJson = nlohmann::json::parse(answers);
+		questions.push_back(answersJson.get<Question>()); // push back serialized question
+	}
+	
+	return questions;
 }

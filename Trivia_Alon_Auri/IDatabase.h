@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include <List>
+#include "Questions.h"
+
 class IDatabase
 {
 public:
@@ -14,5 +17,7 @@ public:
 	//data base related
 	virtual void open() = 0;
 	virtual void close() = 0;
+
+	virtual std::list<Question> getQuestions(int questionsNum) = 0;
 
 };
