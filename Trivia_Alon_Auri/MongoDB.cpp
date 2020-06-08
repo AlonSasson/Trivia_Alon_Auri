@@ -2,6 +2,10 @@
 #include <iostream>
 #include "json.hpp"
 #include <ctime>
+#include <cmath>
+
+using bsoncxx::builder::basic::kvp;
+using bsoncxx::builder::basic::make_document;
 
 /*
 check if user name exist in db
@@ -10,7 +14,7 @@ bool mongoDB::doesUserExist(std::string username)
 {
 	bsoncxx::builder::stream::document document{};
 	document << "username" << username;
-	auto search_result = this->db["User"].find_one(document.view());
+	auto search_result = this->db["Users"].find_one(document.view());
 	return (bool)search_result;
 }
 /*
@@ -20,7 +24,7 @@ bool mongoDB::doesPasswordMatch(std::string username, std::string password)
 {
 	bsoncxx::builder::stream::document document{};
 	document << "username" << username << "password" << password;
-	auto search_result = this->db["User"].find_one(document.view());
+	auto search_result = this->db["Users"].find_one(document.view());
 	return (bool)search_result;
 }
 
@@ -34,7 +38,7 @@ bool mongoDB::addNewUser(std::string username, std::string password, std::string
 	{
 		bsoncxx::builder::stream::document document{};
 		document << "username" << username << "password" << password << "mail" << mail << "address" << address << "phone_number" << phone_number << "birthday" << birthday;
-		auto collection = this->db["User"];
+		auto collection = this->db["Users"];
 		collection.insert_one(document.view());
 		return true;
 	}
@@ -50,7 +54,7 @@ void mongoDB::open()
 	mongocxx::client* client = new mongocxx::client{ mongocxx::uri{} };
 	this->client = client;
 	this->db = (*client)["mydb"];
-	this->db["User"];
+	this->db["Users"];
 	system("python ..\\triviaQuestions.py"); // get random questions
 }
 
@@ -97,4 +101,93 @@ std::list<Question> mongoDB::getQuestions(int questionsNum)
 	}
 	
 	return questions;
+}
+
+// gets a user's statistics
+nlohmann::json mongoDB::getUserStatistics(std::string username)
+{
+	nlohmann::json userStatistics;
+
+	bsoncxx::builder::stream::document document{};
+	document << "username" << username;
+	auto statisticsCol = this->db["Statistics"];
+	auto search_result = statisticsCol.find_one(document.view());
+	if (search_result) // if the user is in the statistics table
+		userStatistics = nlohmann::json::parse(bsoncxx::to_json(*search_result));
+	return userStatistics;
+}
+
+// gets the player's average answer time
+double mongoDB::getPlayerAverageAnswerTime(std::string username)
+{
+	double avgTime = 0;
+	nlohmann::json userStatistics = getUserStatistics(username);
+
+	if (!userStatistics.is_null()) // if the user statistics were found
+		avgTime = userStatistics["avg_answer_time"];
+	return avgTime;
+}
+
+// gets the number of correct answers the player has
+int mongoDB::getNumOfCorrectAnswers(std::string username)
+{
+	int correctAnswersNum = 0;
+	nlohmann::json userStatistics = getUserStatistics(username);
+
+	if (!userStatistics.is_null()) // if the user statistics were found
+		correctAnswersNum = userStatistics["correct_answers"];
+	return correctAnswersNum;
+}
+
+// gets the number of total answers the player has
+int mongoDB::getNumOfTotalAnswers(std::string username)
+{
+	int totalAnswersNum = 0;
+	nlohmann::json userStatistics = getUserStatistics(username);
+
+	if (!userStatistics.is_null()) // if the user statistics were found
+		totalAnswersNum = userStatistics["total_answers"];
+	return totalAnswersNum;
+}
+
+//gets the number of games the player has played
+int mongoDB::getNumOfPlayerGames(std::string username)
+{
+	int gamesPlayedNum = 0;
+	nlohmann::json userStatistics = getUserStatistics(username);
+
+	if (!userStatistics.is_null()) // if the user statistics were found
+		gamesPlayedNum = userStatistics["games_played"];
+	return gamesPlayedNum;
+}
+
+// calculate a player's high score and update it in the database
+void mongoDB::updateHighScore(std::string username)
+{
+	int score = 0;
+	const int QUESTIONS_PER_GAME = 10;
+	double avgCorrectAnswers = (double)getNumOfCorrectAnswers(username) / (QUESTIONS_PER_GAME * getNumOfPlayerGames(username));
+	auto statisticsCol = this->db["Statistics"];
+
+	// the formula for the score : 5000(0.2 + avgCorrectAnswers)/(0.5 + (log(avgTime + 1)+1)/10)
+	score =  5000 * (0.2 + avgCorrectAnswers) / (0.5 + (log10(getPlayerAverageAnswerTime(username) + 1) + 1) / 10.0);
+
+	statisticsCol.update_one(make_document(kvp("username", username)), make_document(kvp("$set", make_document(kvp("score", score)))));
+}
+
+//gets the highscores of all players
+std::vector<std::string> mongoDB::getHighScores()
+{
+	std::vector<std::string> highscores;
+	nlohmann::json userJson;
+	auto statisticsCol = this->db["Statistics"];
+	auto order = mongocxx::options::find{}.sort(make_document(kvp("score", -1))); // sort by top scores
+	auto cursor = statisticsCol.find({}, order);
+
+	for (auto player : cursor) {
+		userJson = nlohmann::json::parse(bsoncxx::to_json(player));
+		highscores.push_back(userJson["username"].dump() + ": " + std::to_string(userJson["score"].get<int>()));
+	}
+
+	return highscores;
 }
