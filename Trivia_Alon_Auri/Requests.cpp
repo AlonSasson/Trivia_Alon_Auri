@@ -36,3 +36,7 @@ void from_json(const nlohmann::json& j, JoinRoomRequest& request)
 {
 	j.at("roomId").get_to(request.roomId);
 }
+
+void from_json(const json& j, HighscoreRequest& request) {
+	j.at("username").get_to(request.username);
+}

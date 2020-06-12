@@ -1,5 +1,6 @@
 #include "Room.h"
 
+// adds a user to the room
 bool Room::addUser(LoggedUser user)
 {
 	for (auto it = m_users.begin(); it != m_users.end(); it++)
@@ -13,6 +14,7 @@ bool Room::addUser(LoggedUser user)
 	return true;
 }
 
+// removes a user from the room
 bool Room::removeUser(LoggedUser user)
 {
 	for (auto it = m_users.begin(); it != m_users.end(); it++)
@@ -26,6 +28,7 @@ bool Room::removeUser(LoggedUser user)
 	return false;
 }
 
+// gets all users in the room
 std::vector<std::string> Room::getAllUsers()
 {
 	std::vector<std::string> users;
@@ -36,9 +39,15 @@ std::vector<std::string> Room::getAllUsers()
 	return users;
 }
 
+// gets the room's matadata
 RoomData Room::getRoomData()
 {
 	return m_metadata;
+}
+
+unsigned int Room::isActive()
+{
+	return m_metadata.isActive;
 }
 
 Room::Room(RoomData roomData , LoggedUser user)
