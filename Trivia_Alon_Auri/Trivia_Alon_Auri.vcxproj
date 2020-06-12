@@ -131,6 +131,7 @@
     <ClInclude Include="LoggedUser.h" />
     <ClInclude Include="LoginManager.h" />
     <ClInclude Include="MongoDB.h" />
+    <ClInclude Include="Questions.h" />
     <ClInclude Include="RequestHandlerFactory.h" />
     <ClInclude Include="RequestHandlers.h" />
     <ClInclude Include="Requests.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="LoggedUser.cpp" />
     <ClCompile Include="LoginManager.cpp" />
     <ClCompile Include="MongoDB.cpp" />
+    <ClCompile Include="Questions.cpp" />
     <ClCompile Include="RequestHandlerFactory.cpp" />
     <ClCompile Include="RequestHandlers.cpp" />
     <ClCompile Include="Requests.cpp" />
