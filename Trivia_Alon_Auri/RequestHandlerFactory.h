@@ -1,6 +1,8 @@
 #pragma once
 #include "IDatabase.h"
 #include "LoginManager.h"
+#include "StatisticsManager.h"
+#include "RoomManager.h"
 #include "RequestHandlers.h"
 
 class LoginRequestHandler;
@@ -14,8 +16,10 @@ private:
 public:
 
 	LoginRequestHandler* createLoginRequestHandler();
-	MenuRequestHandler* createMenuRequestHandler();
+	MenuRequestHandler* createMenuRequestHandler(LoggedUser m_user);
 	LoginManager& getLoginManager();
+	StatisticsManager& getStatisticsManager();
+	RoomManager& getRoomManager();
 
 	static RequestHandlerFactory& getInstance(IDatabase* database);
 

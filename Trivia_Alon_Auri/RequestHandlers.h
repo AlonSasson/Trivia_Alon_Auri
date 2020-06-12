@@ -3,6 +3,10 @@
 #include <ctime>
 #include "RequestHandlerFactory.h"
 #include <iostream>
+#include "LoggedUser.h"
+#include "RoomManager.h"
+#include "StatisticsManager.h"
+
 
 class IRequestHandler;
 typedef struct RequestResult
@@ -22,7 +26,6 @@ class RequestHandlerFactory;
 class LoginRequestHandler : public IRequestHandler
 {
 private:
-	LoginManager& m_loginManager;
 	RequestHandlerFactory& m_handlerFactory;
 
 	RequestResult login(RequestInfo request);
@@ -36,7 +39,19 @@ public:
 class RequestHandlerFactory;
 class MenuRequestHandler : public IRequestHandler
 {
+private:
+	LoggedUser m_user;
+	RequestHandlerFactory& m_handlerFactory;
+
 public:
+	MenuRequestHandler(RequestHandlerFactory& handlerFactory , LoggedUser user);
 	bool isRequestRelevant(RequestInfo request);
 	RequestResult handleRequest(RequestInfo request);
+	RequestResult signout(RequestInfo request);
+	RequestResult getRooms(RequestInfo request);
+	RequestResult getPlayersInRoom(RequestInfo request);
+	RequestResult getStatistics(RequestInfo request);
+	RequestResult joinRoom(RequestInfo request);
+	RequestResult createRoom(RequestInfo request);
 };
+

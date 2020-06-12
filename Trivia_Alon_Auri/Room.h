@@ -7,9 +7,9 @@ typedef struct RoomData
 {
 	unsigned int id;
 	std::string name;
-	int maxPlayers;
+	unsigned int maxPlayers;
 	unsigned int timePerQuestion;
-	unsigned isActive;
+	unsigned int isActive;
 }RoomData;
 
 class Room
@@ -26,6 +26,7 @@ public:
 	bool removeUser(LoggedUser user);
 	std::vector<std::string> getAllUsers();
 	RoomData getRoomData();
+	unsigned int isActive();
 
 	Room(RoomData roomData , LoggedUser user); //C'tor
 };
