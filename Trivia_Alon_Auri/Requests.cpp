@@ -18,3 +18,21 @@ void from_json(const json& j, SignupRequest& request) {
 	j.at("phone_number").get_to(request.phoneNumber);
 	j.at("birthday").get_to(request.birthDate);
 }
+
+void from_json(const nlohmann::json& j, CreateRoomRequest& request)
+{
+	j.at("roomName").get_to(request.roomName);
+	j.at("maxUsers").get_to(request.maxUsers);
+	j.at("questionCount").get_to(request.questionCount);
+	j.at("answerTimeout").get_to(request.answerTimeout);
+}
+
+void from_json(const nlohmann::json& j, GetPlayersInRoomRequest& request)
+{
+	j.at("roomId").get_to(request.roomId);
+}
+
+void from_json(const nlohmann::json& j, JoinRoomRequest& request)
+{
+	j.at("roomId").get_to(request.roomId);
+}

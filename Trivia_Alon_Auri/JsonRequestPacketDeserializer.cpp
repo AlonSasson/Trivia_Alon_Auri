@@ -19,6 +19,30 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(unsigned c
 	return  j.get<SignupRequest>();
 }
 
+// deserializes json into GetPlayersInRoomRequest struct
+GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersInRoomRequest(unsigned char* buffer)
+{
+	std::string data = (char*)buffer;
+	json j = json::parse(data);
+	return  j.get<GetPlayersInRoomRequest>();
+}
+
+// deserializes json into JoinRoomRequest struct
+JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(unsigned char* buffer)
+{
+	std::string data = (char*)buffer;
+	json j = json::parse(data);
+	return  j.get<JoinRoomRequest>();
+}
+
+// deserializes json into CreateRoomRequest struct
+CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(unsigned char* buffer)
+{
+	std::string data = (char*)buffer;
+	json j = json::parse(data);
+	return  j.get<CreateRoomRequest>();
+}
+
 JsonRequestPacketDeserializer& JsonRequestPacketDeserializer::getInstance()
 {
 	static JsonRequestPacketDeserializer instance;
