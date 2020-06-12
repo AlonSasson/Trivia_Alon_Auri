@@ -48,6 +48,67 @@ public:
 		return buffer;
 	}
 
+	static unsigned char* serializeLogoutResponse(LogoutResponse respone)
+	{
+		nlohmann::json j = respone;
+		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
+		buffer[0] = LOGIN_ID;
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
+		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
+		return buffer;
+	}
+
+	static unsigned char* serializeGetRoomResponse(GetRoomsResponse respone)
+	{
+		nlohmann::json j = respone;
+		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
+		buffer[0] = LOGIN_ID;
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
+		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
+		return buffer;
+	}
+
+	static unsigned char* serializeGetPlayersInRoomResponse(GetPlayersInRoomResponse respone)
+	{
+		nlohmann::json j = respone;
+		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
+		buffer[0] = LOGIN_ID;
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
+		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
+		return buffer;
+	}
+
+	static unsigned char* serializeJoinRoomResponse(JoinRoomResponse respone)
+	{
+		nlohmann::json j = respone;
+		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
+		buffer[0] = LOGIN_ID;
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
+		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
+		return buffer;
+	}
+
+	static unsigned char* serializeCreateRoomResponse(CreateRoomResponse respone)
+	{
+		nlohmann::json j = respone;
+		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
+		buffer[0] = LOGIN_ID;
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
+		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
+		return buffer;
+	}
+		
+	static unsigned char* serializeHighScoreResponse(getStaticsResponse respone)
+	{
+		nlohmann::json j = respone;
+		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
+		buffer[0] = LOGIN_ID;
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
+		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
+		return buffer;
+	}
+
+
 	static JsonResponsePacketSerializer& getInstance()
 	{
 		static JsonResponsePacketSerializer instance;
