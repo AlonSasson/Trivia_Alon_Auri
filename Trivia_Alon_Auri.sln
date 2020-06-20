@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Trivia_Alon_Auri", "Trivia_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trivia_Client", "..\Trivia_Client\Trivia_Client.csproj", "{B337A305-758F-4B0B-95F9-31987417FF30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trivia_Client", "Trivia_Client\Trivia_Client.csproj", "{E1FC66FE-418E-4DF6-8C08-C30DB2A9A358}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
