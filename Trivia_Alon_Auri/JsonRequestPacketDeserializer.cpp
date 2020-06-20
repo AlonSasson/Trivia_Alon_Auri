@@ -43,14 +43,6 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(un
 	return  j.get<CreateRoomRequest>();
 }
 
-// deserializes json into HighScoreRequest struct
-HighscoreRequest JsonRequestPacketDeserializer::deserializeHighScoreRequest(unsigned char* buffer)
-{
-	std::string data = (char*)buffer;
-	json j = json::parse(data);
-	return  j.get<HighscoreRequest>();
-}
-
 JsonRequestPacketDeserializer& JsonRequestPacketDeserializer::getInstance()
 {
 	static JsonRequestPacketDeserializer instance;

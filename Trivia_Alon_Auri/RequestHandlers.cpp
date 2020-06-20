@@ -196,10 +196,9 @@ RequestResult MenuRequestHandler::getStatistics(RequestInfo request)
 {
 	RequestResult getStatisticsResult;
 	getStaticsResponse response;
-	HighscoreRequest highscoreRequest = JsonRequestPacketDeserializer::deserializeHighScoreRequest(request.buffer);
 	
 	response.highScores = m_handlerFactory.getStatisticsManager().getTopPlayers();
-	response.statics = m_handlerFactory.getStatisticsManager().getUserStats(highscoreRequest.username);
+	response.statics = m_handlerFactory.getStatisticsManager().getUserStats(m_user.getUserName());
 	response.status = OK;
 	getStatisticsResult.response = JsonResponsePacketSerializer::serializeHighScoreResponse(response);
 
