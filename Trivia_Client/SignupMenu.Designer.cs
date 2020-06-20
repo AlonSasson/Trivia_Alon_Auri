@@ -44,6 +44,7 @@
             this.signup_buttom = new System.Windows.Forms.Button();
             this.login__buttom = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
+            this.errorTextBox = new System.Windows.Forms.TextBox();
             this.date = new System.Windows.Forms.PictureBox();
             this.address = new System.Windows.Forms.PictureBox();
             this.email = new System.Windows.Forms.PictureBox();
@@ -51,7 +52,6 @@
             this.phone = new System.Windows.Forms.PictureBox();
             this.username = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.errorTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.date)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.address)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.email)).BeginInit();
@@ -231,12 +231,26 @@
             this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox7.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox7.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textBox7.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox7.ForeColor = System.Drawing.Color.LightSkyBlue;
             this.textBox7.Location = new System.Drawing.Point(142, 598);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(243, 27);
             this.textBox7.TabIndex = 23;
             this.textBox7.Text = "Already have a user? ";
+            // 
+            // errorTextBox
+            // 
+            this.errorTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(50)))));
+            this.errorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.errorTextBox.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.errorTextBox.ForeColor = System.Drawing.Color.Red;
+            this.errorTextBox.Location = new System.Drawing.Point(58, 488);
+            this.errorTextBox.Name = "errorTextBox";
+            this.errorTextBox.Size = new System.Drawing.Size(374, 24);
+            this.errorTextBox.TabIndex = 24;
+            this.errorTextBox.Text = "Error";
+            this.errorTextBox.Visible = false;
+            this.errorTextBox.TextChanged += new System.EventHandler(this.errorTextBox_TextChanged);
             // 
             // date
             // 
@@ -310,20 +324,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(89, 110);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // errorTextBox
-            // 
-            this.errorTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(50)))));
-            this.errorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.errorTextBox.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.errorTextBox.ForeColor = System.Drawing.Color.Red;
-            this.errorTextBox.Location = new System.Drawing.Point(58, 488);
-            this.errorTextBox.Name = "errorTextBox";
-            this.errorTextBox.Size = new System.Drawing.Size(374, 24);
-            this.errorTextBox.TabIndex = 24;
-            this.errorTextBox.Text = "Error";
-            this.errorTextBox.Visible = false;
-            this.errorTextBox.TextChanged += new System.EventHandler(this.errorTextBox_TextChanged);
             // 
             // SignupMenu
             // 

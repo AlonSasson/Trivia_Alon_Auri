@@ -19,7 +19,7 @@ namespace Trivia_Client
 
         private void ResetPassword()
         {
-            PasswordPic.Image = Properties.Resources.PasswordIcon1;
+            PasswordPic.Image = Properties.Resources.pass;
             PassPanel.BackColor = Color.Silver;
             PasswordBox.ForeColor = Color.CadetBlue;
             if (String.IsNullOrEmpty(PasswordBox.Text))
@@ -30,7 +30,7 @@ namespace Trivia_Client
         }
         private void ResetUsername()
         {
-            UsernamePic.Image = Properties.Resources.UsernameIcon1;
+            UsernamePic.Image = Properties.Resources.username;
             UserPanel.BackColor = Color.Silver;
             UsernameBox.ForeColor = Color.CadetBlue;
             if (String.IsNullOrEmpty(UsernameBox.Text))
@@ -45,13 +45,13 @@ namespace Trivia_Client
 
         private void Batzek_MouseHover(object sender, EventArgs e)
         {
-            Crown.Visible = true;
-            Crown.Image = Properties.Resources.IdoMeleh;
+        //    Crown.Visible = true;
+       //     Crown.Image = Properties.Resources.IdoMeleh;
         }
 
         private void Batzek_MouseLeave(object sender, EventArgs e)
         {
-            Crown.Visible = false;
+         //   Crown.Visible = false;
         }
 
         private void UsernameBox_Click(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace Trivia_Client
             if (!String.IsNullOrEmpty(UsernameBox.Text) && UsernameBox.Text.Equals("Username"))
                 UsernameBox.Clear();
             UsernameBox.ForeColor = Color.FromArgb(25, 139, 177);
-            UsernamePic.Image = Properties.Resources.UsernameIcon2;
+            UsernamePic.Image = Properties.Resources.username2;
             UserPanel.BackColor = Color.FromArgb(25, 139, 177);
 
             ResetPassword();
@@ -76,7 +76,7 @@ namespace Trivia_Client
             else
                 PasswordBox.PasswordChar = '\0';
             PasswordBox.ForeColor = Color.FromArgb(25, 139, 177);
-            PasswordPic.Image = Properties.Resources.PasswordIcon2;
+            PasswordPic.Image = Properties.Resources.pass2;
             PassPanel.BackColor = Color.FromArgb(25, 139, 177);
 
             ResetUsername();
