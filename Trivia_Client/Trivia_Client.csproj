@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E1FC66FE-418E-4DF6-8C08-C30DB2A9A358}</ProjectGuid>
+    <ProjectGuid>{1E55BAEB-1EE6-4535-BEBD-E45D03E4671D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Trivia_Client</RootNamespace>
     <AssemblyName>Trivia_Client</AssemblyName>
@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\Trivia_Alon_Auri\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,35 +46,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Deserializer.cs" />
-    <Compile Include="LoginMenu.cs">
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SignupMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginMenu.Designer.cs">
-      <DependentUpon>LoginMenu.cs</DependentUpon>
+    <Compile Include="SignupMenu.Designer.cs">
+      <DependentUpon>SignupMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests.cs" />
-    <Compile Include="Serializer.cs" />
-    <EmbeddedResource Include="LoginMenu.resx">
-      <DependentUpon>LoginMenu.cs</DependentUpon>
+    <EmbeddedResource Include="SignupMenu.resx">
+      <DependentUpon>SignupMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -88,22 +81,33 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\UsernameIcon1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\batsek.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\PasswordIcon1.png" />
+    <None Include="Resources\username.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\PasswordIcon2.png" />
+    <None Include="Resources\phone.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\UsernameIcon2.png" />
+    <None Include="Resources\pass.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\IdoMeleh.jpg" />
+    <None Include="Resources\mail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\address.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\birth.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\address2.png" />
+    <Content Include="Resources\birth2.png" />
+    <Content Include="Resources\mail2.png" />
+    <Content Include="Resources\pass2.png" />
+    <Content Include="Resources\phone2.png" />
+    <Content Include="Resources\username2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
