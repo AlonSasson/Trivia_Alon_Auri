@@ -8,13 +8,17 @@ namespace Trivia_Client
 {
     class Requests
     {
-        public class LoginRequest
+        public class Request
+        {
+        }
+
+        public class LoginRequest : Request
         {
             public String Username { get; set; }
             public String Password { get; set; }
         }
 
-        public class SignupRequest
+        public class SignupRequest : Request
         {
             public String Username { get; set; }
             public String Password { get; set; }
