@@ -45,13 +45,13 @@ namespace Trivia_Client
 
         private void Batzek_MouseHover(object sender, EventArgs e)
         {
-        //    Crown.Visible = true;
-       //     Crown.Image = Properties.Resources.IdoMeleh;
+            Crown.Visible = true;
+            Crown.Image = Properties.Resources.IdoMeleh;
         }
 
         private void Batzek_MouseLeave(object sender, EventArgs e)
         {
-         //   Crown.Visible = false;
+           Crown.Visible = false;
         }
 
         private void UsernameBox_Click(object sender, EventArgs e)
@@ -88,6 +88,14 @@ namespace Trivia_Client
         }
 
         private void SignupButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            SignupMenu signup = new SignupMenu();
+            signup.ShowDialog();
+            this.Close();
+        }
+
+        private void Crown_Click(object sender, EventArgs e)
         {
 
         }

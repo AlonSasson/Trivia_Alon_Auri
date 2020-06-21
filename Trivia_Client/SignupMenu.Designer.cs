@@ -45,20 +45,34 @@
             this.login__buttom = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.errorTextBox = new System.Windows.Forms.TextBox();
+            this.V6 = new System.Windows.Forms.PictureBox();
+            this.V5 = new System.Windows.Forms.PictureBox();
+            this.V4 = new System.Windows.Forms.PictureBox();
+            this.V3 = new System.Windows.Forms.PictureBox();
+            this.V2 = new System.Windows.Forms.PictureBox();
+            this.V1 = new System.Windows.Forms.PictureBox();
             this.date = new System.Windows.Forms.PictureBox();
             this.address = new System.Windows.Forms.PictureBox();
             this.email = new System.Windows.Forms.PictureBox();
             this.password = new System.Windows.Forms.PictureBox();
             this.phone = new System.Windows.Forms.PictureBox();
             this.username = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Batsek = new System.Windows.Forms.PictureBox();
+            this.Crown = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.V6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.V5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.V4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.V3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.V2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.V1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.date)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.address)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.email)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.password)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.phone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.username)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Batsek)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Crown)).BeginInit();
             this.SuspendLayout();
             // 
             // userTextBox
@@ -75,6 +89,7 @@
             this.userTextBox.Text = "Username";
             this.userTextBox.Click += new System.EventHandler(this.UsernameBox_Click);
             this.userTextBox.TextChanged += new System.EventHandler(this.userTextBox_TextChanged);
+            this.userTextBox.SelectionStart = 0;
             // 
             // userPanel
             // 
@@ -223,6 +238,7 @@
             this.login__buttom.TabIndex = 22;
             this.login__buttom.Text = "Log in";
             this.login__buttom.UseVisualStyleBackColor = false;
+            this.login__buttom.Click += new System.EventHandler(this.login__buttom_Click);
             // 
             // textBox7
             // 
@@ -232,7 +248,7 @@
             this.textBox7.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox7.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textBox7.ForeColor = System.Drawing.Color.LightSkyBlue;
-            this.textBox7.Location = new System.Drawing.Point(142, 598);
+            this.textBox7.Location = new System.Drawing.Point(131, 598);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(243, 27);
             this.textBox7.TabIndex = 23;
@@ -251,6 +267,72 @@
             this.errorTextBox.Text = "Error";
             this.errorTextBox.Visible = false;
             this.errorTextBox.TextChanged += new System.EventHandler(this.errorTextBox_TextChanged);
+            // 
+            // V6
+            // 
+            this.V6.Image = global::Trivia_Client.Properties.Resources.vmark;
+            this.V6.Location = new System.Drawing.Point(450, 432);
+            this.V6.Name = "V6";
+            this.V6.Size = new System.Drawing.Size(38, 38);
+            this.V6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.V6.TabIndex = 30;
+            this.V6.TabStop = false;
+            this.V6.Visible = false;
+            // 
+            // V5
+            // 
+            this.V5.Image = global::Trivia_Client.Properties.Resources.vmark;
+            this.V5.Location = new System.Drawing.Point(450, 376);
+            this.V5.Name = "V5";
+            this.V5.Size = new System.Drawing.Size(38, 38);
+            this.V5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.V5.TabIndex = 29;
+            this.V5.TabStop = false;
+            this.V5.Visible = false;
+            // 
+            // V4
+            // 
+            this.V4.Image = global::Trivia_Client.Properties.Resources.vmark;
+            this.V4.Location = new System.Drawing.Point(450, 327);
+            this.V4.Name = "V4";
+            this.V4.Size = new System.Drawing.Size(38, 38);
+            this.V4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.V4.TabIndex = 28;
+            this.V4.TabStop = false;
+            this.V4.Visible = false;
+            // 
+            // V3
+            // 
+            this.V3.Image = global::Trivia_Client.Properties.Resources.vmark;
+            this.V3.Location = new System.Drawing.Point(450, 278);
+            this.V3.Name = "V3";
+            this.V3.Size = new System.Drawing.Size(38, 38);
+            this.V3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.V3.TabIndex = 27;
+            this.V3.TabStop = false;
+            this.V3.Visible = false;
+            // 
+            // V2
+            // 
+            this.V2.Image = global::Trivia_Client.Properties.Resources.vmark;
+            this.V2.Location = new System.Drawing.Point(450, 228);
+            this.V2.Name = "V2";
+            this.V2.Size = new System.Drawing.Size(38, 38);
+            this.V2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.V2.TabIndex = 26;
+            this.V2.TabStop = false;
+            this.V2.Visible = false;
+            // 
+            // V1
+            // 
+            this.V1.Image = global::Trivia_Client.Properties.Resources.vmark;
+            this.V1.Location = new System.Drawing.Point(450, 173);
+            this.V1.Name = "V1";
+            this.V1.Size = new System.Drawing.Size(38, 38);
+            this.V1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.V1.TabIndex = 25;
+            this.V1.TabStop = false;
+            this.V1.Visible = false;
             // 
             // date
             // 
@@ -316,14 +398,28 @@
             this.username.TabStop = false;
             this.username.Click += new System.EventHandler(this.UsernameBox_Click);
             // 
-            // pictureBox1
+            // Batsek
             // 
-            this.pictureBox1.Image = global::Trivia_Client.Properties.Resources.batsek;
-            this.pictureBox1.Location = new System.Drawing.Point(226, 35);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(89, 110);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.Batsek.Image = global::Trivia_Client.Properties.Resources.batsek;
+            this.Batsek.Location = new System.Drawing.Point(226, 35);
+            this.Batsek.Name = "Batsek";
+            this.Batsek.Size = new System.Drawing.Size(89, 110);
+            this.Batsek.TabIndex = 0;
+            this.Batsek.TabStop = false;
+            this.Batsek.MouseLeave += new System.EventHandler(this.Batzek_MouseLeave);
+            this.Batsek.MouseHover += new System.EventHandler(this.Batzek_MouseHover);
+            // 
+            // Crown
+            // 
+            this.Crown.Image = global::Trivia_Client.Properties.Resources.IdoMeleh;
+            this.Crown.Location = new System.Drawing.Point(226, 11);
+            this.Crown.Name = "Crown";
+            this.Crown.Size = new System.Drawing.Size(62, 35);
+            this.Crown.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Crown.TabIndex = 31;
+            this.Crown.TabStop = false;
+            this.Crown.Visible = false;
+            this.Crown.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // SignupMenu
             // 
@@ -331,6 +427,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(544, 711);
+            this.Controls.Add(this.Crown);
+            this.Controls.Add(this.V6);
+            this.Controls.Add(this.V5);
+            this.Controls.Add(this.V4);
+            this.Controls.Add(this.V3);
+            this.Controls.Add(this.V2);
+            this.Controls.Add(this.V1);
             this.Controls.Add(this.errorTextBox);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.login__buttom);
@@ -353,7 +456,7 @@
             this.Controls.Add(this.password);
             this.Controls.Add(this.phone);
             this.Controls.Add(this.username);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.Batsek);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -363,13 +466,20 @@
             this.Text = "SignupMenu";
             this.TransparencyKey = System.Drawing.Color.Black;
             this.Load += new System.EventHandler(this.SignupMenu_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.V6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.V5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.V4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.V3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.V2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.V1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.date)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.address)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.email)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.password)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.phone)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.username)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Batsek)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Crown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,7 +487,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox Batsek;
         private System.Windows.Forms.PictureBox username;
         private System.Windows.Forms.PictureBox phone;
         private System.Windows.Forms.PictureBox password;
@@ -400,6 +510,13 @@
         private System.Windows.Forms.Button login__buttom;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox errorTextBox;
+        private System.Windows.Forms.PictureBox V1;
+        private System.Windows.Forms.PictureBox V2;
+        private System.Windows.Forms.PictureBox V3;
+        private System.Windows.Forms.PictureBox V4;
+        private System.Windows.Forms.PictureBox V5;
+        private System.Windows.Forms.PictureBox V6;
+        private System.Windows.Forms.PictureBox Crown;
     }
 }
 

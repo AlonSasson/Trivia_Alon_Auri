@@ -121,9 +121,13 @@
   <ItemGroup>
     <Content Include="Resources\address2.png" />
     <Content Include="Resources\birth2.png" />
+    <Content Include="Resources\IdoMeleh.jpg" />
     <Content Include="Resources\mail2.png" />
     <Content Include="Resources\pass2.png" />
     <Content Include="Resources\phone2.png" />
+    <None Include="Resources\xmark.jpg" />
+    <None Include="Resources\vmark.png" />
+    <None Include="Resources\trivia.jpg" />
     <Content Include="Resources\username2.png" />
   </ItemGroup>
   <ItemGroup>

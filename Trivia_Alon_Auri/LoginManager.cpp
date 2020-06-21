@@ -3,7 +3,7 @@
 
 #define PASSWORD_REGEX "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$"
 #define EMAIL_REGEX "^(?:[a-zA-Z0-9]\\.?)*[a-zA-Z0-9]@[a-zA-Z]+(?:\\.[a-zA-Z]+)+$"
-#define ADDRESS_REGEX "^\\([a-zA-Z]+, \\d+, [a-zA-Z]+\\)$"
+#define ADDRESS_REGEX "^[a-zA-Z]+, \\d+, [a-zA-Z]+$"
 #define PHONE_REGEX "^0\\d{1,2}-\\d+$"
 #define BIRTHDAY_REGEX "^(?:(?:\\d{2}\\.){2}|(?:\\d{2}\\/){2})\\d{4}$"
 

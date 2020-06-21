@@ -21,13 +21,17 @@ namespace Trivia_Client
             InitializeComponent();
         }
 
-        public bool Regexp(string re , TextBox tb)
+        public bool Regexp(string re , TextBox tb , PictureBox p)
         {
             Regex regex = new Regex(re);
             if(regex.IsMatch(tb.Text))
             {
+                p.Image = Properties.Resources.vmark;
+                p.Visible = true;
                 return true;
             }
+            p.Image = Properties.Resources.xmark;
+            p.Visible = true;
             return false;
         }
 
@@ -97,13 +101,13 @@ namespace Trivia_Client
 
         private void Batzek_MouseHover(object sender, EventArgs e)
         {
-        //    Crown.Visible = true;
-         //   Crown.Image = Properties.Resources.IdoMeleh;
+            Crown.Visible = true;
+            Crown.Image = Properties.Resources.IdoMeleh;
         }
 
         private void Batzek_MouseLeave(object sender, EventArgs e)
         {
-           // Crown.Visible = false;
+           Crown.Visible = false;
         }
 
         private void UsernameBox_Click(object sender, EventArgs e)
@@ -197,23 +201,37 @@ namespace Trivia_Client
             resetAddress();
             resetPhone();
         }
-        private void LoginButton_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void SignupButton_Click(object sender, EventArgs e)
         {
-            if (Regexp("^(?:(?:\\d{2}\\.){2}|(?:\\d{2}\\/){2})\\d{4}$", dateTextBox))
+            bool correctDetails = true;
+            if (!Regexp("^(?:(?:\\d{2}\\.){2}|(?:\\d{2}\\/){2})\\d{4}$", dateTextBox , V6)) //regex for date
             {
-                //
+                correctDetails = false;
             }
-            else
+             if(!Regexp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$" , passTextBox, V2)) //regex for password
             {
-                errorTextBox.ForeColor = Color.Red;
+                correctDetails = false;
+            }
+             if(!Regexp("^(?:[a-zA-Z0-9]\\.?)*[a-zA-Z0-9]@[a-zA-Z]+(?:\\.[a-zA-Z]+)+$" , emailTextBox , V3)) //regex for email 
+            {
+                correctDetails = false;
+            }
+             if(!Regexp("^0\\d{1,2}-\\d+$" , phoneTextBox , V4)) //regex for phone
+            {
+                correctDetails = false;
+            }
+            if(!Regexp("^[a-zA-Z]+, \\d+, [a-zA-Z]+$" , addressTextBox , V5)) //regex for address
+            {
+                correctDetails = false;
+            }
+            if(correctDetails)
+            {
+                errorTextBox.Text = "idodiiiiiiiii";
                 errorTextBox.Visible = true;
-                errorTextBox.Text = "Birth date format is not valid";
             }
+
         }
 
         private void SignupMenu_Load(object sender, EventArgs e)
@@ -239,6 +257,19 @@ namespace Trivia_Client
         private void errorTextBox_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void login__buttom_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            LoginMenu loginMenu = new LoginMenu();
+            loginMenu.ShowDialog();
+            this.Close();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
