@@ -8,13 +8,15 @@ namespace Trivia_Client
 {
     class Responses
     {
-        public class LoginResponse 
+        public class Response
         {
-            public int status { get; set; }
+            public int Status { get; set; }
         }
-        public class SignupResponse
+        public class LoginResponse : Response
         {
-            public int status { get; set; }
+        }
+        public class SignupResponse : Response
+        { 
         }
     }
 }

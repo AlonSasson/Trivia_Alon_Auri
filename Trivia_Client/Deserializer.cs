@@ -11,16 +11,10 @@ namespace Trivia_Client
 {
     class Deserializer
     {
-        public static Responses.LoginResponse DeserialiseLoginResponse(byte[] response)
+        public static T DeserialiseResponse<T>(byte[] response)
         {
            String jsonStr =  new ASCIIEncoding().GetString(response, 0, response.Length);
-            return JsonConvert.DeserializeObject<Responses.LoginResponse>(jsonStr);
-        }
-
-        public static Responses.SignupResponse DeserialiseSignupResponse(byte[] response)
-        {
-            String jsonStr = new ASCIIEncoding().GetString(response, 0, response.Length);
-            return JsonConvert.DeserializeObject<Responses.SignupResponse>(jsonStr);
+            return JsonConvert.DeserializeObject<T>(jsonStr);
         }
         
     }
