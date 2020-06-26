@@ -10,13 +10,23 @@ namespace Trivia_Client
     {
         public class Response
         {
-            public int Status { get; set; }
         }
         public class LoginResponse : Response
         {
+            public int Status { get; set; }
         }
         public class SignupResponse : Response
-        { 
+        {
+            public int Status { get; set; }
+        }
+        public class ErrorResponse : Response
+        {
+            public String Message { get; set; }
+        }
+        public class ResponseInfo
+        {
+            public byte[] Buffer { get; set; }
+            public int Code { get; set; }
         }
     }
 }
