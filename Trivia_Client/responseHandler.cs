@@ -8,7 +8,7 @@ using static Trivia_Client.Responses;
 
 namespace Trivia_Client
 {
-    class responseHandler
+    class ResponseHandler
     {
         private enum Codes
         {
@@ -16,7 +16,7 @@ namespace Trivia_Client
             SIGN_UP_ID,
             LOGIN_ID 
         }
-        private enum resultCodes { 
+        private enum ResultCodes { 
             ERROR = 0, 
             OK, 
             PASSWORD_INVALID, 
@@ -33,20 +33,20 @@ namespace Trivia_Client
         /*
          *  handel the response from server 
         */
-        public static void handelResponse(Responses.ResponseInfo response, Form form)
+        public static void HandelResponse(Responses.ResponseInfo response, Form form)
         {
-            switch(response.code)
+            switch(response.Code)
             {
                 case (int)Codes.ERROR_MSG_ID:
-                    Responses.ErrorResponse error = Deserializer.DeserialiseResponse<ErrorResponse>(response.buffer);
+                    Responses.ErrorResponse error = Deserializer.DeserialiseResponse<ErrorResponse>(response.Buffer);
                    ((SignupMenu)form).showErrorBox(error.Message, false);
 
                     break;
                 case (int)Codes.SIGN_UP_ID:
-                    Signup(Deserializer.DeserialiseResponse<SignupResponse>(response.buffer) , form);
+                    Signup(Deserializer.DeserialiseResponse<SignupResponse>(response.Buffer) , form);
                     break;       
                 case (int)Codes.LOGIN_ID:   
-                    Login(Deserializer.DeserialiseResponse<LoginResponse>(response.buffer), form);
+                    Login(Deserializer.DeserialiseResponse<LoginResponse>(response.Buffer), form);
                     break;            
                 
                 default: break;
@@ -59,11 +59,11 @@ namespace Trivia_Client
             bool userError = false;
             switch (response.Status)
             {
-                case (int)resultCodes.USERS_ALREADY_EXIST:
+                case (int)ResultCodes.USERS_ALREADY_EXIST:
                     error = "User already exist";
                     userError = true;
                     break;
-                case (int)resultCodes.ERROR:
+                case (int)ResultCodes.ERROR:
                     error = "Server couldn't hande; with request";
                     break;
             }
@@ -75,18 +75,18 @@ namespace Trivia_Client
             String error = "";
             switch (response.Status)
             {
-                case (int)resultCodes.ERROR:
+                case (int)ResultCodes.ERROR:
                   error = "Server couldn't hande; with request";
                    break;
                
-                case (int)resultCodes.USER_ALREADY_CONNECTED:
+                case (int)ResultCodes.USER_ALREADY_CONNECTED:
                     error = "User already connected";
                     break;
                
-                case (int)resultCodes.USER_DOESNT_EXIST:
+                case (int)ResultCodes.USER_DOESNT_EXIST:
                     error = "User doesn't exist";
                     break;
-                case (int)resultCodes.WRONG_DETAILS:
+                case (int)ResultCodes.WRONG_DETAILS:
                     error = "Username or password incorrect";
                     break;
            }

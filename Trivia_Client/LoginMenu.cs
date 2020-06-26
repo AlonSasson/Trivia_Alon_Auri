@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Trivia_Client.RequestHandler;
 
 namespace Trivia_Client
 {
@@ -84,7 +85,7 @@ namespace Trivia_Client
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-
+            RequestHandler.Login(UsernameBox.Text, PasswordBox.Text, this);
         }
 
         private void SignupButton_Click(object sender, EventArgs e)

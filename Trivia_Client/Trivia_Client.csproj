@@ -64,6 +64,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RequestHandler.cs" />
     <Compile Include="Requests.cs" />
     <Compile Include="responseHandler.cs" />
     <Compile Include="Responses.cs" />

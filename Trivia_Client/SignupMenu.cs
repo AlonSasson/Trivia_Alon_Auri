@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-
+using static Trivia_Client.RequestHandler;
 
 namespace Trivia_Client
 {
@@ -92,11 +92,6 @@ namespace Trivia_Client
             {
                 dateTextBox.Text = "Birthday";
             }
-        }
-        private void LoginMenu_Click(object sender, EventArgs e)
-        {
-            ResetPassword();
-            ResetUsername();
         }
 
         private void Batzek_MouseHover(object sender, EventArgs e)
@@ -237,6 +232,7 @@ namespace Trivia_Client
             if (correctDetails)
             {
                 errorTextBox.Visible = false;
+                RequestHandler.Signup(userTextBox.Text, passTextBox.Text, emailTextBox.Text, phoneTextBox.Text, addressTextBox.Text, dateTextBox.Text, this);
             }
             else
             {
@@ -259,31 +255,6 @@ namespace Trivia_Client
             this.errorTextBox.Text = errorToShow;
             this.errorTextBox.Visible = true;
         }
-        private void SignupMenu_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void password_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void phoneTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void userTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void errorTextBox_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void login__buttom_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -292,10 +263,16 @@ namespace Trivia_Client
             this.Close();
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void SignupMenu_MouseClick(object sender, MouseEventArgs e)
         {
-
+            ResetUsername();
+            ResetPassword();
+            resetEmail();
+            resetAddress();
+            resetPhone();
+            resetDate();
         }
 
+   
     }
 }
