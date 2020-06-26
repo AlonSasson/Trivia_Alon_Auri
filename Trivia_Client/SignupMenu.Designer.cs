@@ -89,7 +89,6 @@
             this.userTextBox.Text = "Username";
             this.userTextBox.Click += new System.EventHandler(this.UsernameBox_Click);
             this.userTextBox.TextChanged += new System.EventHandler(this.userTextBox_TextChanged);
-            this.userTextBox.SelectionStart = 0;
             // 
             // userPanel
             // 
@@ -217,7 +216,7 @@
             this.signup_buttom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.signup_buttom.Font = new System.Drawing.Font("David", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.signup_buttom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
-            this.signup_buttom.Location = new System.Drawing.Point(62, 524);
+            this.signup_buttom.Location = new System.Drawing.Point(63, 542);
             this.signup_buttom.Name = "signup_buttom";
             this.signup_buttom.Size = new System.Drawing.Size(369, 50);
             this.signup_buttom.TabIndex = 21;
@@ -260,11 +259,13 @@
             this.errorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.errorTextBox.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.errorTextBox.ForeColor = System.Drawing.Color.Red;
-            this.errorTextBox.Location = new System.Drawing.Point(58, 488);
+            this.errorTextBox.Location = new System.Drawing.Point(12, 476);
+            this.errorTextBox.Multiline = true;
             this.errorTextBox.Name = "errorTextBox";
-            this.errorTextBox.Size = new System.Drawing.Size(374, 24);
+            this.errorTextBox.Size = new System.Drawing.Size(529, 48);
             this.errorTextBox.TabIndex = 24;
-            this.errorTextBox.Text = "Error";
+            this.errorTextBox.Text = "Paaword must incloud at least 8 latters , 1 upercase ,       1 lowercase , 1 numb" +
+    "er , 1 spacil latter";
             this.errorTextBox.Visible = false;
             this.errorTextBox.TextChanged += new System.EventHandler(this.errorTextBox_TextChanged);
             // 

@@ -209,31 +209,56 @@ namespace Trivia_Client
             if (!Regexp("^(?:(?:\\d{2}\\.){2}|(?:\\d{2}\\/){2})\\d{4}$", dateTextBox , V6)) //regex for date
             {
                 correctDetails = false;
+                errorTextBox.Text = "Correct date format: dd/mm/yyyy OR dd.mm.yyyy";
             }
              if(!Regexp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$" , passTextBox, V2)) //regex for password
             {
                 correctDetails = false;
+                errorTextBox.Text = "Paaword must incloud at least 8 latters , 1 upercase , 1 lowercase , one number , 1 spacil latter";
             }
              if(!Regexp("^(?:[a-zA-Z0-9]\\.?)*[a-zA-Z0-9]@[a-zA-Z]+(?:\\.[a-zA-Z]+)+$" , emailTextBox , V3)) //regex for email 
             {
                 correctDetails = false;
+                errorTextBox.Text = "Correct email format: name@gmail.com";
+
             }
-             if(!Regexp("^0\\d{1,2}-\\d+$" , phoneTextBox , V4)) //regex for phone
+            if (!Regexp("^0\\d{1,2}-\\d+$" , phoneTextBox , V4)) //regex for phone
             {
                 correctDetails = false;
+                errorTextBox.Text = "Correct phone foramt: 0xx-xxxxxxx";
+
             }
-            if(!Regexp("^[a-zA-Z]+, \\d+, [a-zA-Z]+$" , addressTextBox , V5)) //regex for address
+            if (!Regexp("^[a-zA-Z]+, \\d+, [a-zA-Z]+$" , addressTextBox , V5)) //regex for address
             {
                 correctDetails = false;
+                errorTextBox.Text = "Correct address format: city,apt,street";
+
             }
-            if(correctDetails)
+            if (correctDetails)
             {
-                errorTextBox.Text = "idodiiiiiiiii";
+                errorTextBox.Visible = false;
+            }
+            else
+            {
                 errorTextBox.Visible = true;
             }
 
         }
-
+        public void showErrorBox(String errorToShow, bool userError)
+        {
+            if (userError == true)
+            {
+                V1.Image = Properties.Resources.xmark;
+                V1.Visible = true;
+            }
+            else
+            {
+                V1.Image = Properties.Resources.vmark;
+                V1.Visible = true;
+            }
+            this.errorTextBox.Text = errorToShow;
+            this.errorTextBox.Visible = true;
+        }
         private void SignupMenu_Load(object sender, EventArgs e)
         {
 

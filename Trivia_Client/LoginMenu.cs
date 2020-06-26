@@ -99,5 +99,16 @@ namespace Trivia_Client
         {
 
         }
+
+        private void LoginMenu_Load(object sender, EventArgs e)
+        {
+
+        }
+        public void showErrorBox(String errorToShow)
+        {
+            this.errorTextBox.Text = errorToShow;
+            this.errorTextBox.Visible = true;
+
+        }
     }
 }

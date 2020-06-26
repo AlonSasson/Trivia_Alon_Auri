@@ -28,5 +28,10 @@ namespace Trivia_Client
             public byte[] Buffer { get; set; }
             public int Code { get; set; }
         }
+        public class ResponseInfo
+        {
+           public byte[] buffer { get; set; }
+           public int code { get; set; }
+        }
     }
 }

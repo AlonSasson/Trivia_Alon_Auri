@@ -42,6 +42,7 @@
             this.UsernamePic = new System.Windows.Forms.PictureBox();
             this.Batzek = new System.Windows.Forms.PictureBox();
             this.Crown = new System.Windows.Forms.PictureBox();
+            this.errorTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batsek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PasswordPic)).BeginInit();
@@ -102,7 +103,7 @@
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginButton.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.LoginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
-            this.LoginButton.Location = new System.Drawing.Point(62, 524);
+            this.LoginButton.Location = new System.Drawing.Point(63, 542);
             this.LoginButton.Margin = new System.Windows.Forms.Padding(2);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(369, 50);
@@ -141,7 +142,6 @@
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Dont have an account?";
             this.textBox1.Click += new System.EventHandler(this.PasswordBox_Click);
-            this.textBox1.SelectionStart = 0;
             // 
             // pictureBox2
             // 
@@ -212,6 +212,21 @@
             this.Crown.Visible = false;
             this.Crown.Click += new System.EventHandler(this.Crown_Click);
             // 
+            // errorTextBox
+            // 
+            this.errorTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(50)))));
+            this.errorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.errorTextBox.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorTextBox.ForeColor = System.Drawing.Color.Red;
+            this.errorTextBox.Location = new System.Drawing.Point(42, 284);
+            this.errorTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.errorTextBox.Name = "errorTextBox";
+            this.errorTextBox.Size = new System.Drawing.Size(407, 27);
+            this.errorTextBox.TabIndex = 8;
+            this.errorTextBox.Text = "error";
+            this.errorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.errorTextBox.Visible = false;
+            // 
             // LoginMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,6 +234,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(50)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(544, 711);
+            this.Controls.Add(this.errorTextBox);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.SignupButton);
             this.Controls.Add(this.LoginButton);
@@ -238,6 +254,7 @@
             this.Name = "LoginMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoginMenu";
+            this.Load += new System.EventHandler(this.LoginMenu_Load);
             this.Click += new System.EventHandler(this.LoginMenu_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batsek)).EndInit();
@@ -265,6 +282,7 @@
         private System.Windows.Forms.PictureBox Crown;
         private System.Windows.Forms.PictureBox batsek;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.TextBox errorTextBox;
     }
 }
 
