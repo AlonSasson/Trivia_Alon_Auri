@@ -39,7 +39,7 @@ namespace Trivia_Client
             const int CODE_SIZE = 1;
             const int LEN_SIZE = 4;
             const int ERROR_ID = 0;
-            Responses.ResponseInfo response = null;
+            Responses.ResponseInfo response = new Responses.ResponseInfo();
             int len = 0;
 
             try

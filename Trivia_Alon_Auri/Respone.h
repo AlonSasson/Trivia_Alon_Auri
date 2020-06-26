@@ -57,21 +57,21 @@ struct getStaticsResponse
 }typedef getStaticsResponse;
 
 void to_json(json& j, const LoginResponse& respone) {
-	j = json{ {"status", respone.status} };
+	j = json{ {"Status", respone.status} };
 }
 void to_json(json& j, const SignupResponse& respone) {
-	j = json{ {"status", respone.status} };
+	j = json{ {"Status", respone.status} };
 }
 void to_json(json& j, const ErrorResponse& respone) {
-	j = json{ {"message", respone.message} };
+	j = json{ {"Message", respone.message} };
 }
 void to_json(json& j, const LogoutResponse& respone)
 {
-	j = json{ {"status", respone.status} };
+	j = json{ {"Status", respone.status} };
 }
 void to_json(json& j, const JoinRoomResponse& respone)
 {
-	j = json{ {"status", respone.status} };
+	j = json{ {"Status", respone.status} };
 }
 void to_json(json& j, const GetRoomsResponse& respone)
 {
@@ -79,28 +79,28 @@ void to_json(json& j, const GetRoomsResponse& respone)
 	std::vector<std::string> addToJson;
 	for (auto it = respone.rooms.begin();it != respone.rooms.end();it++)
 	{
-		structHold["id"] = it->id;
-		structHold["isActive"] = it->isActive;
-		structHold["maxPlayers"] =it->maxPlayers;
-		structHold["name"] = it->name;
-		structHold["timePerQuestion"] = it->timePerQuestion;
+		structHold["Id"] = it->id;
+		structHold["IsActive"] = it->isActive;
+		structHold["MaxPlayers"] =it->maxPlayers;
+		structHold["Name"] = it->name;
+		structHold["TimePerQuestion"] = it->timePerQuestion;
 
 		addToJson.push_back(structHold);
 	}
 
-	j = json{ {"status", respone.status, "rooms" , addToJson} };
+	j = json{ {"Status", respone.status, "Rooms" , addToJson} };
 
 }
 void to_json(json& j, const CreateRoomResponse& respone)
 {
-	j = json{ {"status", respone.status} };
+	j = json{ {"Status", respone.status} };
 }
 void to_json(json& j, const GetPlayersInRoomResponse& respone)
 {
-	j = json{ {"players", respone.players} };
+	j = json{ {"Players", respone.players} };
 }
 
 void to_json(json& j, const getStaticsResponse& respone)
 {
-	j = json{ {"status", respone.status, "highScores" , respone.highScores , "statistics" , respone.statics} };
+	j = json{ {"Status", respone.status, "HighScores" , respone.highScores , "Statistics" , respone.statics} };
 }
