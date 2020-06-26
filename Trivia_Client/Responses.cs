@@ -18,5 +18,10 @@ namespace Trivia_Client
         public class SignupResponse : Response
         { 
         }
+        public class ResponseInfo
+        {
+           public byte[] buffer { get; set; }
+           public int code { get; set; }
+        }
     }
 }
