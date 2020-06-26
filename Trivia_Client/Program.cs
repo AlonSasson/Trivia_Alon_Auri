@@ -14,6 +14,7 @@ namespace Trivia_Client
         [STAThread]
         static void Main()
         {
+            Communicator Com = new Communicator();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginMenu());
