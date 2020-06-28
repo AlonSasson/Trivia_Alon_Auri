@@ -56,6 +56,30 @@ struct getStaticsResponse
 	std::string statics;
 }typedef getStaticsResponse;
 
+struct CloseRoomResponse
+{
+	unsigned int status;
+}typedef CloseRoomResponse;
+
+struct StartGameResponse
+{
+	unsigned int status;
+}typedef StartGameResponse;
+
+struct GetRoomStateResponse
+{
+	unsigned int status;
+	bool hasGameBegun;
+	std::vector<std::string> players;
+	unsigned int questionCount;
+	unsigned int answerTimeout;
+}typedef GetRoomStateResponse;
+
+struct LeaveRoomResponse
+{
+	unsigned int status;
+}typedef LeaveRoomResponse;
+
 void to_json(json& j, const LoginResponse& respone) {
 	j = json{ {"Status", respone.status} };
 }
@@ -103,4 +127,24 @@ void to_json(json& j, const GetPlayersInRoomResponse& respone)
 void to_json(json& j, const getStaticsResponse& respone)
 {
 	j = json{ {"Status", respone.status, "HighScores" , respone.highScores , "Statistics" , respone.statics} };
+}
+
+void to_json(json& j, const CloseRoomResponse& response)
+{
+	j = json{ {"Status" , response.status } };
+}
+
+void to_json(json& j, const StartGameResponse& response)
+{
+	j = json{ {"Status" , response.status } };
+}
+
+void to_json(json& j, const GetRoomStateResponse& response)
+{
+	j = json{ {"status" , response.status , "HasGameBegun" , response.hasGameBegun , "Players" , response.players , "QuestionCount" , response.questionCount , "AnswerTimeout" , response.answerTimeout } };
+}
+
+void to_json(json& j, const LeaveRoomResponse& response)
+{
+	j = json{ {"Status" , response.status } };
 }
