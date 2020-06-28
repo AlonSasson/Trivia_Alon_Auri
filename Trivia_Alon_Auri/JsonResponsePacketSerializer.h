@@ -133,7 +133,7 @@ public:
 		return buffer;
 	}
 
-	static unsigned char* serializeCloseRoomResponse(StartGameResponse response)
+	static unsigned char* serializeStartGameResponse(StartGameResponse response)
 	{
 		nlohmann::json j = response;
 		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
@@ -143,7 +143,7 @@ public:
 		return buffer;
 	}
 
-	static unsigned char* serializeCloseRoomResponse(GetRoomStateResponse response)
+	static unsigned char* serializeGetRoomStateResponse(GetRoomStateResponse response)
 	{
 		nlohmann::json j = response;
 		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
@@ -153,7 +153,7 @@ public:
 		return buffer;
 	}
 
-	static unsigned char* serializeCloseRoomResponse(LeaveRoomResponse response)
+	static unsigned char* serializeLeaveGameResponse(LeaveRoomResponse response)
 	{
 		nlohmann::json j = response;
 		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
