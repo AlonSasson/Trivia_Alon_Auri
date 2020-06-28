@@ -18,7 +18,7 @@ enum codeId
 };
 
 // logs in a user 
-RequestResult LoginRequestHandler::login(RequestInfo request)
+RequestResult LoginRequestHandler::login(RequestInfo request) 
 {
 	RequestResult loginResult;
 	LoginResponse response; 
