@@ -22,12 +22,7 @@ public:
 	std::vector<RoomData> getRooms();
 	Room getRoom(unsigned int roomId);
 	unsigned int getNextRoomId();
-	
+	bool doesRoomExist(std::string room_name);
 
-	enum RoomState
-	{
-		ROOM_WAITING_FOR_PLAYERS = 0,
-		ROOM_WHILE_GAME,
-		ROOM_GAME_ENDED
-	};
+
 };

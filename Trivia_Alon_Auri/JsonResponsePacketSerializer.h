@@ -153,7 +153,7 @@ public:
 		return buffer;
 	}
 
-	static unsigned char* serializeLeaveGameResponse(LeaveRoomResponse response)
+	static unsigned char* serializeLeaveRoomResponse(LeaveRoomResponse response)
 	{
 		nlohmann::json j = response;
 		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];

@@ -27,7 +27,8 @@ namespace Trivia_Client
             WRONG_DETAILS,
             USERS_ALREADY_EXIST, 
             USER_DOESNT_EXIST,
-            USER_ALREADY_CONNECTED
+            USER_ALREADY_CONNECTED,
+            USERNAME_NOT_VALID
         }
 
         /*
@@ -48,6 +49,7 @@ namespace Trivia_Client
                 case (int)Codes.LOGIN_ID:   
                     Login(Deserializer.DeserialiseResponse<LoginResponse>(response.Buffer), form);
                     break;            
+               
                 
                 default: break;
             }
@@ -65,6 +67,9 @@ namespace Trivia_Client
                     break;
                 case (int)ResultCodes.ERROR:
                     error = "Server couldn't hande; with request";
+                    break;
+                case (int)ResultCodes.USERNAME_NOT_VALID:
+                    error = "Username isn't valid";
                     break;
             }
             ((SignupMenu)form).showErrorBox(error, userError) ;
@@ -88,6 +93,9 @@ namespace Trivia_Client
                     break;
                 case (int)ResultCodes.WRONG_DETAILS:
                     error = "Username or password incorrect";
+                    break;
+                case (int)ResultCodes.USERNAME_NOT_VALID:
+                    error = "Username isn't valid";
                     break;
            }
 

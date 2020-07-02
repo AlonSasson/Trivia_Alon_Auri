@@ -4,6 +4,7 @@
 #include <iostream>
 #include <thread>
 #include <cmath>
+#include <typeinfo>
 
 using std::cout;
 using std::cerr;
@@ -17,6 +18,8 @@ using std::exception;
 
 #define BYTE_SIZE 256
 
+std::map<SOCKET, IRequestHandler*> Communicator::m_clients;
+std::map<std::string, SOCKET> Communicator::m_users;
 
 Communicator::Communicator(IDatabase* database) : m_database(database)
 {
@@ -89,7 +92,6 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 	time_t receivalTime;
 	unsigned char * buffer;
 	RequestInfo requestInfo;
-	RequestResult requestResult;
 	
 	while (true)
 	{
@@ -125,15 +127,10 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		requestInfo.buffer[len] = NULL;
 		delete[] buffer;
 
-		requestResult = m_clients[clientSocket]->handleRequest(requestInfo); // send the request to the client's current handler
-		delete m_clients[clientSocket];
-		m_clients[clientSocket] = requestResult.newHandler; // set the client's new handler
-		delete[] requestInfo.buffer;
-
-		len = CODE_SIZE + LEN_SIZE + decodeRequestLen(&requestResult.response[CODE_SIZE]) ; // get response length
-		if (send(clientSocket, (char*)requestResult.response, len, NULL) == INVALID_SOCKET) // if sending the data failed
-			cerr << "Failed to send data to client";
-		delete[] requestResult.response;
+		this->handleRequest(requestInfo, clientSocket);
+		for (auto& t : m_users)
+			std::cout << t.first << " "
+			<< t.second << "\n";
 	}
 	this->m_clients.erase(clientSocket); // remove client from client list
 	closesocket(clientSocket);
@@ -152,5 +149,38 @@ unsigned int Communicator::decodeRequestLen(unsigned char* buffer)
 		len += buffer[i] * pow(BYTE_SIZE, LEN_SIZE - i - 1); // use formula to convert from byte to int
 	}
 	return len;
+}
+
+void Communicator::handleRequest(RequestInfo requestInfo, SOCKET clientSocket)
+{
+	int len;
+	RequestResult requestResult;
+	std::string username;
+
+	
+	if (dynamic_cast<MenuRequestHandler*>(m_clients[clientSocket]))
+	{
+		username = ((MenuRequestHandler*)m_clients[clientSocket])->getUser();
+	}
+
+	requestResult = m_clients[clientSocket]->handleRequest(requestInfo); // send the request to the client's current handler
+	delete m_clients[clientSocket];
+	m_clients[clientSocket] = requestResult.newHandler; // set the client's new handler
+	delete[] requestInfo.buffer;
+
+	if (dynamic_cast<MenuRequestHandler*>(requestResult.newHandler))
+	{
+		m_users[((MenuRequestHandler*)requestResult.newHandler)->getUser()] = clientSocket;
+	}
+	else if (dynamic_cast<LoginRequestHandler*>(requestResult.newHandler) && username.empty() != false)
+	{
+		m_users.erase(username);
+	}
+		
+
+	len = CODE_SIZE + LEN_SIZE + decodeRequestLen(&requestResult.response[CODE_SIZE]); // get response length
+	if (send(clientSocket, (char*)requestResult.response, len, NULL) == INVALID_SOCKET) // if sending the data failed
+		cerr << "Failed to send data to client";
+	delete[] requestResult.response;
 }
 

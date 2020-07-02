@@ -15,6 +15,17 @@ MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler(LoggedUser m
 	return new MenuRequestHandler(*handlerFactory, m_user);
 }
 
+RoomAdminRequestHandler* RequestHandlerFactory::createRoomAdminRequestHanlder(LoggedUser m_user, Room m_room)
+{
+	RequestHandlerFactory* handlerFactory = this;
+	return new RoomAdminRequestHandler(*handlerFactory , m_user, m_room);
+}
+RoomMemberRequestHandler* RequestHandlerFactory::createRoomMemberRequestHanlder(LoggedUser m_user, Room m_room)
+{
+	RequestHandlerFactory* handlerFactory = this;
+	return new RoomMemberRequestHandler(*handlerFactory, m_user, m_room);
+}
+
 // gets the login manager
 LoginManager& RequestHandlerFactory::getLoginManager()
 {
@@ -38,3 +49,4 @@ RequestHandlerFactory& RequestHandlerFactory::getInstance(IDatabase* database)
 	static RequestHandlerFactory instance(database);
 	return instance;
 }
+

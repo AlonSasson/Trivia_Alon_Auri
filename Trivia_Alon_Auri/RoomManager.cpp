@@ -12,6 +12,10 @@ bool RoomManager::createRoom(LoggedUser user, RoomData roomData)
 			return false;
 		}
 	}
+	if (doesRoomExist(roomData.name))
+	{
+		return false;
+	}
 	m_rooms.insert(std::pair<unsigned int , Room>(roomData.id, Room(roomData, user)));
 	roomCount++;
 	return true;
@@ -64,4 +68,16 @@ RoomManager& RoomManager::getInstance()
 unsigned int RoomManager::getNextRoomId()
 {
 	return roomCount + 1;
+}
+
+bool RoomManager::doesRoomExist(std::string room_name)
+{
+	for (auto it = this->m_rooms.begin();it != this->m_rooms.end();it++)
+	{
+		if (it->second.getRoomData().name == room_name)
+		{
+			return true;
+		}
+	}
+	return false;
 }

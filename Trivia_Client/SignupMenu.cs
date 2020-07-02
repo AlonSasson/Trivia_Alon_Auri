@@ -273,6 +273,9 @@ namespace Trivia_Client
             resetDate();
         }
 
-   
+        private void SignupMenu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

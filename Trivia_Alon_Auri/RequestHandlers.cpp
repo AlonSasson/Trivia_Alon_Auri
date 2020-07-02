@@ -1,4 +1,5 @@
 #include "RequestHandlers.h"
+#include "Communicator.h"
 #include "JsonRequestPacketDeserializer.h"
 #include "JsonResponsePacketSerializer.h"
 
@@ -14,7 +15,11 @@ enum codeId
 	GET_PLAYERS_IN_ROOM, 
 	GET_STATISTICS,
 	JOIN_ROOM,
-	CREATE_ROOM
+	CREATE_ROOM,
+	CLOSE_ROOM,
+	START_GAME,
+	GET_ROOM_STATE,
+	LEAVE_ROOM
 };
 
 // logs in a user 
@@ -217,9 +222,9 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo request)
 	response.status = (RoomManager::getInstance()).getRoomState(joinRoomRequest.roomId);
 	joinRoomResult.response = JsonResponsePacketSerializer::serializeJoinRoomResponse(response);
 
-	if (response.status == RoomManager::ROOM_WHILE_GAME || response.status == RoomManager::ROOM_GAME_ENDED)
+	if (response.status == Room::ROOM_WHILE_GAME || response.status == Room::ROOM_GAME_ENDED)
 	{
-		joinRoomResult.newHandler = m_handlerFactory.createMenuRequestHandler(m_user); // stay in the same state
+		joinRoomResult.newHandler = m_handlerFactory.createRoomMemberRequestHanlder(m_user, m_handlerFactory.getRoomManager().getRoom(joinRoomRequest.roomId)); // stay in the same state
 	}
 	else
 	{
@@ -234,11 +239,12 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo request)
 	RequestResult createRoomResult;
 	CreateRoomResponse response;
 	CreateRoomRequest createRoomRequest = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(request.buffer);
-	RoomData roomData = { RoomManager::getInstance().getNextRoomId(), createRoomRequest.roomName, createRoomRequest.maxUsers, createRoomRequest.answerTimeout, (unsigned int)RoomManager::ROOM_WAITING_FOR_PLAYERS};
+	
+	RoomData roomData = { RoomManager::getInstance().getNextRoomId(), createRoomRequest.roomName, createRoomRequest.maxUsers, createRoomRequest.answerTimeout, (unsigned int)Room::ROOM_WAITING_FOR_PLAYERS};
 	response.status = (RoomManager::getInstance()).createRoom(m_user, roomData);
 
 	if (response.status == OK)
-		createRoomResult.newHandler = m_handlerFactory.createMenuRequestHandler(m_user); // move on to next state
+		createRoomResult.newHandler = m_handlerFactory.createRoomAdminRequestHanlder(m_user, Room(roomData , m_user)); // move on to next state
 	else
 		createRoomResult.newHandler = m_handlerFactory.createMenuRequestHandler(m_user); // stay in the same state
 	return createRoomResult;
@@ -248,3 +254,198 @@ MenuRequestHandler::MenuRequestHandler(RequestHandlerFactory& handlerFactory , L
 	m_handlerFactory(handlerFactory), m_user(user)
 {
 }
+RoomAdminRequestHandler::RoomAdminRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Room m_room)
+	: m_handlerFactory(handlerFactory), m_user(m_user), m_room(m_room)
+{
+}
+/*
+	check if request is relevant 
+*/
+bool RoomAdminRequestHandler::isRequestRelevant(RequestInfo request)
+{
+	return request.id == CLOSE_ROOM || request.id == START_GAME || request.id == GET_ROOM_STATE;
+}
+
+RequestResult RoomAdminRequestHandler::handleRequest(RequestInfo request)
+{
+	RequestResult packetToReturn;
+
+	if (isRequestRelevant(request))
+	{
+		switch (request.id)
+		{
+		case CLOSE_ROOM:
+			packetToReturn = closeRoom(request);
+			break;
+		case START_GAME:
+			packetToReturn = startGame(request);
+			break;
+		case GET_ROOM_STATE:
+			packetToReturn = getRoomState(request);
+			break;
+		}
+	}
+	return packetToReturn;
+}
+
+RequestResult RoomAdminRequestHandler::closeRoom(RequestInfo request)
+{
+	RequestResult closeRoomResult;
+	CloseRoomResponse response;
+	RequestInfo requestInfo;
+	response.status = OK;
+	requestInfo.id = LEAVE_ROOM;
+	requestInfo.receivalTime = 0;
+
+	std::vector<std::string> users = this->m_room.getAllUsers();
+	for (auto user = users.begin();user != users.end(); user++)
+	{
+		Communicator::handleRequest(requestInfo, Communicator::m_users[*user]);
+	}
+	if (!m_handlerFactory.getRoomManager().deleteRoom(m_room.getRoomData().id))
+	{
+		response.status = ERROR;
+	}
+
+	closeRoomResult.response = JsonResponsePacketSerializer::serializeCloseRoomResponse(response);
+
+	if (response.status == OK)
+		closeRoomResult.newHandler = m_handlerFactory.createMenuRequestHandler(m_user); // move on to next state
+	else
+		closeRoomResult.newHandler = m_handlerFactory.createRoomAdminRequestHanlder(m_user ,m_room); // stay in the same state
+	return closeRoomResult;
+}
+
+RequestResult RoomAdminRequestHandler::startGame(RequestInfo request)
+{
+	RequestResult startGameResult;
+	StartGameResponse response;
+	RequestInfo requestInfo;
+	
+	response.status = OK;
+	requestInfo.id = START_GAME;
+	requestInfo.receivalTime = 0;
+
+	std::vector<std::string> users = this->m_room.getAllUsers();
+	for (auto user = users.begin();user != users.end(); user++)
+	{
+		Communicator::handleRequest(requestInfo, Communicator::m_users[*user]);
+	}
+
+	startGameResult.response = JsonResponsePacketSerializer::serializeStartGameResponse(response);
+
+	startGameResult.newHandler = m_handlerFactory.createRoomAdminRequestHanlder(m_user, m_room);
+
+	m_room.setRoomState(Room::ROOM_WHILE_GAME);
+
+	startGameResult.newHandler = this;
+
+	return startGameResult;
+	
+}
+
+RequestResult RoomAdminRequestHandler::getRoomState(RequestInfo request)
+{
+	RequestResult getRoomStateResult;
+	GetRoomStateResponse response;
+
+	response.answerTimeout = m_room.getRoomData().timePerQuestion;
+	response.hasGameBegun = m_room.getRoomData().isActive;
+	response.players = m_room.getAllUsers();
+	response.questionCount = 10;
+	response.status = OK;
+	
+	getRoomStateResult.response = JsonResponsePacketSerializer::serializeGetRoomStateResponse(response);
+
+	getRoomStateResult.newHandler = this;
+
+	return getRoomStateResult;
+
+}
+
+std::string MenuRequestHandler::getUser()
+{
+	return this->m_user.getUserName();
+}
+
+RoomMemberRequestHandler::RoomMemberRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Room m_room)
+	: m_handlerFactory(handlerFactory), m_user(m_user), m_room(m_room)
+{
+}
+
+bool RoomMemberRequestHandler::isRequestRelevant(RequestInfo request)
+{
+	return request.id == LEAVE_ROOM || request.id == START_GAME || request.id == GET_ROOM_STATE;
+}
+
+RequestResult RoomMemberRequestHandler::handleRequest(RequestInfo request)
+{
+	RequestResult packetToReturn;
+
+	if (isRequestRelevant(request))
+	{
+		switch (request.id)
+		{
+		case CLOSE_ROOM:
+			packetToReturn = leaveRoom(request);
+			break;
+		case START_GAME:
+			packetToReturn = startGame(request);
+			break;
+		case GET_ROOM_STATE:
+			packetToReturn = getRoomState(request);
+			break;
+		}
+	}
+	return packetToReturn;
+}
+
+RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo request)
+{
+	RequestResult leaveRoomResult;
+	LeaveRoomResponse response;
+	response.status = OK;
+	
+	if (!m_room.removeUser(m_user) || !this->m_handlerFactory.getRoomManager().doesRoomExist(m_room.getRoomData().name))
+	{
+		response.status = ERROR;
+	}
+	leaveRoomResult.response = JsonResponsePacketSerializer::serializeLeaveRoomResponse(response);
+
+
+	leaveRoomResult.newHandler = m_handlerFactory.createMenuRequestHandler(m_user);
+
+	return leaveRoomResult;
+
+}
+
+RequestResult RoomMemberRequestHandler::startGame(RequestInfo request)
+{
+	RequestResult startGameResult;
+	StartGameResponse response;
+
+	response.status = OK;
+	startGameResult.response = JsonResponsePacketSerializer::serializeStartGameResponse(response);
+
+	startGameResult.newHandler = this;
+	return startGameResult;
+}
+
+RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo request)
+{
+	RequestResult getRoomStateResult;
+	GetRoomStateResponse response;
+
+	response.answerTimeout = m_room.getRoomData().timePerQuestion;
+	response.hasGameBegun = m_room.getRoomData().isActive;
+	response.players = m_room.getAllUsers();
+	response.questionCount = 10;
+	response.status = OK;
+
+	getRoomStateResult.response = JsonResponsePacketSerializer::serializeGetRoomStateResponse(response);
+
+	getRoomStateResult.newHandler = this;
+
+	return getRoomStateResult;
+}
+
