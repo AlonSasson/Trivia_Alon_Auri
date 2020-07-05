@@ -12,9 +12,12 @@ namespace Trivia_Client
 {
     public partial class RoomListMenu : Form
     {
+        private BackgroundWorker updateThread = new BackgroundWorker();
         public RoomListMenu()
         {
             InitializeComponent();
+            updateThread.DoWork += UpdateScreen;
+            updateThread.RunWorkerAsync();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -27,6 +30,19 @@ namespace Trivia_Client
           
         }
 
-      
+        // updates the room on the screen
+        private void UpdateScreen(object sender, EventArgs e)
+        {
+            while (true)
+                RequestHandler.GetRooms(this);
+        }
+
+        // aborts the update thread
+        private void StopUpdate()
+        {
+            updateThread.CancelAsync();
+        }
+
+     
     }
 }
