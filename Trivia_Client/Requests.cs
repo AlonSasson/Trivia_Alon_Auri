@@ -28,5 +28,23 @@ namespace Trivia_Client
             public String BirthDate { get; set; }
         }
 
+        public class GetPlayersInRoomRequest : Request
+        {
+            public int RoomId { get; set; }
+        }
+
+        public class JoinRoomRequest : Request
+        {
+            public int RoomId { get; set; }
+        }
+
+        public class CreateRoomRequest : Request
+        {
+            public int RoomName { get; set; }
+            public int MaxUsers { get; set; }
+            public int QuestionCount { get; set; }
+            public int AnswerTimeout { get; set; }
+        }
+
     }
 }

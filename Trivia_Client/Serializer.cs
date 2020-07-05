@@ -12,8 +12,18 @@ namespace Trivia_Client
     {
 		enum codeId
 		{
-			SIGNUP = 1,
-			LOGIN
+			LOGOUT = 0,
+			SIGNUP,
+			LOGIN,
+			GET_ROOMS,
+			GET_PLAYERS_IN_ROOM,
+			GET_STATISTICS,
+			JOIN_ROOM,
+			CREATE_ROOM,
+			CLOSE_ROOM,
+			START_GAME,
+			GET_ROOM_STATE,
+			LEAVE_ROOM
 		};
 		public const int CODE_SIZE = 1;
 		public const int LEN_SIZE = 4;
@@ -25,7 +35,14 @@ namespace Trivia_Client
 				return codeId.SIGNUP;
 			else if (request.GetType() == typeof(Requests.LoginRequest))
 				return codeId.LOGIN;
-			throw new Exception("Request type is invalid.");
+			else if (request.GetType() == typeof(Requests.GetPlayersInRoomRequest))
+				return codeId.GET_PLAYERS_IN_ROOM;
+			else if (request.GetType() == typeof(Requests.JoinRoomRequest))
+				return codeId.JOIN_ROOM;
+			else if (request.GetType() == typeof(Requests.CreateRoomRequest))
+				return codeId.CREATE_ROOM;
+			else
+				throw new Exception("Request type is invalid.");
 		}
 
 		
