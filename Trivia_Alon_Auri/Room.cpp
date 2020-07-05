@@ -50,6 +50,11 @@ unsigned int Room::isActive()
 	return m_metadata.isActive;
 }
 
+void Room::setRoomState(unsigned int newState)
+{
+	this->m_metadata.isActive = newState;
+}
+
 Room::Room(RoomData roomData , LoggedUser user)
 {
 	this->m_metadata = roomData;

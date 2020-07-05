@@ -7,7 +7,7 @@
 #define PHONE_REGEX "^0\\d{1,2}-\\d+$"
 #define BIRTHDAY_REGEX "^(?:(?:\\d{2}\\.){2}|(?:\\d{2}\\/){2})\\d{4}$"
 
-enum resultCodes{ERROR, OK, PASSWORD_INVALID, EMAIL_INVALID, ADDRESS_INVALID, PHONE_INVALID, BIRTHDAY_INVALID, WRONG_DETAILS, USERS_ALREADY_EXIST, USER_DOESNT_EXIST, USER_ALREADY_CONNECTED};
+enum resultCodes{ERROR, OK, PASSWORD_INVALID, EMAIL_INVALID, ADDRESS_INVALID, PHONE_INVALID, BIRTHDAY_INVALID, WRONG_DETAILS, USERS_ALREADY_EXIST, USER_DOESNT_EXIST, USER_ALREADY_CONNECTED, USERNAME_NOT_VALID};
 
 
 using std::regex;
@@ -16,8 +16,14 @@ using std::regex;
 // logs in a user
 unsigned int LoginManager::login(std::string username, std::string password)
 {
-	this->m_dbLock.lock(); // lock when accessing db
+
 	std::vector<LoggedUser>::iterator it;
+
+	if (username.empty() == true)
+	{
+		return USERNAME_NOT_VALID;
+	}
+
 	for (it = m_loggedUsers.begin(); it != m_loggedUsers.end(); it++)
 	{
 		if (it->getUserName() == username)
@@ -25,6 +31,7 @@ unsigned int LoginManager::login(std::string username, std::string password)
 			return USER_ALREADY_CONNECTED;
 		}
 	}
+	this->m_dbLock.lock(); // lock when accessing db
 
 	if (this->m_database->doesPasswordMatch(username, password))
 	{
@@ -43,7 +50,10 @@ unsigned int LoginManager::login(std::string username, std::string password)
 unsigned int LoginManager::signup(std::string username, std::string password, std::string email, std::string address, std::string phoneNumber, std::string birthDate)
 {
 	int infoValidationResult = validateInfo(password, email, address, phoneNumber, birthDate);
-
+	if (username == "" || username == "Username" || username == "Admin")
+	{
+		return USERNAME_NOT_VALID;
+	}
 	if (infoValidationResult != OK) // if the info wasn't valid
 		return infoValidationResult;
 

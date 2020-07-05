@@ -27,7 +27,15 @@ public:
 	std::vector<std::string> getAllUsers();
 	RoomData getRoomData();
 	unsigned int isActive();
+	void setRoomState(unsigned int newState);
 
 	Room(RoomData roomData , LoggedUser user); //C'tor
+
+	enum RoomState
+	{
+		ROOM_WAITING_FOR_PLAYERS = 0,
+		ROOM_WHILE_GAME,
+		ROOM_GAME_ENDED
+	};
 };
 

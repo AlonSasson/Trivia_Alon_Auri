@@ -53,5 +53,40 @@ public:
 	RequestResult getStatistics(RequestInfo request);
 	RequestResult joinRoom(RequestInfo request);
 	RequestResult createRoom(RequestInfo request);
+	std::string getUser();
 };
 
+class RequestHandlerFactory;
+class RoomAdminRequestHandler : public IRequestHandler
+{
+private:
+	Room m_room;
+	LoggedUser m_user;
+	RequestHandlerFactory& m_handlerFactory;
+
+public:
+	RoomAdminRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Room m_room);
+	bool isRequestRelevant(RequestInfo request);
+	RequestResult handleRequest(RequestInfo request);
+	RequestResult closeRoom(RequestInfo request);
+	RequestResult startGame(RequestInfo request);
+	RequestResult getRoomState(RequestInfo request);
+
+};
+
+class RequestHandlerFactory;
+class RoomMemberRequestHandler : public IRequestHandler
+{
+private:
+	Room m_room;
+	LoggedUser m_user;
+	RequestHandlerFactory& m_handlerFactory;
+
+public:
+	RoomMemberRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Room m_room);
+	bool isRequestRelevant(RequestInfo request);
+	RequestResult handleRequest(RequestInfo request);
+	RequestResult leaveRoom(RequestInfo request);
+	RequestResult startGame(RequestInfo request);
+	RequestResult getRoomState(RequestInfo request);
+};
