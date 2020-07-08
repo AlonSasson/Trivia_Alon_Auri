@@ -61,6 +61,7 @@
             this.LogoutButton.TabIndex = 8;
             this.LogoutButton.Text = "Log out";
             this.LogoutButton.UseVisualStyleBackColor = false;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // CloseButton
             // 
@@ -74,6 +75,7 @@
             this.CloseButton.TabIndex = 6;
             this.CloseButton.Text = "Close Room";
             this.CloseButton.UseVisualStyleBackColor = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // PlayerList
             // 
@@ -114,6 +116,7 @@
             this.StartButton.TabIndex = 6;
             this.StartButton.Text = "Start Game";
             this.StartButton.UseVisualStyleBackColor = false;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // LeaveButton
             // 
@@ -128,6 +131,7 @@
             this.LeaveButton.Text = "Leave Game";
             this.LeaveButton.UseVisualStyleBackColor = false;
             this.LeaveButton.Visible = false;
+            this.LeaveButton.Click += new System.EventHandler(this.LeaveButton_Click);
             // 
             // RoomMenu
             // 
