@@ -43,6 +43,19 @@ namespace Trivia_Client
             updateThread.CancelAsync();
         }
 
-     
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            RequestHandler.Logout(this);
+        }
+
+        private void RoomList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RequestHandler.GetPlayersInRoom(RoomList.SelectedItem.ToString(), this);
+        }
+
+        private void JoinButton_Click(object sender, EventArgs e)
+        {
+            RequestHandler.JoinRoom(RoomList.SelectedItem.ToString(), this);
+        }
     }
 }

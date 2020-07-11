@@ -10,7 +10,7 @@ namespace Trivia_Client
 {
     class Serializer
     {
-		enum codeId
+		public enum codeId
 		{
 			LOGOUT = 0,
 			SIGNUP,

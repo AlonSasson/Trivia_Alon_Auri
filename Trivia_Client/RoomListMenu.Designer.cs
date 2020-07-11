@@ -62,6 +62,7 @@
             this.RoomList.Name = "RoomList";
             this.RoomList.Size = new System.Drawing.Size(349, 360);
             this.RoomList.TabIndex = 0;
+            this.RoomList.SelectedIndexChanged += new System.EventHandler(this.RoomList_SelectedIndexChanged);
             this.RoomList.DoubleClick += new System.EventHandler(this.RoomList_DoubleClick);
             // 
             // JoinButton
@@ -76,6 +77,7 @@
             this.JoinButton.TabIndex = 1;
             this.JoinButton.Text = "Join Room";
             this.JoinButton.UseVisualStyleBackColor = false;
+            this.JoinButton.Click += new System.EventHandler(this.JoinButton_Click);
             // 
             // CreateButton
             // 
@@ -101,6 +103,7 @@
             this.LogoutButton.TabIndex = 3;
             this.LogoutButton.Text = "Log out";
             this.LogoutButton.UseVisualStyleBackColor = false;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // textBox1
             // 

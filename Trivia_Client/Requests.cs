@@ -40,7 +40,7 @@ namespace Trivia_Client
 
         public class CreateRoomRequest : Request
         {
-            public int RoomName { get; set; }
+            public String RoomName { get; set; }
             public int MaxUsers { get; set; }
             public int QuestionCount { get; set; }
             public int AnswerTimeout { get; set; }

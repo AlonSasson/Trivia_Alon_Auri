@@ -27,7 +27,7 @@ namespace Trivia_Client
         private void UpdateScreen(object sender, EventArgs e)
         {
             while (true)
-                RequestHandler.GetPlayersInRoom(this);
+                RequestHandler.GetRoomState(this);
         }
 
         // aborts the update thread
@@ -62,6 +62,29 @@ namespace Trivia_Client
         private void RoomList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            RequestHandler.Logout(this);
+        }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            if (StartButton.Visible)
+                RequestHandler.StartGame(this);
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            if(CloseButton.Visible)
+                RequestHandler.CloseRoom(this);
+        }
+
+        private void LeaveButton_Click(object sender, EventArgs e)
+        {
+            if (LeaveButton.Visible)
+                RequestHandler.LeaveRoom(this);
         }
     }
 }
