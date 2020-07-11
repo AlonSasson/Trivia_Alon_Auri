@@ -260,7 +260,7 @@ namespace Trivia_Client
                 ((RoomMenu)form).showErrorBox(error);
             }
         }
-        private static void GetRooms(Responses.tu response , Form form)
+        private static void GetRooms(Responses.GetRoomsResponse response , Form form)
         {
             string error = "Failed to Get rooms";
             if(response.Status == (int)ResultCodes.OK)

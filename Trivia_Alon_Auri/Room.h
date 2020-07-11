@@ -12,6 +12,7 @@ typedef struct RoomData
 	unsigned int isActive;
 }RoomData;
 
+
 class Room
 {
 private:
