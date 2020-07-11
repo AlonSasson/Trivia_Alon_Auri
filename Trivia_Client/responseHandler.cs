@@ -14,7 +14,18 @@ namespace Trivia_Client
         {
             ERROR_MSG_ID = 0,
             SIGN_UP_ID,
-            LOGIN_ID 
+            LOGIN_ID,
+            LOGOUT,
+            GET_ROOMS,
+            GET_PLAYERS_IN_ROOM,
+            JOIN_ROOM,
+            CREATE_ROOM,
+            GET_STATICS,
+            CLOSE_ROOM,
+            START_GAME,
+            GET_ROOM_STATE,
+            LEAVE_ROOM
+
         }
         private enum ResultCodes { 
             ERROR = 0, 
@@ -40,19 +51,56 @@ namespace Trivia_Client
             {
                 case (int)Codes.ERROR_MSG_ID:
                     Responses.ErrorResponse error = Deserializer.DeserialiseResponse<ErrorResponse>(response.Buffer);
-                   ((SignupMenu)form).showErrorBox(error.Message, false);
-
-                    break;
+                    if (typeof(SignupMenu).IsInstanceOfType(form))
+                    {
+                        ((SignupMenu)form).showErrorBox(error.Message, false);
+                    }
+                    else if (typeof(LoginMenu).IsInstanceOfType(form))
+                    {
+                        ((LoginMenu)form).showErrorBox(error.Message);
+                    }
+                    else if (typeof(RoomListMenu).IsInstanceOfType(form))
+                    {
+                        ((RoomListMenu)form).showErrorBox(error.Message);
+                    }
+                        break;
                 case (int)Codes.SIGN_UP_ID:
                     Signup(Deserializer.DeserialiseResponse<SignupResponse>(response.Buffer) , form);
                     break;       
                 case (int)Codes.LOGIN_ID:   
                     Login(Deserializer.DeserialiseResponse<LoginResponse>(response.Buffer), form);
-                    break;            
-               
-                
+                    break;
+                case (int)Codes.LOGOUT:
+                    Logout(Deserializer.DeserialiseResponse<LogoutResponse>(response.Buffer), form);
+                    break;
+                case (int)Codes.JOIN_ROOM:
+                    JoinRoom(Deserializer.DeserialiseResponse<JoinRoomResponse>(response.Buffer), form);
+                    break;
+                case (int)Codes.LEAVE_ROOM:
+                    LeaveRoom(Deserializer.DeserialiseResponse<LeaveRoomResponse>(response.Buffer), form);
+                    break;
+                case (int)Codes.CREATE_ROOM:
+                    CreateRoom(Deserializer.DeserialiseResponse<CreateRoomResponse>(response.Buffer), form);
+                    break;
+                case (int)Codes.CLOSE_ROOM:
+                    CloseRoom(Deserializer.DeserialiseResponse<CloseRoomResponse>(response.Buffer), form);
+                    break;
+                case (int)Codes.GET_PLAYERS_IN_ROOM:
+                        
+                    break;
+                case (int)Codes.GET_ROOM_STATE:
+                    GetRoomState(Deserializer.DeserialiseResponse<GetRoomStateResponse>(response.Buffer), form);
+                    break;
+                case (int)Codes.GET_ROOMS:
+                    
+                    break;
                 default: break;
             }
+        }
+
+        private static void CreateRoomResponse(CreateRoomResponse createRoomResponse, Form form)
+        {
+            throw new NotImplementedException();
         }
 
         private static void Signup(Responses.SignupResponse response, Form form)
@@ -72,7 +120,11 @@ namespace Trivia_Client
                     error = "Username isn't valid";
                     break;
             }
-            ((SignupMenu)form).showErrorBox(error, userError) ;
+            ((SignupMenu)form).showErrorBox(error, userError);
+            if (error == "")
+            {
+                ((SignupMenu)form).SignupWorked();
+            }
 
         }
         private static void Login(Responses.LoginResponse response, Form form)
@@ -97,11 +149,129 @@ namespace Trivia_Client
                 case (int)ResultCodes.USERNAME_NOT_VALID:
                     error = "Username isn't valid";
                     break;
+      
            }
 
           ((LoginMenu)form).showErrorBox(error);
+           if(error == "")
+            {
+                ((LoginMenu)form).LoginWorked();
+            }
+        
         }
-          
+        private static void Logout(Responses.LogoutResponse response, Form form)
+        {
+            string error = "Failed to Logout";
+            if(response.Status == (int)ResultCodes.OK)
+            {
+                if (typeof(RoomListMenu).IsInstanceOfType(form))
+                {
+                    ((RoomListMenu)form).LogoutWorked();
+                }
+                else
+                {
+                    ((RoomMenu)form).LogoutWorked();
+                }
+            }
+            else
+            {
+                if (typeof(RoomListMenu).IsInstanceOfType(form))
+                {
+                    ((RoomListMenu)form).showErrorBox(error);
+                }
+                else
+                {
+                    ((RoomMenu)form).showErrorBox(error);
+                }
+            }     
+        }
+        private static void JoinRoom(Responses.JoinRoomResponse response, Form form)
+        {
+            string error = "Failed to Join room";
+            if(response.Status == (int)ResultCodes.OK)
+            {
+                form = ((RoomListMenu)form).JoinRoomWorked();
+                ((RoomMenu)form).Member();
+            }
+            else
+            {
+                ((RoomListMenu)form).showErrorBox(error);
+            }
+        }
+        private static void LeaveRoom(Responses.LeaveRoomResponse respnse , Form form)
+        {
+            string error = "Failed to Leave room";
+            if(respnse.Status == (int)ResultCodes.OK)
+            {
+                ((RoomMenu)form).leaveRoomWorked();
+            }
+            else
+            {
+                ((RoomListMenu)form).showErrorBox(error);
+            }
+        }
+        private static void CreateRoom(Responses.CreateRoomResponse response , Form form)
+        {
+            string error = "Failed to Create room";
+            if(response.Status == (int)ResultCodes.OK)
+            {
+                form = ((RoomListMenu)form).createRoomWorked();
+                ((RoomMenu)form).Admin();
+            }
+            else
+            {
+                ((RoomListMenu)form).showErrorBox(error);
+            }
+        }
+        private static void CloseRoom(Responses.CloseRoomResponse response, Form form)
+        {
+            string error = "Failed to Close room";
+            if (response.Status == (int)ResultCodes.OK)
+            {
+                ((RoomMenu)form).leaveRoomWorked();
+            }
+            else
+            {
+                ((RoomMenu)form).showErrorBox(error);
+            } 
+        }
+        private static void GetPlayersInRoom(Responses.GetPlayersInRoomResponse response , Form form)
+        {
+            string error = "Failed to Get players in room";
+            if(response.Status == (int)ResultCodes.OK)
+            {
+             //   ((RoomMenu)form).addPlayers(response.);
+            }
+            else
+            {
+                ((RoomMenu)form).showErrorBox(error);
+            }
+        }
+        private static void GetRoomState(Responses.GetRoomStateResponse response , Form form)
+        {
+            string error = "Failed to Get room state";
+            if (response.Status == (int)ResultCodes.OK)
+            {
+                ((RoomMenu)form).addPlayers(response.Players);
+                ((RoomMenu)form).SetParameters(response.AnswerTimeout.ToString());
+            }
+            else
+            {
+                ((RoomMenu)form).showErrorBox(error);
+            }
+        }
+        private static void GetRooms(Responses.tu response , Form form)
+        {
+            string error = "Failed to Get rooms";
+            if(response.Status == (int)ResultCodes.OK)
+            {
+                ((RoomListMenu)form).addRooms(response.Rooms);
+            }
+            else
+            {
+                ((RoomListMenu)form).showErrorBox(error);
+            }
+        }
     }
 
 }

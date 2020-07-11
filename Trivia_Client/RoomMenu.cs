@@ -63,6 +63,29 @@ namespace Trivia_Client
         {
 
         }
+        public void LogoutWorked()
+        {
+            this.Hide();
+            LoginMenu loginMenu = new LoginMenu();
+            loginMenu.ShowDialog();
+            this.Close();
+        }
+        public void leaveRoomWorked()
+        {
+            this.Hide();
+            RoomListMenu roomListMenu = new RoomListMenu();
+            roomListMenu.ShowDialog();
+            this.Close();
+        }
+        public void showErrorBox(String errorToShow)
+        {
+            this.errorTextBox.Text = errorToShow;
+            this.errorTextBox.Visible = true;
+
+        }
+        private void errorTextBox_TextChanged(object sender, EventArgs e)
+        {
+        }
 
         private void LogoutButton_Click(object sender, EventArgs e)
         {
@@ -79,6 +102,29 @@ namespace Trivia_Client
         {
             if(CloseButton.Visible)
                 RequestHandler.CloseRoom(this);
+        }
+        public void Admin()
+        {
+            this.admin_box.Visible = true;
+            this.LeaveButton .Visible= false;
+            this.CloseButton.Visible = true;
+            this.StartButton.Visible = true;
+        }
+        public void Member()
+        {
+            this.admin_box.Visible = false;
+            this.LeaveButton.Visible = true;
+            this.CloseButton.Visible = false;
+            this.StartButton.Visible = false;
+        }
+        public void addPlayers(List<string> list)
+        {
+              PlayerList.Items.Add(list);         
+        }
+        public void SetParameters(string time)
+        {
+            this.answerTimeout.Text = "Time for each question: " + time;
+            this.questionCount.Text = "Number of questions : 10";
         }
 
         private void LeaveButton_Click(object sender, EventArgs e)

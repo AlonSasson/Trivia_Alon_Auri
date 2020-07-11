@@ -277,5 +277,12 @@ namespace Trivia_Client
         {
 
         }
+        public void SignupWorked()
+        {
+            this.Hide();
+            RoomListMenu roomListMenu= new RoomListMenu();
+            roomListMenu.ShowDialog();
+            this.Close();
+        }
     }
 }

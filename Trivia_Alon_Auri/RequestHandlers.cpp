@@ -240,8 +240,13 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo request)
 	CreateRoomResponse response;
 	CreateRoomRequest createRoomRequest = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(request.buffer);
 	
+	createRoomResult.response = OK;
+
 	RoomData roomData = { RoomManager::getInstance().getNextRoomId(), createRoomRequest.roomName, createRoomRequest.maxUsers, createRoomRequest.answerTimeout, (unsigned int)Room::ROOM_WAITING_FOR_PLAYERS};
-	response.status = (RoomManager::getInstance()).createRoom(m_user, roomData);
+	if (!(RoomManager::getInstance()).createRoom(m_user, roomData))
+	{
+		createRoomResult.response = ERROR;
+	}
 
 	if (response.status == OK)
 		createRoomResult.newHandler = m_handlerFactory.createRoomAdminRequestHanlder(m_user, Room(roomData , m_user)); // move on to next state

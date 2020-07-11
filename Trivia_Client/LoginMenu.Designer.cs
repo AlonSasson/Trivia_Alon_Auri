@@ -73,6 +73,7 @@
             this.UsernameBox.TabIndex = 0;
             this.UsernameBox.Text = "Username";
             this.UsernameBox.Click += new System.EventHandler(this.UsernameBox_Click);
+            this.UsernameBox.TextChanged += new System.EventHandler(this.UsernameBox_TextChanged);
             // 
             // PassPanel
             // 
