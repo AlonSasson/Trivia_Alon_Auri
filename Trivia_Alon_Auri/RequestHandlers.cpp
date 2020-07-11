@@ -19,7 +19,11 @@ enum codeId
 	CLOSE_ROOM,
 	START_GAME,
 	GET_ROOM_STATE,
-	LEAVE_ROOM
+	LEAVE_ROOM,
+	LEAVE_GAME,
+	GET_QUESTION,
+	SUBMIT_ANSWER,
+	GET_GAME_RESULTS
 };
 
 // logs in a user 
@@ -240,12 +244,12 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo request)
 	CreateRoomResponse response;
 	CreateRoomRequest createRoomRequest = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(request.buffer);
 	
-	createRoomResult.response = OK;
+	response.status = OK;
 
 	RoomData roomData = { RoomManager::getInstance().getNextRoomId(), createRoomRequest.roomName, createRoomRequest.maxUsers, createRoomRequest.answerTimeout, (unsigned int)Room::ROOM_WAITING_FOR_PLAYERS};
 	if (!(RoomManager::getInstance()).createRoom(m_user, roomData))
 	{
-		createRoomResult.response = ERROR;
+		response.status = ERROR;
 	}
 
 	if (response.status == OK)
@@ -417,7 +421,7 @@ RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo request)
 	}
 	leaveRoomResult.response = JsonResponsePacketSerializer::serializeLeaveRoomResponse(response);
 
-
+	
 	leaveRoomResult.newHandler = m_handlerFactory.createMenuRequestHandler(m_user);
 
 	return leaveRoomResult;

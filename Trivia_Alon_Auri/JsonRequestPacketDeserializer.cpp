@@ -43,6 +43,13 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(un
 	return  j.get<CreateRoomRequest>();
 }
 
+SubmitAnswerReqest JsonRequestPacketDeserializer::deserializerSubmitAnswerRequest(unsigned char* buffer)
+{
+	std::string data = (char*)buffer;
+	json j = json::parse(data);
+	return  j.get<SubmitAnswerReqest>();
+}
+
 JsonRequestPacketDeserializer& JsonRequestPacketDeserializer::getInstance()
 {
 	static JsonRequestPacketDeserializer instance;
