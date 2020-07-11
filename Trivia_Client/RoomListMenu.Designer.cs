@@ -80,6 +80,7 @@
             this.JoinButton.TabIndex = 1;
             this.JoinButton.Text = "Join Room";
             this.JoinButton.UseVisualStyleBackColor = false;
+            this.JoinButton.Click += new System.EventHandler(this.JoinButton_Click);
             // 
             // CreateButton
             // 
@@ -107,6 +108,7 @@
             this.LogoutButton.TabIndex = 3;
             this.LogoutButton.Text = "Log out";
             this.LogoutButton.UseVisualStyleBackColor = false;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // textBox1
             // 
