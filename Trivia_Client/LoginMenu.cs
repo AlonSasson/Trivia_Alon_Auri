@@ -111,5 +111,17 @@ namespace Trivia_Client
             this.errorTextBox.Visible = true;
 
         }
+        public void LoginWorked()
+        {
+            this.Hide();
+            RoomListMenu roomListMenu = new RoomListMenu();
+            roomListMenu.ShowDialog();
+            this.Close();
+        }
+
+        private void UsernameBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
