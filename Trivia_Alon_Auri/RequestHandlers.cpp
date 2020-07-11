@@ -29,6 +29,8 @@ RequestResult LoginRequestHandler::login(RequestInfo request)
 	LoginResponse response; 
 	LoginRequest loginRequest = JsonRequestPacketDeserializer::deserializeLoginRequest(request.buffer);
 
+	if (Communicator::m_users.find(loginRequest.username) == Communicator::m_users.end()) // if the user shouldn't be connected
+		m_handlerFactory.getLoginManager().logout(loginRequest.username); // make sure they get logged out
 	response.status = m_handlerFactory.getLoginManager().login(loginRequest.username, loginRequest.password); // get status from login into database
 	loginResult.response = JsonResponsePacketSerializer::serializeResponse(response);
 
@@ -240,12 +242,12 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo request)
 	CreateRoomResponse response;
 	CreateRoomRequest createRoomRequest = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(request.buffer);
 	
-	createRoomResult.response = OK;
+	response.status = OK;
 
 	RoomData roomData = { RoomManager::getInstance().getNextRoomId(), createRoomRequest.roomName, createRoomRequest.maxUsers, createRoomRequest.answerTimeout, (unsigned int)Room::ROOM_WAITING_FOR_PLAYERS};
 	if (!(RoomManager::getInstance()).createRoom(m_user, roomData))
 	{
-		createRoomResult.response = ERROR;
+		response.status = ERROR;
 	}
 
 	if (response.status == OK)

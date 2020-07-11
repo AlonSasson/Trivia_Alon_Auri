@@ -63,7 +63,11 @@ namespace Trivia_Client
                     {
                         ((RoomListMenu)form).showErrorBox(error.Message);
                     }
-                        break;
+                    else if (typeof(RoomMenu).IsInstanceOfType(form))
+                    {
+                        ((RoomMenu)form).showErrorBox(error.Message);
+                    }
+                    break;
                 case (int)Codes.SIGN_UP_ID:
                     Signup(Deserializer.DeserialiseResponse<SignupResponse>(response.Buffer) , form);
                     break;       
@@ -86,21 +90,16 @@ namespace Trivia_Client
                     CloseRoom(Deserializer.DeserialiseResponse<CloseRoomResponse>(response.Buffer), form);
                     break;
                 case (int)Codes.GET_PLAYERS_IN_ROOM:
-                        
+                    GetPlayersInRoom(Deserializer.DeserialiseResponse<GetPlayersInRoomResponse>(response.Buffer), form);
                     break;
                 case (int)Codes.GET_ROOM_STATE:
                     GetRoomState(Deserializer.DeserialiseResponse<GetRoomStateResponse>(response.Buffer), form);
                     break;
                 case (int)Codes.GET_ROOMS:
-                    
+                    GetRooms(Deserializer.DeserialiseResponse<GetRoomsResponse>(response.Buffer), form);
                     break;
                 default: break;
             }
-        }
-
-        private static void CreateRoomResponse(CreateRoomResponse createRoomResponse, Form form)
-        {
-            throw new NotImplementedException();
         }
 
         private static void Signup(Responses.SignupResponse response, Form form)
@@ -118,6 +117,7 @@ namespace Trivia_Client
                     break;
                 case (int)ResultCodes.USERNAME_NOT_VALID:
                     error = "Username isn't valid";
+                    userError = true;
                     break;
             }
             ((SignupMenu)form).showErrorBox(error, userError);
@@ -164,25 +164,11 @@ namespace Trivia_Client
             string error = "Failed to Logout";
             if(response.Status == (int)ResultCodes.OK)
             {
-                if (typeof(RoomListMenu).IsInstanceOfType(form))
-                {
-                    ((RoomListMenu)form).LogoutWorked();
-                }
-                else
-                {
-                    ((RoomMenu)form).LogoutWorked();
-                }
+                ((RoomListMenu)form).LogoutWorked();
             }
             else
             {
-                if (typeof(RoomListMenu).IsInstanceOfType(form))
-                {
-                    ((RoomListMenu)form).showErrorBox(error);
-                }
-                else
-                {
-                    ((RoomMenu)form).showErrorBox(error);
-                }
+                ((RoomListMenu)form).showErrorBox(error);
             }     
         }
         private static void JoinRoom(Responses.JoinRoomResponse response, Form form)
@@ -240,11 +226,11 @@ namespace Trivia_Client
             string error = "Failed to Get players in room";
             if(response.Status == (int)ResultCodes.OK)
             {
-             //   ((RoomMenu)form).addPlayers(response.);
+                ((RoomListMenu)form).ShowPlayers(response.Players);
             }
             else
             {
-                ((RoomMenu)form).showErrorBox(error);
+                ((RoomListMenu)form).showErrorBox(error);
             }
         }
         private static void GetRoomState(Responses.GetRoomStateResponse response , Form form)
@@ -260,12 +246,17 @@ namespace Trivia_Client
                 ((RoomMenu)form).showErrorBox(error);
             }
         }
-        private static void GetRooms(Responses.tu response , Form form)
+        private static void GetRooms(Responses.GetRoomsResponse response , Form form)
         {
             string error = "Failed to Get rooms";
+            List<String> rooms = new List<string>();
             if(response.Status == (int)ResultCodes.OK)
             {
-                ((RoomListMenu)form).addRooms(response.Rooms);
+                foreach(RoomData room in response.Rooms)
+                {
+                    rooms.Add(room.Name);
+                }
+                ((RoomListMenu)form).addRooms(rooms);
             }
             else
             {

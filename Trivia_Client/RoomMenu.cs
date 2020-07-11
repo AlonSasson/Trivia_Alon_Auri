@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,8 +27,7 @@ namespace Trivia_Client
         // updates the room on the screen
         private void UpdateScreen(object sender, EventArgs e)
         {
-            while (true)
-                RequestHandler.GetRoomState(this);
+
         }
 
         // aborts the update thread
@@ -39,40 +39,18 @@ namespace Trivia_Client
         // checks for a change in the room (start / leave)
         private void CheckRoomChange(object sender, EventArgs e)
         {
-            while (true)
-            {
-                ResponseHandler.HandelResponse(Communicator.recvResponse(), this);
-            }
+
         }
         // stops checking for a change in the room (start / leave)
         private void StopRoomChangeCheck()
         {
             roomChangeThread.CancelAsync();
         }
-        private void RoomMenu_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void RoomList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-        public void LogoutWorked()
-        {
-            this.Hide();
-            LoginMenu loginMenu = new LoginMenu();
-            loginMenu.ShowDialog();
-            this.Close();
-        }
         public void leaveRoomWorked()
         {
             this.Hide();
+            StopRoomChangeCheck();
+            StopUpdate();
             RoomListMenu roomListMenu = new RoomListMenu();
             roomListMenu.ShowDialog();
             this.Close();
@@ -85,11 +63,6 @@ namespace Trivia_Client
         }
         private void errorTextBox_TextChanged(object sender, EventArgs e)
         {
-        }
-
-        private void LogoutButton_Click(object sender, EventArgs e)
-        {
-            RequestHandler.Logout(this);
         }
 
         private void StartButton_Click(object sender, EventArgs e)
@@ -132,5 +105,7 @@ namespace Trivia_Client
             if (LeaveButton.Visible)
                 RequestHandler.LeaveRoom(this);
         }
+
+     
     }
 }

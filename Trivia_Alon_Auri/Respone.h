@@ -99,8 +99,9 @@ void to_json(json& j, const JoinRoomResponse& respone)
 }
 void to_json(json& j, const GetRoomsResponse& respone)
 {
-	json structHold;
-	std::vector<std::string> addToJson;
+	json structHold = json{ {"Id", 1, "IsActive", 0, "MaxPlayers", 10, "Name", "idk", "TimePerQuestion", 10} };
+	std::vector<json> addToJson;
+	addToJson.push_back(structHold);
 	for (auto it = respone.rooms.begin();it != respone.rooms.end();it++)
 	{
 		structHold["Id"] = it->id;
@@ -141,7 +142,7 @@ void to_json(json& j, const StartGameResponse& response)
 
 void to_json(json& j, const GetRoomStateResponse& response)
 {
-	j = json{ {"status" , response.status , "HasGameBegun" , response.hasGameBegun , "Players" , response.players , "QuestionCount" , response.questionCount , "AnswerTimeout" , response.answerTimeout } };
+	j = json{ {"Status" , response.status , "HasGameBegun" , response.hasGameBegun , "Players" , response.players , "QuestionCount" , response.questionCount , "AnswerTimeout" , response.answerTimeout } };
 }
 
 void to_json(json& j, const LeaveRoomResponse& response)

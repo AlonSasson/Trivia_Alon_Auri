@@ -20,20 +20,6 @@ namespace Trivia_Client
             updateThread.RunWorkerAsync();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void RoomList_DoubleClick(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void errorTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         public void showErrorBox(String errorToShow)
         {
             this.errorTextBox.Text = errorToShow;
@@ -42,22 +28,17 @@ namespace Trivia_Client
         public void LogoutWorked()
         {
             this.Hide();
+            StopUpdate();
             LoginMenu loginMenu = new LoginMenu();
             loginMenu.ShowDialog();
             this.Close();
         }
-        private void RoomList_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void RoomListMenu_Load(object sender, EventArgs e)
-        {
-
-        }
+      
         public RoomMenu JoinRoomWorked()
         {
             this.Hide();
+            StopUpdate();
             RoomMenu roomMenu = new RoomMenu();
             roomMenu.ShowDialog();
             this.Close();
@@ -66,6 +47,7 @@ namespace Trivia_Client
         public RoomMenu createRoomWorked()
         {
             this.Hide();
+            StopUpdate();
             RoomMenu roomMenu = new RoomMenu();
             roomMenu.ShowDialog();
             this.Close();
@@ -95,12 +77,32 @@ namespace Trivia_Client
 
         private void RoomList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RequestHandler.GetPlayersInRoom(RoomList.SelectedItem.ToString(), this);
+            if(RoomList.SelectedItems.Count != 0) // if a room has been selected
+            {
+                RequestHandler.GetPlayersInRoom(RoomList.SelectedItem.ToString(), this);
+            }              
         }
 
         private void JoinButton_Click(object sender, EventArgs e)
         {
-            RequestHandler.JoinRoom(RoomList.SelectedItem.ToString(), this);
+            if (RoomList.SelectedItems.Count != 0) // if a room has been selected
+                RequestHandler.JoinRoom(RoomList.SelectedItem.ToString(), this);
+        }
+
+        public void ShowPlayers(List<string> list)
+        {
+            PlayerList.Items.Add(list);
+            PlayerList.Visible = true;
+        }
+
+        private void RoomListMenu_MouseClick(object sender, MouseEventArgs e)
+        {
+            PlayerList.Visible = false;
+        }
+
+        private void RoomList_MouseClick(object sender, MouseEventArgs e)
+        {
+            PlayerList.Location = e.Location;
         }
     }
 }

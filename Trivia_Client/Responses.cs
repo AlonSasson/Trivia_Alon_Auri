@@ -71,16 +71,12 @@ namespace Trivia_Client
         }
         public class RoomData
         {
-            private int id { get; set; }
-            private string name { get; set; }
-            private int maxPlayers { get; set; }
-            private int numOfQuestionsInGame { get; set; }
-            private int timePerQuestion { get; set; }
-            private int isActive { get; set; }
-            
-
-
-
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public int MaxPlayers { get; set; }
+            public int NumOfQuestionsInGame { get; set; }
+            public int TimePerQuestion { get; set; }
+            public int IsActive { get; set; }
 
         }
 

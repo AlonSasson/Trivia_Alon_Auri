@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace Trivia_Client
 {
@@ -36,14 +37,15 @@ namespace Trivia_Client
         public static Responses.ResponseInfo sendRequest(byte[] buffer)
         {
             const int ERROR_ID = 0;
+            Responses.ErrorResponse errorResponse = new Responses.ErrorResponse { Message = "Failed to send request" };
             try
             {
                 ClientSock.Write(buffer, 0, buffer.Length);
                 ClientSock.Flush();
             }
-            catch (SocketException e)
+            catch (Exception e)
             {
-                return new Responses.ResponseInfo { Code = ERROR_ID, Buffer = new ASCIIEncoding().GetBytes("Failed to send request") };
+                return new Responses.ResponseInfo { Code = ERROR_ID, Buffer = new ASCIIEncoding().GetBytes(JsonConvert.SerializeObject(errorResponse)) };
             }
 
             return recvResponse();
@@ -57,27 +59,30 @@ namespace Trivia_Client
             const int ERROR_ID = 0;
             int len = 0;
             Responses.ResponseInfo response = new Responses.ResponseInfo();
+            Responses.ErrorResponse errorResponse = new Responses.ErrorResponse { Message = "Failed to get response" };
             byte[] buffer = null;
+            
 
             try
             {
                 buffer = new byte[CODE_SIZE + LEN_SIZE];
                 if (ClientSock.Read(buffer, 0, CODE_SIZE) == 0) // if no info was read
-                    return new Responses.ResponseInfo { Code = ERROR_ID, Buffer = new ASCIIEncoding().GetBytes("Failed to get response") };
+                    return new Responses.ResponseInfo { Code = ERROR_ID, Buffer = new ASCIIEncoding().GetBytes(JsonConvert.SerializeObject(errorResponse)) };
                 response.Code = (int)buffer[0];
 
                 if (ClientSock.Read(buffer, CODE_SIZE, LEN_SIZE) == 0) // if no info was read
-                    return new Responses.ResponseInfo { Code = ERROR_ID, Buffer = new ASCIIEncoding().GetBytes("Failed to get response") };
+                    return new Responses.ResponseInfo { Code = ERROR_ID, Buffer = new ASCIIEncoding().GetBytes(JsonConvert.SerializeObject(errorResponse)) };
+                Array.Reverse(buffer, CODE_SIZE, LEN_SIZE); // convert to little indian
                 len = BitConverter.ToInt32(buffer, 1);
 
-                buffer = new byte[CODE_SIZE + LEN_SIZE + len];
-                if (ClientSock.Read(buffer, CODE_SIZE + LEN_SIZE, len) == 0) // if no info was read
-                    return new Responses.ResponseInfo { Code = ERROR_ID, Buffer = new ASCIIEncoding().GetBytes("Failed to get response") };
+                buffer = new byte[len];
+                if (ClientSock.Read(buffer, 0, len) == 0) // if no info was read
+                    return new Responses.ResponseInfo { Code = ERROR_ID, Buffer = new ASCIIEncoding().GetBytes(JsonConvert.SerializeObject(errorResponse)) };
                 response.Buffer = buffer;
             }
-            catch (SocketException e)
+            catch (Exception e)
             {
-                response = new Responses.ResponseInfo { Code = ERROR_ID, Buffer = new ASCIIEncoding().GetBytes("Failed to get response") };
+                return new Responses.ResponseInfo { Code = ERROR_ID, Buffer = new ASCIIEncoding().GetBytes(JsonConvert.SerializeObject(errorResponse)) };
             }
 
             return response;
