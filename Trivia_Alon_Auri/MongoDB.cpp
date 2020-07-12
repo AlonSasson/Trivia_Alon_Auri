@@ -36,10 +36,14 @@ bool mongoDB::addNewUser(std::string username, std::string password, std::string
 
 	if (!this->doesUserExist(username))
 	{
-		bsoncxx::builder::stream::document document{};
-		document << "username" << username << "password" << password << "mail" << mail << "address" << address << "phone_number" << phone_number << "birthday" << birthday;
-		auto collection = this->db["Users"];
-		collection.insert_one(document.view());
+		bsoncxx::builder::stream::document userDoc{};
+		bsoncxx::builder::stream::document statisticsDoc{};
+		userDoc << "username" << username << "password" << password << "mail" << mail << "address" << address << "phone_number" << phone_number << "birthday" << birthday;
+		statisticsDoc << "username" << username << "avg_answer_time" << 0 << "correct_answers" << 0 << "games_played" << 0 << "total_answers" << 0 << "score" << 0;
+		auto usersCol = this->db["Users"];
+		usersCol.insert_one(userDoc.view());
+		auto statisticsCol = this->db["Statistics"];
+		statisticsCol.insert_one(statisticsDoc.view());
 		return true;
 	}
 	return false;
@@ -190,4 +194,14 @@ std::vector<std::string> mongoDB::getHighScores()
 	}
 
 	return highscores;
+}
+
+// updates the user's statistics
+void mongoDB::updateStaticsDB(std::string username, double averegeAnswerTime, int numOfCorrectAnswers, int numOfTotalAnswers, int numOfGamesPlayed, int score)
+{
+	auto statisticsCol = this->db["Statistics"];
+
+	statisticsCol.update_one(make_document(kvp("username", username)), make_document(kvp("$set", 
+							make_document(kvp("avg_answer_time", averegeAnswerTime), kvp("correct_answers", numOfCorrectAnswers),
+										 kvp("total_answers", numOfTotalAnswers), kvp("games_played", numOfGamesPlayed), kvp("score", score)))));
 }
