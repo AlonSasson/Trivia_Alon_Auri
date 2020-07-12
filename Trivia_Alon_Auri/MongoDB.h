@@ -36,6 +36,7 @@ public:
 	int getNumOfCorrectAnswers(std::string username);
 	int getNumOfTotalAnswers(std::string username);
 	int getNumOfPlayerGames(std::string username);
+	int getScore(std::string username);
 	void updateHighScore(std::string username);
 	virtual std::vector<std::string> getHighScores();
 

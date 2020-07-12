@@ -89,6 +89,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatisticsMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatisticsMenu.Designer.cs">
+      <DependentUpon>StatisticsMenu.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="LoginMenu.resx">
       <DependentUpon>LoginMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +111,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatisticsMenu.resx">
+      <DependentUpon>StatisticsMenu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -145,6 +154,7 @@
     <Content Include="Resources\address2.png" />
     <Content Include="Resources\birth2.png" />
     <Content Include="Resources\IdoMeleh.jpg" />
+    <None Include="Resources\LightCrown.jpg" />
     <Content Include="Resources\mail2.png" />
     <Content Include="Resources\pass2.png" />
     <Content Include="Resources\phone2.png" />

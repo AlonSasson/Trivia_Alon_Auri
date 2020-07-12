@@ -29,6 +29,12 @@ namespace Trivia_Client
         { 
             public int Status { get; set; }
         }
+        public class GetStatisticsResponse : Response
+        {
+            public int Status { get; set; }
+            public List<String> HighScores { get; set; }
+            public String Statistics { get; set; }
+        }
         public class JoinRoomResponse : Response
         { 
             public int Status { get; set; }

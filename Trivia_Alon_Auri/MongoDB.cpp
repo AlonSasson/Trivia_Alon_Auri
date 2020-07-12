@@ -161,6 +161,17 @@ int mongoDB::getNumOfPlayerGames(std::string username)
 	return gamesPlayedNum;
 }
 
+//gets the score of the player 
+int mongoDB::getScore(std::string username)
+{
+	int score = 0;
+	nlohmann::json userStatistics = getUserStatistics(username);
+
+	if (!userStatistics.is_null()) // if the user statistics were found
+		score = userStatistics["score"];
+	return score;
+}
+
 // calculate a player's high score and update it in the database
 void mongoDB::updateHighScore(std::string username)
 {

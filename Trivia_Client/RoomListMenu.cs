@@ -46,10 +46,6 @@ namespace Trivia_Client
             loginMenu.ShowDialog();
             this.Close();
         }
-        private void RoomList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void RoomListMenu_Load(object sender, EventArgs e)
         {
@@ -101,6 +97,15 @@ namespace Trivia_Client
         private void JoinButton_Click(object sender, EventArgs e)
         {
             RequestHandler.JoinRoom(RoomList.SelectedItem.ToString(), this);
+        }
+
+        private void StatsButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            StopUpdate();
+            StatisticsMenu StatsMenu = new StatisticsMenu();
+            StatsMenu.ShowDialog();
+            this.Close();
         }
     }
 }
