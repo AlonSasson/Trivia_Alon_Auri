@@ -84,6 +84,7 @@ unsigned int LoginManager::logout(std::string username)
 		{
 			userExist = true;
 			this->m_loggedUsers.erase(it); //if user name exist the program erase it
+			break;
 		}
 	}
 	if (userExist == false) //if the user name was not found return much status code

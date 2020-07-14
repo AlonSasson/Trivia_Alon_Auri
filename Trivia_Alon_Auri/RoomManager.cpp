@@ -1,4 +1,5 @@
 #include "RoomManager.h"
+#include <iostream>
 
 unsigned int RoomManager::roomCount = 0;
 
@@ -54,7 +55,7 @@ std::vector<RoomData> RoomManager::getRooms()
 }
 
 // gets a room
-Room RoomManager::getRoom(unsigned int roomId)
+Room& RoomManager::getRoom(unsigned int roomId)
 {
 	return m_rooms.at(roomId);
 }

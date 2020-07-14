@@ -24,6 +24,7 @@ public:
 	virtual int getNumOfCorrectAnswers(std::string username) = 0;
 	virtual int getNumOfTotalAnswers(std::string username) = 0;
 	virtual int getNumOfPlayerGames(std::string username) = 0;
+	virtual int getScore(std::string username) = 0;
 	virtual void updateHighScore(std::string username) = 0;
 	virtual std::vector<std::string> getHighScores() = 0;
 

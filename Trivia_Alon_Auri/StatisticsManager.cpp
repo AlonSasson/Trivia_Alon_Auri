@@ -23,7 +23,8 @@ std::string StatisticsManager::getUserStats(std::string username)
 	json userStats = json{ {"avg_answer_time", this->m_database->getPlayerAverageAnswerTime(username)},
 						   {"correct_answers", this->m_database->getNumOfCorrectAnswers(username)}, 
 						   {"total_answers", this->m_database->getNumOfTotalAnswers(username)},
-					       {"games_played", this->m_database->getNumOfPlayerGames(username)}};
+					       {"games_played", this->m_database->getNumOfPlayerGames(username)},
+						   {"score", this->m_database->getScore(username)}};
 	return userStats.dump();
 }
 

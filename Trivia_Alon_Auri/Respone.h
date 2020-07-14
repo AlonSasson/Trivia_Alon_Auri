@@ -69,7 +69,7 @@ struct StartGameResponse
 struct GetRoomStateResponse
 {
 	unsigned int status;
-	bool hasGameBegun;
+	unsigned int hasGameBegun;
 	std::vector<std::string> players;
 	unsigned int questionCount;
 	unsigned int answerTimeout;
@@ -137,11 +137,11 @@ void to_json(json& j, const JoinRoomResponse& respone)
 void to_json(json& j, const GetRoomsResponse& respone)
 {
 	json structHold;
-	std::vector<std::string> addToJson;
+	std::vector<json> addToJson;
 	for (auto it = respone.rooms.begin();it != respone.rooms.end();it++)
 	{
 		structHold["Id"] = it->id;
-		structHold["IsActive"] = it->isActive;
+		structHold["HasGameBegun"] = it->isActive;
 		structHold["MaxPlayers"] =it->maxPlayers;
 		structHold["Name"] = it->name;
 		structHold["TimePerQuestion"] = it->timePerQuestion;
@@ -149,9 +149,10 @@ void to_json(json& j, const GetRoomsResponse& respone)
 		addToJson.push_back(structHold);
 	}
 
-	j = json{ {"Status", respone.status, "Rooms" , addToJson} };
-
+	j = json{ {"Status", respone.status } , {"Rooms" , addToJson } };
 }
+
+
 void to_json(json& j, const CreateRoomResponse& respone)
 {
 	j = json{ {"Status", respone.status} };
@@ -163,7 +164,7 @@ void to_json(json& j, const GetPlayersInRoomResponse& respone)
 
 void to_json(json& j, const getStaticsResponse& respone)
 {
-	j = json{ {"Status", respone.status, "HighScores" , respone.highScores , "Statistics" , respone.statics} };
+	j = json{ {"Status", respone.status }, { "HighScores" , respone.highScores }, { "Statistics" , respone.statics } };
 }
 
 void to_json(json& j, const CloseRoomResponse& response)
@@ -178,7 +179,8 @@ void to_json(json& j, const StartGameResponse& response)
 
 void to_json(json& j, const GetRoomStateResponse& response)
 {
-	j = json{ {"Status" , response.status , "HasGameBegun" , response.hasGameBegun , "Players" , response.players , "QuestionCount" , response.questionCount , "AnswerTimeout" , response.answerTimeout } };
+	j = json{ {"Status" , response.status } ,{ "HasGameBegun" , response.hasGameBegun },{ "Players" , response.players },{ "QuestionCount" , response.questionCount },{ "AnswerTimeout" , response.answerTimeout} };
+
 }
 
 void to_json(json& j, const LeaveRoomResponse& response)
@@ -204,4 +206,3 @@ void to_json(json& j, const GetGameResultResponse& response)
 	json structHold;
 	
 }
-

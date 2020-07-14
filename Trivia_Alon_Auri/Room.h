@@ -18,9 +18,9 @@ class Room
 private:
 
 	RoomData m_metadata;
-	std::vector<LoggedUser> m_users;
 
 public:
+	std::vector<LoggedUser> m_users;
 
 	//manage users inside room 
 	bool addUser(LoggedUser user);

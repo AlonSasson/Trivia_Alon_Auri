@@ -37,13 +37,13 @@ bool mongoDB::addNewUser(std::string username, std::string password, std::string
 	if (!this->doesUserExist(username))
 	{
 		bsoncxx::builder::stream::document userDoc{};
-		bsoncxx::builder::stream::document statisticsDoc{};
+		bsoncxx::builder::stream::document staticsDoc{};
 		userDoc << "username" << username << "password" << password << "mail" << mail << "address" << address << "phone_number" << phone_number << "birthday" << birthday;
-		statisticsDoc << "username" << username << "avg_answer_time" << 0 << "correct_answers" << 0 << "games_played" << 0 << "total_answers" << 0 << "score" << 0;
-		auto usersCol = this->db["Users"];
-		usersCol.insert_one(userDoc.view());
-		auto statisticsCol = this->db["Statistics"];
-		statisticsCol.insert_one(statisticsDoc.view());
+		staticsDoc << "username" << username << "avg_answer_time" << 0 << "correct_answers" << 0 << "total_answers" << 0 << "games_played" << 0 << "score" << 0;
+		auto collectionStatics = this->db["Statistics"];
+		collectionStatics.insert_one(staticsDoc.view());
+		auto collection = this->db["Users"];
+		collection.insert_one(userDoc.view());
 		return true;
 	}
 	return false;
@@ -163,6 +163,17 @@ int mongoDB::getNumOfPlayerGames(std::string username)
 	if (!userStatistics.is_null()) // if the user statistics were found
 		gamesPlayedNum = userStatistics["games_played"];
 	return gamesPlayedNum;
+}
+
+//gets the score of the player 
+int mongoDB::getScore(std::string username)
+{
+	int score = 0;
+	nlohmann::json userStatistics = getUserStatistics(username);
+
+	if (!userStatistics.is_null()) // if the user statistics were found
+		score = userStatistics["score"];
+	return score;
 }
 
 // calculate a player's high score and update it in the database
