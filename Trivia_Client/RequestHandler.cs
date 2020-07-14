@@ -12,17 +12,20 @@ namespace Trivia_Client
     class RequestHandler
     {
         private static int getRoomId(String roomName)
-        {
+            {
             byte[] buffer = new byte[Serializer.CODE_SIZE + Serializer.LEN_SIZE];
             buffer[0] = (byte)Serializer.codeId.GET_ROOMS;
             Responses.ResponseInfo responseInfo = Communicator.sendRequest(buffer);
             GetRoomsResponse response = Deserializer.DeserialiseResponse<GetRoomsResponse>(responseInfo.Buffer);
-            for (int i = 0; i < response.Rooms.Count; i++)
+            if (response.Rooms != null)
             {
-                if (response.Rooms[i].Name.Equals(roomName)) // if this is the room we're looking for
-                    return response.Rooms[i].Id;
+                for (int i = 0; i < response.Rooms.Count; i++)
+                {
+                    if (response.Rooms[i].Name.Equals(roomName)) // if this is the room we're looking for
+                        return response.Rooms[i].Id;
+                }
             }
-            return -1; // if no room was found
+             return -1; // if no room was found
             
         }
         private static void HandleRequest(byte[] buffer, Form form)

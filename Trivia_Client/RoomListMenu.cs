@@ -7,23 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Trivia_Client
 {
     public partial class RoomListMenu : Form
     {
-        private BackgroundWorker updateThread = new BackgroundWorker();
         public RoomListMenu()
         {
             InitializeComponent();
+            runThread();
+        }
+        private BackgroundWorker updateThread;
+        private void runThread()
+        {
+            updateThread = new BackgroundWorker();
+            updateThread.WorkerSupportsCancellation = true;
             updateThread.DoWork += UpdateScreen;
             updateThread.RunWorkerAsync();
         }
-
         public void showErrorBox(String errorToShow)
         {
-            this.errorTextBox.Text = errorToShow;
-            this.errorTextBox.Visible = true;
+            Action action = () => this.errorTextBox.Text = errorToShow;
+            errorTextBox.Invoke(action);
+
+            action = () => this.errorTextBox.Visible = true;
+            errorTextBox.Invoke(action);
+
         }
         public void LogoutWorked()
         {
@@ -35,33 +45,63 @@ namespace Trivia_Client
         }
 
       
-        public RoomMenu JoinRoomWorked()
+        public void JoinRoomWorked()
         {
             this.Hide();
             StopUpdate();
             RoomMenu roomMenu = new RoomMenu();
+            roomMenu.Member();
             roomMenu.ShowDialog();
             this.Close();
-            return roomMenu;
         }
-        public RoomMenu createRoomWorked()
-        {
-            this.Hide();
-            StopUpdate();
-            RoomMenu roomMenu = new RoomMenu();
-            roomMenu.ShowDialog();
-            this.Close();
-            return roomMenu;
-        }
+
         public void addRooms(List<string> rooms)
         {
-            this.RoomList.Items.Add(rooms);
+            bool nameNotInList = true;
+
+            foreach (object name in RoomList.Items)
+            {
+                nameNotInList = true;
+                foreach (string room in rooms)
+                {
+                    if (name.ToString().Equals(room))
+                    {
+                        nameNotInList = false;
+                    }
+
+                }
+                if (nameNotInList)
+                {
+                    PlayerList.Items.Remove(name);
+                }
+            }
+            nameNotInList = true;
+            foreach (string roomName in rooms)
+            {
+                for (int i =0;i<RoomList.Items.Count;i++)
+                {
+                    if (RoomList.Items[i].ToString().Equals(roomName))
+                        nameNotInList = false;
+                }
+                if (nameNotInList)
+                {
+                    Action action = () => RoomList.Items.Add(roomName);
+                    RoomList.Invoke(action);
+                }
+            }
+
         }
         // updates the room on the screen
         private void UpdateScreen(object sender, EventArgs e)
         {
             while (true)
+            {
+                Thread.Sleep(1000);
+                if (updateThread.CancellationPending)
+                    break;
                 RequestHandler.GetRooms(this);
+
+            }
         }
 
         // aborts the update thread
@@ -77,10 +117,12 @@ namespace Trivia_Client
 
         private void RoomList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            StopUpdate();
             if(RoomList.SelectedItems.Count != 0) // if a room has been selected
             {
                 RequestHandler.GetPlayersInRoom(RoomList.SelectedItem.ToString(), this);
-            }              
+            }
+            runThread();
         }
 
         private void JoinButton_Click(object sender, EventArgs e)
@@ -91,7 +133,36 @@ namespace Trivia_Client
 
         public void ShowPlayers(List<string> list)
         {
-            PlayerList.Items.Add(list);
+            bool nameNotInList = true;
+
+            foreach(object name in PlayerList.Items)
+            {
+                nameNotInList = true;
+                foreach(string playerName in list)
+                {
+                    if(name.ToString().Equals(playerName))
+                    {
+                        nameNotInList = false;
+                    }
+                    
+                }
+                if(nameNotInList)
+                {
+                    PlayerList.Items.Remove(name);   
+                }
+            }
+            nameNotInList = true;
+            foreach (string playerName in list)
+           {
+                foreach(object name in PlayerList.Items)
+                {
+                    if (name.ToString().Equals(playerName))
+                        nameNotInList = false;
+                }
+                if(nameNotInList)
+                    PlayerList.Items.Add(playerName);
+                
+            }
             PlayerList.Visible = true;
         }
 
@@ -103,6 +174,29 @@ namespace Trivia_Client
         private void RoomList_MouseClick(object sender, MouseEventArgs e)
         {
             PlayerList.Location = e.Location;
+        }
+
+        private void errorTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RoomListMenu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            StopUpdate();
+            CreateRoomMenu roomMenu = new CreateRoomMenu();
+            roomMenu.ShowDialog();
+            this.Close();
+        }
+        public void ClearList()
+        {
+            RoomList.Items.Clear();
         }
     }
 }

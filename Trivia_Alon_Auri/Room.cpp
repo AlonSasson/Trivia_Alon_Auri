@@ -1,4 +1,5 @@
 #include "Room.h"
+#include <iostream>
 
 // adds a user to the room
 bool Room::addUser(LoggedUser user)
@@ -11,6 +12,9 @@ bool Room::addUser(LoggedUser user)
 		}
 	}
 	m_users.push_back(user);
+	for (int i = 0; i < m_users.size(); i++) {
+		std::cout << m_users.at(i).getUserName() << ' ';
+	}
 	return true;
 }
 

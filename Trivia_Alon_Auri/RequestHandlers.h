@@ -65,7 +65,7 @@ private:
 	RequestHandlerFactory& m_handlerFactory;
 
 public:
-	RoomAdminRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Room m_room);
+	RoomAdminRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, int id);
 	bool isRequestRelevant(RequestInfo request);
 	RequestResult handleRequest(RequestInfo request);
 	RequestResult closeRoom(RequestInfo request);
@@ -83,7 +83,7 @@ private:
 	RequestHandlerFactory& m_handlerFactory;
 
 public:
-	RoomMemberRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Room m_room);
+	RoomMemberRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, int id);
 	bool isRequestRelevant(RequestInfo request);
 	RequestResult handleRequest(RequestInfo request);
 	RequestResult leaveRoom(RequestInfo request);

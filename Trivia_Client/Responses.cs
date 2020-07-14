@@ -52,13 +52,12 @@ namespace Trivia_Client
         }
         public class GetPlayersInRoomResponse : Response
         { 
-            public int Status { get; set; }
             public List<string> Players { get; set; }
         }
         public class GetRoomStateResponse : Response
         {
             public int Status { get; set; }
-            public bool HasGameBegin { set; get; }
+            public int HasGameBegun { set; get; }
             public List<string> Players { get; set; }
             public int QuestionCount { get; set; }
             public int AnswerTimeout { get; set; }

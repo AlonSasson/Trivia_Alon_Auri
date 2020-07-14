@@ -52,6 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communicator.cs" />
+    <Compile Include="CreateRoomMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateRoomMenu.Designer.cs">
+      <DependentUpon>CreateRoomMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Deserializer.cs" />
     <Compile Include="LoginMenu.cs">
       <SubType>Form</SubType>
@@ -89,6 +95,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CreateRoomMenu.resx">
+      <DependentUpon>CreateRoomMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginMenu.resx">
       <DependentUpon>LoginMenu.cs</DependentUpon>
     </EmbeddedResource>
