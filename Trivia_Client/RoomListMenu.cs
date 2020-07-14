@@ -196,10 +196,20 @@ namespace Trivia_Client
         }
         public void ClearList()
         {
-            RoomList.Items.Clear();
+            Action action = () => RoomList.Items.Clear();
+            RoomList.Invoke(action); 
         }
 
         private void StatsButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            StopUpdate();
+            StatisticsMenu StatsMenu = new StatisticsMenu();
+            StatsMenu.ShowDialog();
+            this.Close();
+        }
+
+        private void stats_button_Click(object sender, EventArgs e)
         {
             this.Hide();
             StopUpdate();
