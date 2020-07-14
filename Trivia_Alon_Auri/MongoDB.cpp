@@ -206,3 +206,13 @@ std::vector<std::string> mongoDB::getHighScores()
 
 	return highscores;
 }
+
+// updates the user's statistics
+void mongoDB::updateStaticsDB(std::string username, double averegeAnswerTime, int numOfCorrectAnswers, int numOfTotalAnswers, int numOfGamesPlayed, int score)
+{
+	auto statisticsCol = this->db["Statistics"];
+
+	statisticsCol.update_one(make_document(kvp("username", username)), make_document(kvp("$set", 
+							make_document(kvp("avg_answer_time", averegeAnswerTime), kvp("correct_answers", numOfCorrectAnswers),
+										 kvp("total_answers", numOfTotalAnswers), kvp("games_played", numOfGamesPlayed), kvp("score", score)))));
+}
