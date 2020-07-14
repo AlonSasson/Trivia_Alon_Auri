@@ -45,6 +45,10 @@ typedef struct JoinRoomRequest
 	unsigned int roomId;
 }JoinRoomRequest;
 
+typedef struct SubmitAnswerReqest
+{
+	unsigned int answerId;
+}SubmitAnswerReqest;
 
 // convert json data to a request struct
 
@@ -53,3 +57,5 @@ void from_json(const nlohmann::json& j, SignupRequest& request);
 void from_json(const nlohmann::json& j, CreateRoomRequest& request);
 void from_json(const nlohmann::json& j, GetPlayersInRoomRequest& request);
 void from_json(const nlohmann::json& j, JoinRoomRequest& request);
+void from_json(const nlohmann::json& j, SubmitAnswerReqest& request);
+

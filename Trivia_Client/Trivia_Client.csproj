@@ -115,6 +115,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="StatisticsMenu.resx">
+      <DependentUpon>StatisticsMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -154,6 +157,7 @@
     <Content Include="Resources\address2.png" />
     <Content Include="Resources\birth2.png" />
     <Content Include="Resources\IdoMeleh.jpg" />
+    <None Include="Resources\LightCrown.jpg" />
     <Content Include="Resources\mail2.png" />
     <Content Include="Resources\pass2.png" />
     <Content Include="Resources\phone2.png" />

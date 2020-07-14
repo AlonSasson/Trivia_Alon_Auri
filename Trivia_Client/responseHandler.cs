@@ -20,7 +20,7 @@ namespace Trivia_Client
             GET_PLAYERS_IN_ROOM,
             JOIN_ROOM,
             CREATE_ROOM,
-            GET_STATICS,
+            GET_STATISTICS,
             CLOSE_ROOM,
             START_GAME,
             GET_ROOM_STATE,
@@ -90,6 +90,9 @@ namespace Trivia_Client
                     break;
                 case (int)Codes.CREATE_ROOM:
                     CreateRoom(Deserializer.DeserialiseResponse<CreateRoomResponse>(response.Buffer), form);
+                    break;
+                case (int)Codes.GET_STATISTICS:
+                    GetStatistics(Deserializer.DeserialiseResponse<GetStatisticsResponse>(response.Buffer), form);
                     break;
                 case (int)Codes.CLOSE_ROOM:
                     CloseRoom(Deserializer.DeserialiseResponse<CloseRoomResponse>(response.Buffer), form);
@@ -212,6 +215,14 @@ namespace Trivia_Client
             else
             {
                 ((CreateRoomMenu)form).showErrorBox(error);
+            }
+        }
+        private static void GetStatistics(Responses.GetStatisticsResponse response, Form form)
+        {
+            if (response.Status == (int)ResultCodes.OK)
+            {
+                ((StatisticsMenu)form).ShowScores(response.HighScores);
+                ((StatisticsMenu)form).ShowStatistics(response.Statistics);
             }
         }
         private static void CloseRoom(Responses.CloseRoomResponse response, Form form)

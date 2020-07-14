@@ -19,7 +19,11 @@ enum codeId
 	CLOSE_ROOM,
 	START_GAME,
 	GET_ROOM_STATE,
-	LEAVE_ROOM
+	LEAVE_ROOM,
+	LEAVE_GAME,
+	GET_QUESTION,
+	SUBMIT_ANSWER,
+	GET_GAME_RESULTS
 };
 
 // logs in a user 
@@ -443,7 +447,7 @@ RequestResult RoomMemberRequestHandler::leaveRoom(RequestInfo request)
 	}
 	leaveRoomResult.response = JsonResponsePacketSerializer::serializeLeaveRoomResponse(response);
 
-
+	
 	leaveRoomResult.newHandler = m_handlerFactory.createMenuRequestHandler(m_user);
 
 	return leaveRoomResult;

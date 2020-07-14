@@ -23,7 +23,11 @@ private:
 		CLOSE_ROOM,
 		START_GAME,
 		GET_ROOM_STATE,
-		LEAVE_ROOM
+		LEAVE_ROOM,
+		LEAVE_GAME,
+		GET_QUESTION,
+		SUBMIT_ANSWER,
+		GET_GAME_RESULTS
 	};
 public:
 	/*
@@ -158,6 +162,44 @@ public:
 		nlohmann::json j = response;
 		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
 		buffer[0] = LEAVE_ROOM;
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
+		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
+		return buffer;
+	}
+	static unsigned char* serializeLeaveGameResponse(LeaveGameResponse response)
+	{
+		nlohmann::json j = response;
+		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
+		buffer[0] = LEAVE_GAME;
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
+		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
+		return buffer;
+	}
+
+	static unsigned char* serializeGetQuestionResponse(GetQestionResponse response)
+	{
+		nlohmann::json j = response;
+		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
+		buffer[0] = GET_QUESTION;
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
+		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
+		return buffer;
+	}
+	
+	static unsigned char* serializeGetSubmitAnswerResponse(SubmitAnswerResponse response)
+	{
+		nlohmann::json j = response;
+		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
+		buffer[0] = SUBMIT_ANSWER;
+		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
+		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
+		return buffer;
+	}	
+	static unsigned char* serializeGetGameResultsResponse(SubmitAnswerResponse response)
+	{
+		nlohmann::json j = response;
+		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];
+		buffer[0] = GET_GAME_RESULTS;
 		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
 		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
 		return buffer;

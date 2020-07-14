@@ -62,7 +62,7 @@
             this.JoinButton.Location = new System.Drawing.Point(182, 388);
             this.JoinButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.JoinButton.Name = "JoinButton";
-            this.JoinButton.Size = new System.Drawing.Size(171, 58);
+            this.JoinButton.Size = new System.Drawing.Size(228, 71);
             this.JoinButton.TabIndex = 1;
             this.JoinButton.Text = "Join Room";
             this.JoinButton.UseVisualStyleBackColor = false;
@@ -77,7 +77,7 @@
             this.CreateButton.Location = new System.Drawing.Point(404, 388);
             this.CreateButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(171, 58);
+            this.CreateButton.Size = new System.Drawing.Size(228, 71);
             this.CreateButton.TabIndex = 2;
             this.CreateButton.Text = "Create Room";
             this.CreateButton.UseVisualStyleBackColor = false;
@@ -91,7 +91,7 @@
             this.LogoutButton.Location = new System.Drawing.Point(9, 15);
             this.LogoutButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LogoutButton.Name = "LogoutButton";
-            this.LogoutButton.Size = new System.Drawing.Size(110, 44);
+            this.LogoutButton.Size = new System.Drawing.Size(147, 54);
             this.LogoutButton.TabIndex = 3;
             this.LogoutButton.Text = "Log out";
             this.LogoutButton.UseVisualStyleBackColor = false;
@@ -105,7 +105,7 @@
             this.textBox1.Location = new System.Drawing.Point(314, 15);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(118, 43);
+            this.textBox1.Size = new System.Drawing.Size(157, 54);
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = "Rooms";
             // 
@@ -136,13 +136,14 @@
             // 
             // RoomListMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(147)))), ((int)(((byte)(164)))));
             this.ClientSize = new System.Drawing.Size(753, 461);
             this.Controls.Add(this.PlayerList);
             this.Controls.Add(this.errorTextBox);
             this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.StatsButton);
             this.Controls.Add(this.LogoutButton);
             this.Controls.Add(this.CreateButton);
             this.Controls.Add(this.JoinButton);

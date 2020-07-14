@@ -36,3 +36,9 @@ void from_json(const nlohmann::json& j, JoinRoomRequest& request)
 {
 	j.at("RoomId").get_to(request.roomId);
 }
+
+void from_json(const nlohmann::json& j, SubmitAnswerReqest& request)
+{
+	j.at("AnswerId").get_to(request.answerId);
+
+}

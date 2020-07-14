@@ -198,5 +198,14 @@ namespace Trivia_Client
         {
             RoomList.Items.Clear();
         }
+
+        private void StatsButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            StopUpdate();
+            StatisticsMenu StatsMenu = new StatisticsMenu();
+            StatsMenu.ShowDialog();
+            this.Close();
+        }
     }
 }

@@ -10,7 +10,7 @@ public:
 	static GetPlayersInRoomRequest deserializeGetPlayersInRoomRequest(unsigned char* buffer);
 	static JoinRoomRequest deserializeJoinRoomRequest(unsigned char* buffer);
 	static CreateRoomRequest deserializeCreateRoomRequest(unsigned char* buffer);
-
+	static SubmitAnswerReqest deserializerSubmitAnswerRequest(unsigned char* buffer);
 	static JsonRequestPacketDeserializer& getInstance();
 
 	JsonRequestPacketDeserializer(JsonRequestPacketDeserializer const&) = delete;
