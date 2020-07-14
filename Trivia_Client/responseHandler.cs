@@ -195,7 +195,6 @@ namespace Trivia_Client
         }
         private static void LeaveRoom(Responses.LeaveRoomResponse respnse, Form form)
         {
-            Console.WriteLine("kjhgfdfhgfshghfgfgxdfs");
             string error = "Failed to Leave room";
             if (respnse.Status == (int)ResultCodes.OK)
             {
