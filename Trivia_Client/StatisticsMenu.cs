@@ -39,7 +39,7 @@ namespace Trivia_Client
             foreach (String UserScore in Scores)
             {
                 NameLength = UserScore.LastIndexOf(":");
-                Name = UserScore.Substring(0, NameLength);
+                Name = UserScore.Substring(1, NameLength - 2);
                 this.Names.Items.Add(Name);
                 Score = UserScore.Substring(NameLength + 2, UserScore.Length - NameLength - 2);
                 this.Scores.Items.Add(Score);
@@ -48,7 +48,7 @@ namespace Trivia_Client
 
         public void ShowStatistics(String Statistics)
         {
-            Dictionary<String, int> Stats = JsonConvert.DeserializeObject<Dictionary<String, int>>(Statistics);
+            Dictionary<String, double> Stats = JsonConvert.DeserializeObject<Dictionary<String, double>>(Statistics);
             this.TimeBox.Text = Stats["avg_answer_time"].ToString();
             this.CorrectAnsBox.Text = Stats["correct_answers"].ToString();
             this.TotalAnsBox.Text = Stats["total_answers"].ToString();

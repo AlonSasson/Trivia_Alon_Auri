@@ -36,10 +36,14 @@ bool mongoDB::addNewUser(std::string username, std::string password, std::string
 
 	if (!this->doesUserExist(username))
 	{
-		bsoncxx::builder::stream::document document{};
-		document << "username" << username << "password" << password << "mail" << mail << "address" << address << "phone_number" << phone_number << "birthday" << birthday;
+		bsoncxx::builder::stream::document userDoc{};
+		bsoncxx::builder::stream::document staticsDoc{};
+		userDoc << "username" << username << "password" << password << "mail" << mail << "address" << address << "phone_number" << phone_number << "birthday" << birthday;
+		staticsDoc << "username" << username << "avg_answer_time" << 0 << "correct_answers" << 0 << "total_answers" << 0 << "games_played" << 0 << "score" << 0;
+		auto collectionStatics = this->db["Statistics"];
+		collectionStatics.insert_one(staticsDoc.view());
 		auto collection = this->db["Users"];
-		collection.insert_one(document.view());
+		collection.insert_one(userDoc.view());
 		return true;
 	}
 	return false;
