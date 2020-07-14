@@ -70,6 +70,30 @@ namespace Trivia_Client
             public int AnswerTimeout { get; set; }
         }
 
+        public class LeaveGameResponse : Response
+        {
+            public int Status { get; set; }
+        }
+
+        public class GetQuestionResponse : Response
+        {
+            public int Status { get; set; }
+            public String Question { get; set; }
+            public Dictionary<int, String> Answers { get; set; }
+        }
+
+        public class SubmitAnswerResponse : Response
+        {
+            public int Status { get; set; }
+            public int CorrectAnswerId { get; set; }
+        }
+
+        public class GetGameResultsResponse : Response
+        {
+            public int Status { get; set; }
+            public List<PlayerResults> Results { get; set; }
+        }
+
         public class ResponseInfo
         {
             public byte[] Buffer { get; set; }
@@ -83,11 +107,15 @@ namespace Trivia_Client
             private int numOfQuestionsInGame { get; set; }
             private int timePerQuestion { get; set; }
             private int isActive { get; set; }
-            
+        }
 
-
-
-
+        public class PlayerResults
+        {
+            private String Username { get; set; }
+            private int CorrectAnswerCount { get; set; }
+            private int WrongAnswerCount { get; set; }
+            private int AverageAnswerTime { get; set; }
+            private int Score { get; set; }
         }
 
 

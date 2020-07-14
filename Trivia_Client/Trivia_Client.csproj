@@ -53,6 +53,12 @@
   <ItemGroup>
     <Compile Include="Communicator.cs" />
     <Compile Include="Deserializer.cs" />
+    <Compile Include="GameMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameMenu.Designer.cs">
+      <DependentUpon>GameMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     <Compile Include="StatisticsMenu.Designer.cs">
       <DependentUpon>StatisticsMenu.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="GameMenu.resx">
+      <DependentUpon>GameMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginMenu.resx">
       <DependentUpon>LoginMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -161,6 +170,7 @@
     <None Include="Resources\xmark.jpg" />
     <None Include="Resources\vmark.png" />
     <None Include="Resources\trivia.jpg" />
+    <None Include="Resources\Timer.png" />
     <Content Include="Resources\username2.png" />
   </ItemGroup>
   <ItemGroup>

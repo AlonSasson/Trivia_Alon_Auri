@@ -46,5 +46,11 @@ namespace Trivia_Client
             public int AnswerTimeout { get; set; }
         }
 
+
+        public class SubmitAnswerRequest : Request
+        {
+            public int AnswerId { get; set; }
+        }
+
     }
 }

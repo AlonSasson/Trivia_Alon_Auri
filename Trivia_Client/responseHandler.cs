@@ -24,7 +24,11 @@ namespace Trivia_Client
             CLOSE_ROOM,
             START_GAME,
             GET_ROOM_STATE,
-            LEAVE_ROOM
+            LEAVE_ROOM,
+            LEAVE_GAME,
+            GET_QUESTION,
+            SUBMIT_ANSWER,
+            GET_GAME_RESULTS
 
         }
         private enum ResultCodes { 
@@ -97,6 +101,19 @@ namespace Trivia_Client
                 case (int)Codes.GET_ROOMS:
                     
                     break;
+                case (int)Codes.LEAVE_GAME:
+                    LeaveGame(Deserializer.DeserialiseResponse<LeaveGameResponse>(response.Buffer), form);
+                    break;
+                case (int)Codes.GET_QUESTION:
+                    GetQuestion(Deserializer.DeserialiseResponse<GetQuestionResponse>(response.Buffer), form);
+                    break;
+                case (int)Codes.SUBMIT_ANSWER:
+                    SubmitAnswer(Deserializer.DeserialiseResponse<SubmitAnswerResponse>(response.Buffer), form);
+                    break;
+                case (int)Codes.GET_GAME_RESULTS:
+                    GetGameResults(Deserializer.DeserialiseResponse<GetGameResultsResponse>(response.Buffer), form);
+                    break;
+
                 default: break;
             }
         }
@@ -276,13 +293,51 @@ namespace Trivia_Client
             string error = "Failed to Get rooms";
             if(response.Status == (int)ResultCodes.OK)
             {
-                ((RoomListMenu)form).addRooms(response.Rooms);
+              //  ((RoomListMenu)form).addRooms(response.Rooms);
             }
             else
             {
                 ((RoomListMenu)form).showErrorBox(error);
             }
         }
+        private static void LeaveGame(Responses.LeaveGameResponse response, Form form)
+        {
+            if (response.Status == (int)ResultCodes.OK)
+            {
+                if (typeof(SignupMenu).IsInstanceOfType(form))
+                {
+                    ((GameMenu)form).QuitWorked();
+                }
+               // else if (typeof(ResultsMenu).IsInstanceOfType(form))
+                    // ((ResultsMenu)form).LeaveWorked();
+            }
+        }
+        private static void GetQuestion(Responses.GetQuestionResponse response, Form form)
+        {
+            if (response.Status == (int)ResultCodes.OK)
+            {
+                ((GameMenu)form).UpdateQuestion(response.Question, response.Answers);
+            }
+            else // if there are no more questions, the game ended
+            {
+                RequestHandler.GetGameResults(form);
+            }
+        }
+        private static void SubmitAnswer(Responses.SubmitAnswerResponse response, Form form)
+        {
+            if (response.Status == (int)ResultCodes.OK)
+            {
+                ((GameMenu)form).UpdateCorrectAnswer(response.CorrectAnswerId);
+            }
+        }
+        private static void GetGameResults(Responses.GetGameResultsResponse response, Form form)
+        {
+            if (response.Status == (int)ResultCodes.OK)
+            {
+               // ((GameMenu)form).leaveRoomWorked();
+            }
+        }
+
     }
 
 }
