@@ -41,7 +41,12 @@ namespace Trivia_Client
             USER_ALREADY_CONNECTED,
             USERNAME_NOT_VALID
         }
+        private enum RoomState {
 
+            ROOM_WAITING_FOR_PLAYERS = 0,
+            ROOM_WHILE_GAME,
+            ROOM_GAME_ENDED
+        }
         /*
          *  handel the response from server 
         */
@@ -63,7 +68,11 @@ namespace Trivia_Client
                     {
                         ((RoomListMenu)form).showErrorBox(error.Message);
                     }
-                        break;
+                    else if (typeof(RoomMenu).IsInstanceOfType(form))
+                    {
+                        ((RoomMenu)form).showErrorBox(error.Message);
+                    }
+                    break;
                 case (int)Codes.SIGN_UP_ID:
                     Signup(Deserializer.DeserialiseResponse<SignupResponse>(response.Buffer) , form);
                     break;       
@@ -89,21 +98,16 @@ namespace Trivia_Client
                     CloseRoom(Deserializer.DeserialiseResponse<CloseRoomResponse>(response.Buffer), form);
                     break;
                 case (int)Codes.GET_PLAYERS_IN_ROOM:
-                        
+                    GetPlayersInRoom(Deserializer.DeserialiseResponse<GetPlayersInRoomResponse>(response.Buffer), form);
                     break;
                 case (int)Codes.GET_ROOM_STATE:
                     GetRoomState(Deserializer.DeserialiseResponse<GetRoomStateResponse>(response.Buffer), form);
                     break;
                 case (int)Codes.GET_ROOMS:
-                    
+                    GetRooms(Deserializer.DeserialiseResponse<GetRoomsResponse>(response.Buffer), form);
                     break;
                 default: break;
             }
-        }
-
-        private static void CreateRoomResponse(CreateRoomResponse createRoomResponse, Form form)
-        {
-            throw new NotImplementedException();
         }
 
         private static void Signup(Responses.SignupResponse response, Form form)
@@ -121,6 +125,7 @@ namespace Trivia_Client
                     break;
                 case (int)ResultCodes.USERNAME_NOT_VALID:
                     error = "Username isn't valid";
+                    userError = true;
                     break;
             }
             ((SignupMenu)form).showErrorBox(error, userError);
@@ -167,34 +172,19 @@ namespace Trivia_Client
             string error = "Failed to Logout";
             if(response.Status == (int)ResultCodes.OK)
             {
-                if (typeof(RoomListMenu).IsInstanceOfType(form))
-                {
-                    ((RoomListMenu)form).LogoutWorked();
-                }
-                else
-                {
-                    ((RoomMenu)form).LogoutWorked();
-                }
+                ((RoomListMenu)form).LogoutWorked();
             }
             else
             {
-                if (typeof(RoomListMenu).IsInstanceOfType(form))
-                {
-                    ((RoomListMenu)form).showErrorBox(error);
-                }
-                else
-                {
-                    ((RoomMenu)form).showErrorBox(error);
-                }
+                ((RoomListMenu)form).showErrorBox(error);
             }     
         }
         private static void JoinRoom(Responses.JoinRoomResponse response, Form form)
         {
             string error = "Failed to Join room";
-            if(response.Status == (int)ResultCodes.OK)
+            if(response.Status == (int)RoomState.ROOM_WAITING_FOR_PLAYERS)
             {
-                form = ((RoomListMenu)form).JoinRoomWorked();
-                ((RoomMenu)form).Member();
+                ((RoomListMenu)form).JoinRoomWorked();
             }
             else
             {
@@ -203,14 +193,16 @@ namespace Trivia_Client
         }
         private static void LeaveRoom(Responses.LeaveRoomResponse respnse , Form form)
         {
+            Console.WriteLine("kjhgfdfhgfshghfgfgxdfs");
             string error = "Failed to Leave room";
             if(respnse.Status == (int)ResultCodes.OK)
             {
-                ((RoomMenu)form).leaveRoomWorked();
+                if(typeof(RoomMenu).IsInstanceOfType(form))
+                    ((RoomMenu)form).leaveRoomWorked();
             }
             else
             {
-                ((RoomListMenu)form).showErrorBox(error);
+                ((RoomMenu)form).showErrorBox(error);
             }
         }
         private static void CreateRoom(Responses.CreateRoomResponse response , Form form)
@@ -218,12 +210,11 @@ namespace Trivia_Client
             string error = "Failed to Create room";
             if(response.Status == (int)ResultCodes.OK)
             {
-                form = ((RoomListMenu)form).createRoomWorked();
-                ((RoomMenu)form).Admin();
+                ((CreateRoomMenu)form).createRoomWorked();
             }
             else
             {
-                ((RoomListMenu)form).showErrorBox(error);
+                ((CreateRoomMenu)form).showErrorBox(error);
             }
         }
         private static void GetStatistics(Responses.GetStatisticsResponse response, Form form)
@@ -249,22 +240,34 @@ namespace Trivia_Client
         private static void GetPlayersInRoom(Responses.GetPlayersInRoomResponse response , Form form)
         {
             string error = "Failed to Get players in room";
-            if(response.Status == (int)ResultCodes.OK)
+            if(response.Players.Count() != 0)
             {
-             //   ((RoomMenu)form).addPlayers(response.);
+                ((RoomListMenu)form).ShowPlayers(response.Players);
             }
             else
             {
-                ((RoomMenu)form).showErrorBox(error);
+                ((RoomListMenu)form).showErrorBox(error);
             }
         }
         private static void GetRoomState(Responses.GetRoomStateResponse response , Form form)
         {
             string error = "Failed to Get room state";
+
             if (response.Status == (int)ResultCodes.OK)
             {
-                ((RoomMenu)form).addPlayers(response.Players);
-                ((RoomMenu)form).SetParameters(response.AnswerTimeout.ToString());
+                if (response.HasGameBegun == (int)RoomState.ROOM_WHILE_GAME)
+                {
+                    RequestHandler.StartGame(form);
+                }
+                if (response.HasGameBegun == (int)RoomState.ROOM_GAME_ENDED)
+                {
+                    RequestHandler.LeaveRoom(form);
+                }
+                else
+                {
+                    ((RoomMenu)form).addPlayers(response.Players);
+                    ((RoomMenu)form).SetParameters(response.AnswerTimeout.ToString());
+                }
             }
             else
             {
@@ -273,13 +276,18 @@ namespace Trivia_Client
         }
         private static void GetRooms(Responses.GetRoomsResponse response , Form form)
         {
-            string error = "Failed to Get rooms";
+            string error = "No rooms were found";
+            List<String> rooms = new List<string>();
             if(response.Status == (int)ResultCodes.OK)
             {
-                ((RoomListMenu)form).addRooms(response.Rooms);
+                foreach(Object room in response.Rooms)
+                      rooms.Add(((RoomData)room).Name);
+                if(typeof(RoomListMenu).IsInstanceOfType(form))
+                     ((RoomListMenu)form).addRooms(rooms);
             }
             else
             {
+                ((RoomListMenu)form).ClearList();
                 ((RoomListMenu)form).showErrorBox(error);
             }
         }

@@ -114,25 +114,32 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		}
 		len = decodeRequestLen(buffer);
 		delete[] buffer;
-
-		buffer = new unsigned char[len];
-		requestInfo.buffer = new unsigned char[len+1];
-		if (recv(clientSocket, (char*)buffer, len, NULL) == INVALID_SOCKET) // if recieving the json data failed
+		
+		requestInfo.buffer = new unsigned char[len + 1];
+		if (len != 0) // if the request has a data buffer
 		{
-			cerr << "Failed to read code from socket\n";
+			buffer = new unsigned char[len];
+			if (recv(clientSocket, (char*)buffer, len, NULL) == INVALID_SOCKET) // if recieving the json data failed
+			{
+				cerr << "Failed to read code from socket\n";
+				delete[] buffer;
+				break;
+			}
+			std::memcpy(requestInfo.buffer, buffer, len); // deep copy json data
+			requestInfo.buffer[len] = NULL;
 			delete[] buffer;
-			break;
 		}
-		std::memcpy(requestInfo.buffer, buffer, len); // deep copy json data
-		requestInfo.buffer[len] = NULL;
-		delete[] buffer;
-
 		this->handleRequest(requestInfo, clientSocket);
-		for (auto& t : m_users)
-			std::cout << t.first << " "
-			<< t.second << "\n";
 	}
 	this->m_clients.erase(clientSocket); // remove client from client list
+	for (auto it = this->m_users.begin(); it != this->m_users.end(); it++)
+	{
+		if (it->second == clientSocket) // erase the user if he was logged in
+		{
+			this->m_users.erase(it);
+			break;
+		}
+	}
 	closesocket(clientSocket);
 	cerr << "Client " << clientSocket << " Disconnected" << endl;
 
@@ -172,13 +179,15 @@ void Communicator::handleRequest(RequestInfo requestInfo, SOCKET clientSocket)
 	{
 		m_users[((MenuRequestHandler*)requestResult.newHandler)->getUser()] = clientSocket;
 	}
-	else if (dynamic_cast<LoginRequestHandler*>(requestResult.newHandler) && username.empty() != false)
+	else if (dynamic_cast<LoginRequestHandler*>(requestResult.newHandler) && !username.empty())
 	{
 		m_users.erase(username);
 	}
-		
+	
 
 	len = CODE_SIZE + LEN_SIZE + decodeRequestLen(&requestResult.response[CODE_SIZE]); // get response length
+	std::cout << requestResult.response << "\n";
+
 	if (send(clientSocket, (char*)requestResult.response, len, NULL) == INVALID_SOCKET) // if sending the data failed
 		cerr << "Failed to send data to client";
 	delete[] requestResult.response;
