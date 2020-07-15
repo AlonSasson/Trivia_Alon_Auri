@@ -31,30 +31,6 @@ void Question::setAnswers(std::vector<std::string> answers)
 	this->m_possibleAnswers = answers;
 }
 
-int Question::getCorrectAnswerId()
-{
-	int id;
-	for (int i = 0;i < m_possibleAnswers.size();i++)
-	{
-		if (m_possibleAnswers[i] == m_correctAnswer)
-		{
-			id = i;
-		}
-	}
-	return id;
-}
-
-std::string Question::getQuestion()
-{
-	return this->m_question;
-}
-
-std::vector<std::string> Question::getPossibleAnswers()
-{
-	return this->m_possibleAnswers;
-}
-
-std::string Question::getCorrectAnswer()
-{
-	return this->m_correctAnswer;
+	for (i = 0; i < ANSWERS_NUM; i++) // copy answers to answer array
+		answersJson.at(std::to_string(i)).get_to(question.answers[i]);
 }

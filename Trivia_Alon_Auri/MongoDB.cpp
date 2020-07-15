@@ -92,8 +92,7 @@ std::vector<Question> mongoDB::getQuestions(int questionsNum)
 		do // continue until you get a new question id
 		{
 			id = rand() % QUESTIONS_NUM;
-		} 
-		while (find(questionIds.begin(), questionIds.end(), id) != questionIds.end()); 
+		} while (find(questionIds.begin(), questionIds.end(), id) != questionIds.end());
 		questionIds.push_back(id);
 
 		bsoncxx::builder::stream::document document{};
@@ -103,7 +102,7 @@ std::vector<Question> mongoDB::getQuestions(int questionsNum)
 		answersJson = nlohmann::json::parse(answers);
 		questions.push_back(answersJson.get<Question>()); // push back serialized question
 	}
-	
+
 	return questions;
 }
 
@@ -191,14 +190,4 @@ std::vector<std::string> mongoDB::getHighScores()
 	}
 
 	return highscores;
-}
-
-// updates the user's statistics
-void mongoDB::updateStaticsDB(std::string username, double averegeAnswerTime, int numOfCorrectAnswers, int numOfTotalAnswers, int numOfGamesPlayed, int score)
-{
-	auto statisticsCol = this->db["Statistics"];
-
-	statisticsCol.update_one(make_document(kvp("username", username)), make_document(kvp("$set", 
-							make_document(kvp("avg_answer_time", averegeAnswerTime), kvp("correct_answers", numOfCorrectAnswers),
-										 kvp("total_answers", numOfTotalAnswers), kvp("games_played", numOfGamesPlayed), kvp("score", score)))));
 }

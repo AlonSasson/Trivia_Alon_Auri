@@ -95,6 +95,7 @@ namespace Trivia_Client
             this.LeaveButton .Visible= false;
             this.CloseButton.Visible = true;
             this.StartButton.Visible = true;
+            this.panel7.Visible = true;
         }
         public void Member()
         {
@@ -144,6 +145,11 @@ namespace Trivia_Client
         }
 
         private void admin_box_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

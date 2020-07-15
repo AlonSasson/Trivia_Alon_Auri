@@ -6,7 +6,7 @@
 using nlohmann::json;
 
 /*
-	File with respone structs 
+	File with respone structs
 */
 
 struct LoginResponse
@@ -133,7 +133,7 @@ void to_json(json& j, const GetRoomsResponse& respone)
 	{
 		structHold["Id"] = it->id;
 		structHold["HasGameBegun"] = it->isActive;
-		structHold["MaxPlayers"] =it->maxPlayers;
+		structHold["MaxPlayers"] = it->maxPlayers;
 		structHold["Name"] = it->name;
 		structHold["TimePerQuestion"] = it->timePerQuestion;
 
