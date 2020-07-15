@@ -23,7 +23,11 @@ namespace Trivia_Client
 			CLOSE_ROOM,
 			START_GAME,
 			GET_ROOM_STATE,
-			LEAVE_ROOM
+			LEAVE_ROOM,
+			LEAVE_GAME,
+			GET_QUESTION,
+			SUBMIT_ANSWER,
+			GET_GAME_RESULTS
 		};
 		public const int CODE_SIZE = 1;
 		public const int LEN_SIZE = 4;
@@ -41,6 +45,8 @@ namespace Trivia_Client
 				return codeId.JOIN_ROOM;
 			else if (request.GetType() == typeof(Requests.CreateRoomRequest))
 				return codeId.CREATE_ROOM;
+			else if (request.GetType() == typeof(Requests.SubmitAnswerRequest))
+				return codeId.SUBMIT_ANSWER;
 			else
 				throw new Exception("Request type is invalid.");
 		}

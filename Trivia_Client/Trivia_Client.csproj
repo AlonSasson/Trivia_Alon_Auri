@@ -59,6 +59,12 @@
       <DependentUpon>CreateRoomMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Deserializer.cs" />
+    <Compile Include="GameMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameMenu.Designer.cs">
+      <DependentUpon>GameMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,8 @@
     <Compile Include="StatisticsMenu.Designer.cs">
       <DependentUpon>StatisticsMenu.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="GameMenu.resx">
+      <DependentUpon>GameMenu.cs</DependentUpon>
     <EmbeddedResource Include="CreateRoomMenu.resx">
       <DependentUpon>CreateRoomMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,9 +180,13 @@
     <None Include="Resources\xmark.jpg" />
     <None Include="Resources\vmark.png" />
     <None Include="Resources\trivia.jpg" />
+<<<<<<< Trivia_Client/Trivia_Client.csproj
+    <None Include="Resources\Timer.png" />
+=======
     <None Include="Resources\rounder bar with boarders.png" />
     <None Include="Resources\room name panel.png" />
     <None Include="Resources\time panel.png" />
+>>>>>>> Trivia_Client/Trivia_Client.csproj
     <Content Include="Resources\username2.png" />
   </ItemGroup>
   <ItemGroup>

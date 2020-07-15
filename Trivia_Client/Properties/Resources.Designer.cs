@@ -233,6 +233,9 @@ namespace Trivia_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Timer {
+            get {
+                object obj = ResourceManager.GetObject("Timer", resourceCulture);
         internal static System.Drawing.Bitmap room_name_panel {
             get {
                 object obj = ResourceManager.GetObject("room name panel", resourceCulture);
