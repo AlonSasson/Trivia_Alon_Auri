@@ -8,7 +8,15 @@ Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> playe
 
 Question Game::getQuestionForUser(LoggedUser user)
 {
-	Question questionToReturn = m_questions[m_players[user].currentQuestion];
+	Question questionToReturn;
+	if (m_players[user].currentQuestion == m_questions.size()) // if there are no more questions
+	{
+		questionToReturn.setQuestion("");
+		questionToReturn.setCorrectAnswer("");
+		questionToReturn.setAnswers(std::vector<std::string>());
+		return questionToReturn;
+	}
+	questionToReturn = m_questions[m_players[user].currentQuestion];
 	return questionToReturn;
 }
 
@@ -56,6 +64,12 @@ int Game::getScore(double PlayerAverageAnswerTime, int NumOfTotalAnswers, int Nu
 	// the formula for the score : 5000(0.2 + avgCorrectAnswers)/(0.5 + (log(avgTime + 1)+1)/10)
 	score = 5000 * (0.2 + avgCorrectAnswers) / (0.5 + (log10(PlayerAverageAnswerTime + 1) + 1) / 10.0);
 	return score;
+}
+
+// checks if the player is in this game
+bool Game::isPlayerInGame(std::string username)
+{
+	return false;
 }
 
 
