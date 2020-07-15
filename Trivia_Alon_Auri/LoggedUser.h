@@ -10,4 +10,5 @@ public:
 	LoggedUser(std::string username);
 	//get the name of the user
 	std::string getUserName() const;
+	bool operator<(const LoggedUser& other) const;
 };

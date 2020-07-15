@@ -10,9 +10,9 @@ void from_json(const json& j, Question& question)
 	json answersJson;
 	unsigned int i = 0;
 
-	question.setQuestion(j.at("question").get<std::string>);
-	question.setCorrectAnswer(j.at("correct_answer").get<std::string>);
-	question.setAnswers(j.at("answers").get<std::vector<std::string>>);
+	question.setQuestion(j.at("question").get<std::string>());
+	question.setCorrectAnswer(j.at("correct_answer").get<std::string>());
+	question.setAnswers(j.at("answers").get<std::vector<std::string>>());
 	
 }
 

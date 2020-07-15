@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "MongoDB.cpp"
 
 Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> players)
 	: m_players(players) , m_questions(questions)
@@ -44,7 +43,15 @@ void Game::removePlayer(LoggedUser user)
 
 bool Game::operator==(const Game& other)
 {
-	return this->m_players == other.m_players;
+	auto it1 = m_players.begin();
+	for (auto it2 = other.m_players.begin();it1 != m_players.end() && it2 != other.m_players.end();it1++, it2++)
+	{
+		if (it1->first.getUserName() != it2->first.getUserName())
+		{
+			return false;
+		}
+	}
+	return m_players.size() == other.m_players.size();
 }
 
 int Game::getScore(double PlayerAverageAnswerTime, int NumOfTotalAnswers, int NumOfPlayerGames)
@@ -85,6 +92,7 @@ GameData& Game::getPlayerData(LoggedUser user)
 
 std::vector<PlayerResults> Game::getGameResults()
 {
+
 	int i, j;
 	PlayerResults temp;
 	PlayerResults playerResult;
@@ -116,6 +124,9 @@ std::vector<PlayerResults> Game::getGameResults()
 	return results;
 
 }
+
+
+
 
 
 

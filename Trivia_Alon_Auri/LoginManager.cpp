@@ -7,7 +7,7 @@
 #define PHONE_REGEX "^0\\d{1,2}-\\d+$"
 #define BIRTHDAY_REGEX "^(?:(?:\\d{2}\\.){2}|(?:\\d{2}\\/){2})\\d{4}$"
 
-enum resultCodes{ERROR, OK, PASSWORD_INVALID, EMAIL_INVALID, ADDRESS_INVALID, PHONE_INVALID, BIRTHDAY_INVALID, WRONG_DETAILS, USERS_ALREADY_EXIST, USER_DOESNT_EXIST, USER_ALREADY_CONNECTED, USERNAME_NOT_VALID};
+enum resultCodes { ERROR, OK, PASSWORD_INVALID, EMAIL_INVALID, ADDRESS_INVALID, PHONE_INVALID, BIRTHDAY_INVALID, WRONG_DETAILS, USERS_ALREADY_EXIST, USER_DOESNT_EXIST, USER_ALREADY_CONNECTED, USERNAME_NOT_VALID };
 
 
 using std::regex;
@@ -60,7 +60,7 @@ unsigned int LoginManager::signup(std::string username, std::string password, st
 	this->m_dbLock.lock(); // lock when accessing db
 	if (this->m_database->addNewUser(username, password, email, address, phoneNumber, birthDate))
 	{
-		this->m_dbLock.unlock(); 
+		this->m_dbLock.unlock();
 		this->m_loggedUsers.push_back(LoggedUser(username));
 		return OK;
 	}
@@ -69,7 +69,7 @@ unsigned int LoginManager::signup(std::string username, std::string password, st
 		this->m_dbLock.unlock();
 		return USERS_ALREADY_EXIST;
 	}
-		
+
 
 }
 
@@ -121,6 +121,6 @@ unsigned int LoginManager::validateInfo(std::string password, std::string email,
 
 LoginManager& LoginManager::getInstance(IDatabase* database)
 {
-		static LoginManager instance(database);
-		return instance;
-	}
+	static LoginManager instance(database);
+	return instance;
+}

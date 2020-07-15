@@ -2,6 +2,7 @@
 #include "Questions.h"
 #include "LoggedUser.h"
 #include "PlayerResults.h"
+#include <map>
 
 typedef struct GameData
 {
