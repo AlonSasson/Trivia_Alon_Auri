@@ -34,7 +34,7 @@ namespace Trivia_Client
             
             if (CheckTextBoxInput(this.usersTextBox.Text, this.timeTextBox.Text) && this.nameTextBox.Text != "")
             {
-                RequestHandler.CreateRoom(this.nameTextBox.Text, int.Parse(this.usersTextBox.Text), int.Parse(this.timeTextBox.Text), 10, this);
+                RequestHandler.CreateRoom(this.nameTextBox.Text, int.Parse(this.usersTextBox.Text), 10, int.Parse(this.timeTextBox.Text), this);
 
             }
             else
