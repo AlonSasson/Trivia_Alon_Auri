@@ -10,6 +10,7 @@ class RoomAdminRequestHandler;
 class RoomMemberRequestHandler;
 class LoginRequestHandler;
 class MenuRequestHandler;
+class GameRequestHandler;
 class RequestHandlerFactory
 {
 private:

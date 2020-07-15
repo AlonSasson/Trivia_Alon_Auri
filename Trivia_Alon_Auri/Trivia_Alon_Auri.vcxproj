@@ -133,6 +133,7 @@
     <ClInclude Include="LoggedUser.h" />
     <ClInclude Include="LoginManager.h" />
     <ClInclude Include="MongoDB.h" />
+    <ClInclude Include="PlayerResults.h" />
     <ClInclude Include="Questions.h" />
     <ClInclude Include="RequestHandlerFactory.h" />
     <ClInclude Include="RequestHandlers.h" />

@@ -20,11 +20,11 @@ Question Game::getQuestionForUser(LoggedUser user)
 	return questionToReturn;
 }
 
-unsigned int Game::submitAnswer(LoggedUser user, std::string answer, double answerTime)
+unsigned int Game::submitAnswer(LoggedUser user, unsigned int id, double answerTime)
 {
 	int answerId = m_questions[m_players[user].currentQuestion].getCorrectAnswerId();
 	
-	if (answer == m_questions[m_players[user].currentQuestion].getCorrectAnswer())
+	if (id == answerId)
 	{
 		m_players[user].correctAnswerCount++;
 	}
@@ -72,9 +72,9 @@ bool Game::isPlayerInGame(std::string username)
 }
 
 // checks if the game has no players in it
-bool Game::isGameEmpty()
+unsigned int Game::playersInGame()
 {
-	return this->m_players.empty();
+	return this->m_players.size();
 }
 
 // gets the player game data
@@ -82,6 +82,43 @@ GameData& Game::getPlayerData(LoggedUser user)
 {
 	return this->m_players[user];
 }
+
+std::vector<PlayerResults> Game::getGameResults()
+{
+	int i, j;
+	PlayerResults temp;
+	PlayerResults playerResult;
+	std::vector<PlayerResults> results;
+
+	for (auto it = m_players.begin();it != m_players.end();it++) // entering the ata into results
+	{
+		playerResult.averageAnswerTime = it->second.averageAnswerTime;
+		playerResult.correctAnswerCount = it->second.correctAnswerCount;
+		playerResult.wrongAnswerCount = it->second.wrongAnswerCount;
+		playerResult.username = it->first.getUserName();
+		playerResult.score = getScore(playerResult.averageAnswerTime, 10, 1);
+		results.push_back(playerResult);
+	}
+
+	for (i = 0; i < results.size() - 1; i++) // sorting the results by score
+	{
+		// Last i elements are already in place  
+		for (j = 0; j < results.size() - i - 1; j++)
+		{
+			if (results[j].score > results[j + 1].score)
+			{
+				temp = results[j];
+				results[j] = results[j + 1];
+				results[j + 1] = temp;
+			}
+		}
+	}
+	return results;
+
+}
+
+
+
 
 
 

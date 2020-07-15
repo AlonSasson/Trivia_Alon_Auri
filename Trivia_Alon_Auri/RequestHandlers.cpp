@@ -344,12 +344,12 @@ RequestResult RoomAdminRequestHandler::startGame(RequestInfo request)
 	StartGameResponse response;
 	response.status = OK;
 
-	m_handlerFactory.getGameManager().createGame(this->m_room);
+//	m_handlerFactory.getGameManager().createGame(this->m_room);
 	try
 	{
-		Game game = m_handlerFactory.getGameManager().getGameForPlayer(this->m_user.getUserName());
+//		Game game = m_handlerFactory.getGameManager().getGameForPlayer(this->m_user.getUserName());
 		m_room.setRoomState(Room::ROOM_WHILE_GAME);
-		startGameResult.newHandler = m_handlerFactory.createGameRequestHandler(game, this->m_user); // move to next state
+		//startGameResult.newHandler = m_handlerFactory.createGameRequestHandler(game, this->m_user); // move to next state
 	}
 	catch(std::exception& e) // if no game has been found
 	{
@@ -464,8 +464,8 @@ RequestResult RoomMemberRequestHandler::startGame(RequestInfo request)
 	response.status = OK;
 	try
 	{
-		Game game = m_handlerFactory.getGameManager().getGameForPlayer(this->m_user.getUserName());
-		startGameResult.newHandler = m_handlerFactory.createGameRequestHandler(game, this->m_user); // move to next state
+//		Game game = m_handlerFactory.getGameManager().getGameForPlayer(this->m_user.getUserName());
+//		startGameResult.newHandler = m_handlerFactory.createGameRequestHandler(game, this->m_user); // move to next state
 	}
 	catch (std::exception& e) // if no game has been found
 	{
@@ -501,98 +501,129 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo request)
 
 	return getRoomStateResult;
 }
-
-GameRequestHandler::GameRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Game game)
-	: m_game(game), m_user(m_user), m_handlerFactory(handlerFactory)
-{
-}
-
-bool GameRequestHandler::isRequestRelevant(RequestInfo request)
-{
-	return 	request.id == LEAVE_GAME || request.id == GET_QUESTION || request.id ==	SUBMIT_ANSWER || request.id == GET_GAME_RESULTS;
-}
-
-RequestResult GameRequestHandler::handleRequest(RequestInfo request)
-{
-	RequestResult packetToReturn;
-
-	if (isRequestRelevant(request))
-	{
-		switch (request.id)
-		{
-		case LEAVE_GAME:
-			packetToReturn = leaveGame(request);
-			break;
-		case GET_QUESTION:
-			packetToReturn = getQuestion(request);
-			break;
-		case SUBMIT_ANSWER:
-			packetToReturn = submitAnswer(request);
-			break;
-		case GET_GAME_RESULTS:
-			packetToReturn = getGameResults(request);
-			break;
-		}
-	}
-	else
-	{
-		ErrorResponse e;
-		e.message = "ERROR";
-		packetToReturn.response = JsonResponsePacketSerializer::serializeResponse(e);
-		packetToReturn.newHandler = m_handlerFactory.createGameRequestHandler(this->m_game, this->m_user);
-	}
-	return packetToReturn;
-}
-
-RequestResult GameRequestHandler::getQuestion(RequestInfo request)
-{
-	RequestResult getQuestionResult;
-	GetQestionResponse response;
-	Question question;
-	std::vector<std::string> answers;
-	response.status = OK;
-	
-	question = this->m_game.getQuestionForUser(this->m_user);
-	response.question = question.getQuestion();
-	if (question.getQuestion() == "") // if there are no question left
-	{
-		response.status = ERROR;
-		response.answers = std::map<unsigned int, std::string>();
-	}
-	else // if there was a valid question
-	{
-		answers = question.getPossibleAnswers();
-		for (int i = 0; i < answers.size(); i++) // add the answers
-			response.answers.insert(std::pair<unsigned int, std::string>(i + 1, answers[i]));
-	}
-	
-	getQuestionResult.response = JsonResponsePacketSerializer::serializeGetQuestionResponse(response);
-
-	getQuestionResult.newHandler = m_handlerFactory.createGameRequestHandler(this->m_game, this->m_user); // stay in same handler
-
-	return getQuestionResult;
-}
-
-RequestResult GameRequestHandler::submitAnswer(RequestInfo request)
-{
-	return RequestResult();
-}
-
-RequestResult GameRequestHandler::getGameResults(RequestInfo request)
-{
-	return RequestResult();
-}
-
-RequestResult GameRequestHandler::leaveGame(RequestInfo request)
-{
-	RequestResult leaveGameResult;
-	LeaveGameResponse response;
-	response.status = OK;
-
-	m_handlerFactory.getGameManager().removePlayerInGame(this->m_user, this->m_game);
-	leaveGameResult.response = JsonResponsePacketSerializer::serializeLeaveGameResponse(response);
-
-	leaveGameResult.newHandler = m_handlerFactory.createMenuRequestHandler(this->m_user); // go back to room menu
-
-	return leaveGameResult;
-}
+//
+//GameRequestHandler::GameRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Game game)
+//	: m_game(game), m_user(m_user), m_handlerFactory(handlerFactory)
+//{
+//}
+//
+//bool GameRequestHandler::isRequestRelevant(RequestInfo request)
+//{
+//	return 	request.id == LEAVE_GAME || request.id == GET_QUESTION || request.id ==	SUBMIT_ANSWER || request.id == GET_GAME_RESULTS;
+//}
+//
+//RequestResult GameRequestHandler::handleRequest(RequestInfo request)
+//{
+//	RequestResult packetToReturn;
+//
+//	if (isRequestRelevant(request))
+//	{
+//		switch (request.id)
+//		{
+//		case LEAVE_GAME:
+//			packetToReturn = leaveGame(request);
+//			break;
+//		case GET_QUESTION:
+//			packetToReturn = getQuestion(request);
+//			break;
+//		case SUBMIT_ANSWER:
+//			packetToReturn = submitAnswer(request);
+//			break;
+//		case GET_GAME_RESULTS:
+//			packetToReturn = getGameResults(request);
+//			break;
+//		}
+//	}
+//	else
+//	{
+//		ErrorResponse e;
+//		e.message = "ERROR";
+//		packetToReturn.response = JsonResponsePacketSerializer::serializeResponse(e);
+//		packetToReturn.newHandler = m_handlerFactory.createGameRequestHandler(this->m_game, this->m_user);
+//	}
+//	return packetToReturn;
+//}
+//
+//RequestResult GameRequestHandler::getQuestion(RequestInfo request)
+//{
+//	RequestResult getQuestionResult;
+//	GetQestionResponse response;
+//	Question question;
+//	std::vector<std::string> answers;
+//	response.status = OK;
+//
+//	question = this->m_game.getQuestionForUser(this->m_user);
+//	response.question = question.getQuestion();
+//	if (question.getQuestion() == "") // if there are no question left
+//	{
+//		response.status = ERROR;
+//		response.answers = std::map<unsigned int, std::string>();
+//	}
+//	else // if there was a valid question
+//	{
+//		answers = question.getPossibleAnswers();
+//		for (int i = 0; i < answers.size(); i++) // add the answers
+//			response.answers.insert(std::pair<unsigned int, std::string>(i + 1, answers[i]));
+//	}
+//	
+//	getQuestionResult.response = JsonResponsePacketSerializer::serializeGetQuestionResponse(response);
+//
+//	getQuestionResult.newHandler = m_handlerFactory.createGameRequestHandler(this->m_game, this->m_user); // stay in same handler
+//	this->m_packetSendTime = time(&this->m_packetSendTime);
+//	return getQuestionResult;
+//}
+//
+//RequestResult GameRequestHandler::submitAnswer(RequestInfo request)
+//{
+//	RequestResult submitAnswerResult;
+//	SubmitAnswerResponse response;
+//	SubmitAnswerReqest submitAnswerReqest;
+//	response.status = OK;
+//	
+//	submitAnswerReqest = JsonRequestPacketDeserializer::deserializerSubmitAnswerRequest(request.buffer);
+//
+//	time_t time = this->m_packetSendTime - request.receivalTime;
+//
+//	m_game.submitAnswer(m_user, submitAnswerReqest.answerId, (double)time);
+//	submitAnswerResult.response = JsonResponsePacketSerializer::serializeGetSubmitAnswerResponse(response);
+//
+//	submitAnswerResult.newHandler = m_handlerFactory.createGameRequestHandler(m_game , m_user); // stay in the same state
+//
+//	return submitAnswerResult;
+//}
+//
+//RequestResult GameRequestHandler::getGameResults(RequestInfo request)
+//{
+//	static int waitForResults = 0;
+//	waitForResults++;
+//	RequestResult getGameResults;
+//	GetGameResultResponse response;
+//
+//	response.status = OK;
+//	
+//	while (waitForResults != m_game.playersInGame());
+//	response.results = m_game.getGameResults();
+//	getGameResults.response = JsonResponsePacketSerializer::serializeGetGameResultsResponse(response);
+//
+//	getGameResults.newHandler = m_handlerFactory.createGameRequestHandler(m_game, m_user);
+//	
+//	return getGameResults;
+//}
+//
+//RequestResult GameRequestHandler::leaveGame(RequestInfo request)
+//{
+//	RequestResult leaveGameResult;
+//	LeaveGameResponse response;
+//	response.status = OK;
+//
+//	m_handlerFactory.getGameManager().removePlayerInGame(this->m_user, this->m_game);
+//	if (m_game.playersInGame() == 0) // if the game is empty
+//	{
+//		m_handlerFactory.getGameManager().deleteGame(m_game);
+//	}
+//	leaveGameResult.response = JsonResponsePacketSerializer::serializeLeaveGameResponse(response);
+//
+//	leaveGameResult.newHandler = m_handlerFactory.createMenuRequestHandler(this->m_user); // go back to room menu
+//
+//	return leaveGameResult;
+//}
