@@ -6,6 +6,7 @@
 #include "LoggedUser.h"
 #include "RoomManager.h"
 #include "StatisticsManager.h"
+#include "Game.h"
 
 
 class IRequestHandler;
@@ -89,4 +90,20 @@ public:
 	RequestResult leaveRoom(RequestInfo request);
 	RequestResult startGame(RequestInfo request);
 	RequestResult getRoomState(RequestInfo request);
+};
+class RequestHandlerFactory;
+class GameRequestHandler : public IRequestHandler
+{
+private:
+	Game m_game;
+	LoggedUser m_user;
+	RequestHandlerFactory& m_handlerFactory;
+public:
+	GameRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Game game);
+	bool isRequestRelevant(RequestInfo request);
+	RequestResult handleRequest(RequestInfo request);
+	RequestResult getQuestion(RequestInfo);
+	RequestResult submitAnswer(RequestInfo);
+	RequestResult getGameResults(RequestInfo);
+	RequestResult leaveGame(RequestInfo);
 };

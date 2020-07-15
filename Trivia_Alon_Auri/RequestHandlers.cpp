@@ -484,3 +484,41 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo request)
 	return getRoomStateResult;
 }
 
+GameRequestHandler::GameRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Game game)
+	: m_game(game), m_user(m_user), m_handlerFactory(handlerFactory)
+{
+}
+
+bool GameRequestHandler::isRequestRelevant(RequestInfo request)
+{
+	return 	request.id == LEAVE_GAME || request.id == GET_QUESTION || request.id ==	SUBMIT_ANSWER || request.id == GET_GAME_RESULTS;
+}
+
+RequestResult GameRequestHandler::handleRequest(RequestInfo request)
+{
+	return RequestResult();
+}
+
+RequestResult GameRequestHandler::getQuestion(RequestInfo request)
+{
+	return RequestResult();
+}
+
+RequestResult GameRequestHandler::submitAnswer(RequestInfo request)
+{
+	return RequestResult();
+}
+
+RequestResult GameRequestHandler::getGameResults(RequestInfo request)
+{
+	return RequestResult();
+}
+
+RequestResult GameRequestHandler::leaveGame(RequestInfo request)
+{
+	RequestResult leaveRoomResult;
+	LeaveRoomResponse response;
+	response.status = OK;
+
+	m_handlerFactory.getGameManager().
+}

@@ -4,6 +4,7 @@
 #include "StatisticsManager.h"
 #include "RoomManager.h"
 #include "RequestHandlers.h"
+#include "GameManager.h"
 
 class RoomAdminRequestHandler;
 class RoomMemberRequestHandler;
@@ -21,10 +22,12 @@ public:
 	MenuRequestHandler* createMenuRequestHandler(LoggedUser m_user);
 	RoomAdminRequestHandler* createRoomAdminRequestHanlder(LoggedUser m_user , Room m_room);
 	RoomMemberRequestHandler* createRoomMemberRequestHanlder(LoggedUser m_user , Room m_room);
+	GameRequestHandler* createGameRequestHandler(Game m_game, LoggedUser m_user);
 
 	LoginManager& getLoginManager();
 	StatisticsManager& getStatisticsManager();
 	RoomManager& getRoomManager();
+	GameManager& getGameManager();
 
 	static RequestHandlerFactory& getInstance(IDatabase* database);
 
