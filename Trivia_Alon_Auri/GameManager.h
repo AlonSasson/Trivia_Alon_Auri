@@ -14,5 +14,6 @@ public:
 	GameManager(GameManager const&) = delete;
 	void createGame(Room room);
 	void deleteGame(Game game);
-
+	void removePlayerInGame(LoggedUser user, Game game);
+	Game& getGameForPlayer(std::string username);
 };
