@@ -22,7 +22,7 @@ public:
 	unsigned int submitAnswer(LoggedUser user, std::string answer, double answerTime);
 	void removePlayer(LoggedUser user);
 	bool operator==(const Game& other);
-	int getScore(double PlayerAverageAnswerTime, int NumOfTotalAnswers, int NumOfPlayerGames);
+	static int getScore(double PlayerAverageAnswerTime, int NumOfTotalAnswers, int NumOfPlayerGames);
 	bool isPlayerInGame(std::string username);
 	bool isGameEmpty();
 	GameData& getPlayerData(LoggedUser user);

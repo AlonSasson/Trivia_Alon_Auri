@@ -37,17 +37,9 @@ unsigned int Game::submitAnswer(LoggedUser user, std::string answer, double answ
 	return answerId;
 }
 
-void Game::removePlayer(LoggedUser user, IDatabase* database)
+void Game::removePlayer(LoggedUser user)
 {
-	GameData data = this->m_players[user];
 	this->m_players.erase(user);
-
-	int NumOfCorrectAnswers = database->getNumOfCorrectAnswers(user.getUserName()) + data.correctAnswerCount;
-	int NumOfPlayerGames = database->getNumOfPlayerGames(user.getUserName()) + 1;
-	int NumOfTotalAnswers = database->getNumOfTotalAnswers(user.getUserName()) + 10;
-	double PlayerAverageAnswerTime = (database->getPlayerAverageAnswerTime(user.getUserName()) * (NumOfPlayerGames -1) + data.averageAnswerTime) / NumOfPlayerGames;
-	
-	database->updateStaticsDB(user.getUserName(), PlayerAverageAnswerTime, NumOfCorrectAnswers, NumOfTotalAnswers, NumOfPlayerGames, getScore(PlayerAverageAnswerTime, NumOfTotalAnswers, NumOfPlayerGames));
 }
 
 bool Game::operator==(const Game& other)
@@ -66,10 +58,29 @@ int Game::getScore(double PlayerAverageAnswerTime, int NumOfTotalAnswers, int Nu
 	return score;
 }
 
-// checks if the player is in this game
+// checks if a player is in this game
 bool Game::isPlayerInGame(std::string username)
 {
+	for (auto it = this->m_players.begin(); it != this->m_players.end(); it++)
+	{
+		if (it->first.getUserName() == username) // if the player has been found
+		{
+			return true;
+		}
+	}
 	return false;
+}
+
+// checks if the game has no players in it
+bool Game::isGameEmpty()
+{
+	return this->m_players.empty();
+}
+
+// gets the player game data
+GameData& Game::getPlayerData(LoggedUser user)
+{
+	return this->m_players[user];
 }
 
 
