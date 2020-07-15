@@ -52,6 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communicator.cs" />
+    <Compile Include="CreateRoomMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateRoomMenu.Designer.cs">
+      <DependentUpon>CreateRoomMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Deserializer.cs" />
     <Compile Include="GameMenu.cs">
       <SubType>Form</SubType>
@@ -103,6 +109,8 @@
     </Compile>
     <EmbeddedResource Include="GameMenu.resx">
       <DependentUpon>GameMenu.cs</DependentUpon>
+    <EmbeddedResource Include="CreateRoomMenu.resx">
+      <DependentUpon>CreateRoomMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginMenu.resx">
       <DependentUpon>LoginMenu.cs</DependentUpon>
@@ -161,7 +169,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\address2.png" />
+    <None Include="Resources\amount of players panel.png" />
     <Content Include="Resources\birth2.png" />
+    <None Include="Resources\game.png" />
     <Content Include="Resources\IdoMeleh.jpg" />
     <None Include="Resources\LightCrown.jpg" />
     <Content Include="Resources\mail2.png" />
@@ -170,7 +180,13 @@
     <None Include="Resources\xmark.jpg" />
     <None Include="Resources\vmark.png" />
     <None Include="Resources\trivia.jpg" />
+<<<<<<< Trivia_Client/Trivia_Client.csproj
     <None Include="Resources\Timer.png" />
+=======
+    <None Include="Resources\rounder bar with boarders.png" />
+    <None Include="Resources\room name panel.png" />
+    <None Include="Resources\time panel.png" />
+>>>>>>> Trivia_Client/Trivia_Client.csproj
     <Content Include="Resources\username2.png" />
   </ItemGroup>
   <ItemGroup>

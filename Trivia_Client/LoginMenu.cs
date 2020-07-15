@@ -13,9 +13,12 @@ namespace Trivia_Client
 {
     public partial class LoginMenu : Form
     {
+
+
         public LoginMenu()
         {
             InitializeComponent();
+
         }
 
         private void ResetPassword()

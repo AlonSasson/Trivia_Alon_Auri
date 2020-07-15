@@ -5,24 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using static Trivia_Client.Responses;
 
 namespace Trivia_Client
 {
     class RequestHandler
     {
         private static int getRoomId(String roomName)
-        {
+            {
             byte[] buffer = new byte[Serializer.CODE_SIZE + Serializer.LEN_SIZE];
             buffer[0] = (byte)Serializer.codeId.GET_ROOMS;
             Responses.ResponseInfo responseInfo = Communicator.sendRequest(buffer);
-            //GetRoomsResponse response =  Deserializer.DeserialiseResponse<GetRoomsResponse>(responseInfo.Buffer);
-           // List<RoomData> rooms = Deserializer.DeserialiseResponse<List<RoomData>>(response.rooms);
-            //for(int i = 0; i <rooms.Count; i++)
-            //{
-            //    if (rooms[i].Name.equals(roomName)) // if this is the room we're looking for
-            //        return rooms[i].Id;
-            //}
-            return -1; // if no room was found
+            GetRoomsResponse response = Deserializer.DeserialiseResponse<GetRoomsResponse>(responseInfo.Buffer);
+            if (response.Rooms != null)
+            {
+                for (int i = 0; i < response.Rooms.Count; i++)
+                {
+                    if (response.Rooms[i].Name.Equals(roomName)) // if this is the room we're looking for
+                        return response.Rooms[i].Id;
+                }
+            }
+             return -1; // if no room was found
             
         }
         private static void HandleRequest(byte[] buffer, Form form)

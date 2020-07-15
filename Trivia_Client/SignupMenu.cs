@@ -209,7 +209,7 @@ namespace Trivia_Client
              if(!Regexp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$" , passTextBox, V2)) //regex for password
             {
                 correctDetails = false;
-                errorTextBox.Text = "Paaword must incloud at least 8 latters , 1 upercase , 1 lowercase , one number , 1 spacil latter";
+                errorTextBox.Text = "Password must include at least 8 letters , 1 uppercase , 1 lowercase , 1 number , 1 special letter";
             }
              if(!Regexp("^(?:[a-zA-Z0-9]\\.?)*[a-zA-Z0-9]@[a-zA-Z]+(?:\\.[a-zA-Z]+)+$" , emailTextBox , V3)) //regex for email 
             {
@@ -283,6 +283,11 @@ namespace Trivia_Client
             RoomListMenu roomListMenu= new RoomListMenu();
             roomListMenu.ShowDialog();
             this.Close();
+        }
+
+        private void userTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -58,13 +58,12 @@ namespace Trivia_Client
         }
         public class GetPlayersInRoomResponse : Response
         { 
-            public int Status { get; set; }
             public List<string> Players { get; set; }
         }
         public class GetRoomStateResponse : Response
         {
             public int Status { get; set; }
-            public bool HasGameBegin { set; get; }
+            public int HasGameBegun { set; get; }
             public List<string> Players { get; set; }
             public int QuestionCount { get; set; }
             public int AnswerTimeout { get; set; }
@@ -101,13 +100,12 @@ namespace Trivia_Client
         }
         public class RoomData
         {
-            private int id { get; set; }
-            private string name { get; set; }
-            private int maxPlayers { get; set; }
-            private int numOfQuestionsInGame { get; set; }
-            private int timePerQuestion { get; set; }
-            private int isActive { get; set; }
-        }
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public int MaxPlayers { get; set; }
+            public int NumOfQuestionsInGame { get; set; }
+            public int TimePerQuestion { get; set; }
+            public int IsActive { get; set; }
 
         public class PlayerResults
         {

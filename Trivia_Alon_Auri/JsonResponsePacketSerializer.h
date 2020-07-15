@@ -195,7 +195,7 @@ public:
 		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
 		return buffer;
 	}	
-	static unsigned char* serializeGetGameResultsResponse(SubmitAnswerResponse response)
+	static unsigned char* serializeGetGameResultsResponse(GetGameResultResponse response)
 	{
 		nlohmann::json j = response;
 		unsigned char* buffer = new unsigned char[j.dump().length() + LENGTH_OF_CONST_PACKET_DATA];

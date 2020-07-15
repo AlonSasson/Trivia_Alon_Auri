@@ -13,7 +13,7 @@ namespace Trivia_Client
     {
         public static T DeserialiseResponse<T>(byte[] response)
         {
-           String jsonStr =  new ASCIIEncoding().GetString(response, 0, response.Length);
+            String jsonStr = new ASCIIEncoding().GetString(response, 0, response.Length);
             return JsonConvert.DeserializeObject<T>(jsonStr);
         }
         
