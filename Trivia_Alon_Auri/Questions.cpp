@@ -10,10 +10,26 @@ void from_json(const json& j, Question& question)
 	json answersJson;
 	unsigned int i = 0;
 
-	j.at("question").get_to(question.question);
-	j.at("correct_answer").get_to(question.correctAnswer);
-	j.at("answers").get_to(answerList);
-	answersJson = json::parse(answerList);
+	question.setQuestion(j.at("question").get<std::string>());
+	question.setCorrectAnswer(j.at("correct_answer").get<std::string>());
+	question.setAnswers(j.at("answers").get<std::vector<std::string>>());
+	
+}
+
+void Question::setQuestion(std::string question)
+{
+	this->m_question = question;
+}
+
+void Question::setCorrectAnswer(std::string correctAnswer)
+{
+	this->m_correctAnswer = correctAnswer;
+}
+
+void Question::setAnswers(std::vector<std::string> answers)
+{
+	this->m_possibleAnswers = answers;
+}
 
 	for (i = 0; i < ANSWERS_NUM; i++) // copy answers to answer array
 		answersJson.at(std::to_string(i)).get_to(question.answers[i]);

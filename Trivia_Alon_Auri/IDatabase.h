@@ -19,13 +19,14 @@ public:
 	virtual void close() = 0;
 
 	// queries
-	virtual std::list<Question> getQuestions(int questionsNum) = 0;
+	virtual std::vector<Question> getQuestions(int questionsNum) = 0;
 	virtual double getPlayerAverageAnswerTime(std::string username) = 0;
 	virtual int getNumOfCorrectAnswers(std::string username) = 0;
 	virtual int getNumOfTotalAnswers(std::string username) = 0;
 	virtual int getNumOfPlayerGames(std::string username) = 0;
 	virtual int getScore(std::string username) = 0;
-	virtual void updateHighScore(std::string username) = 0;
 	virtual std::vector<std::string> getHighScores() = 0;
+	virtual void updateStaticsDB(std::string username, double averegeAnswerTime, int numOfCorrectAnswers, int numOfTotalAnswers, int numOfGamesPlayed, int score) = 0;
+
 
 };

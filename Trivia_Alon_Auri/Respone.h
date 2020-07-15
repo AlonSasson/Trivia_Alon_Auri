@@ -2,6 +2,7 @@
 #include <string>
 #include "json.hpp"
 #include "Room.h"
+#include "PlayerResults.h"
 using nlohmann::json;
 
 /*
@@ -97,16 +98,6 @@ struct SubmitAnswerResponse
 	unsigned int status;
 	unsigned int correctAnswerId;
 }typedef SubmitAnswerResponse;
-
-typedef struct PlayerResults
-{
-	std::string username;
-	unsigned int correctAnswerCount;
-	unsigned int wrongAnswerCount;
-	unsigned int averageAnswerTime;
-
-} PlayerResults;
-
 
 struct GetGameResultResponse
 {
@@ -204,5 +195,17 @@ void to_json(json& j, const SubmitAnswerResponse& response)
 void to_json(json& j, const GetGameResultResponse& response)
 {
 	json structHold;
+	std::vector<json> addToJson;
+	for (auto it = response.results.begin();it != response.results.end();it++)
+	{
+		structHold["Username"] = it->username;
+		structHold["Score"] = it->score;
+		structHold["CorrectAnswerCount"] = it->correctAnswerCount;
+		structHold["WrongAnswerCount"] = it->wrongAnswerCount;
+		structHold["AverageAnswerTime"] = it->averageAnswerTime;
 
+		addToJson.push_back(structHold);
+	}
+
+	j = json{ {"Status", response.status } , {"Results" , addToJson } };
 }

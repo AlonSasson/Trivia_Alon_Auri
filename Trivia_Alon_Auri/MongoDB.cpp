@@ -75,11 +75,11 @@ mongoDB* mongoDB::getInstance()
 }
 
 // gets random questions from the database
-std::list<Question> mongoDB::getQuestions(int questionsNum)
+std::vector<Question> mongoDB::getQuestions(int questionsNum)
 {
 	int id = 0;
 	int i = 0;
-	std::list<Question> questions;
+	std::vector<Question> questions;
 	std::vector<unsigned int> questionIds;
 	auto collection = this->db["Questions"];
 	bsoncxx::stdx::optional<bsoncxx::document::value> result;
@@ -173,20 +173,6 @@ int mongoDB::getScore(std::string username)
 	if (!userStatistics.is_null()) // if the user statistics were found
 		score = userStatistics["score"];
 	return score;
-}
-
-// calculate a player's high score and update it in the database
-void mongoDB::updateHighScore(std::string username)
-{
-	int score = 0;
-	const int QUESTIONS_PER_GAME = 10;
-	double avgCorrectAnswers = (double)getNumOfCorrectAnswers(username) / (QUESTIONS_PER_GAME * getNumOfPlayerGames(username));
-	auto statisticsCol = this->db["Statistics"];
-
-	// the formula for the score : 5000(0.2 + avgCorrectAnswers)/(0.5 + (log(avgTime + 1)+1)/10)
-	score = 5000 * (0.2 + avgCorrectAnswers) / (0.5 + (log10(getPlayerAverageAnswerTime(username) + 1) + 1) / 10.0);
-
-	statisticsCol.update_one(make_document(kvp("username", username)), make_document(kvp("$set", make_document(kvp("score", score)))));
 }
 
 //gets the highscores of all players
