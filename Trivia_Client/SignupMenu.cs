@@ -284,5 +284,10 @@ namespace Trivia_Client
             roomListMenu.ShowDialog();
             this.Close();
         }
+
+        private void userTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

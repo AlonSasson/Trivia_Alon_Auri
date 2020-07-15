@@ -88,6 +88,7 @@
             this.userTextBox.TabIndex = 7;
             this.userTextBox.Text = "Username";
             this.userTextBox.Click += new System.EventHandler(this.UsernameBox_Click);
+            this.userTextBox.TextChanged += new System.EventHandler(this.userTextBox_TextChanged);
             // 
             // userPanel
             // 

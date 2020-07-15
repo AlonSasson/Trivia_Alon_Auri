@@ -161,7 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\address2.png" />
+    <None Include="Resources\amount of players panel.png" />
     <Content Include="Resources\birth2.png" />
+    <None Include="Resources\game.png" />
     <Content Include="Resources\IdoMeleh.jpg" />
     <None Include="Resources\LightCrown.jpg" />
     <Content Include="Resources\mail2.png" />
@@ -170,6 +172,9 @@
     <None Include="Resources\xmark.jpg" />
     <None Include="Resources\vmark.png" />
     <None Include="Resources\trivia.jpg" />
+    <None Include="Resources\rounder bar with boarders.png" />
+    <None Include="Resources\room name panel.png" />
+    <None Include="Resources\time panel.png" />
     <Content Include="Resources\username2.png" />
   </ItemGroup>
   <ItemGroup>
