@@ -21,8 +21,8 @@ public:
 
 	LoginRequestHandler* createLoginRequestHandler();
 	MenuRequestHandler* createMenuRequestHandler(LoggedUser m_user);
-	RoomAdminRequestHandler* createRoomAdminRequestHanlder(LoggedUser m_user , Room m_room);
-	RoomMemberRequestHandler* createRoomMemberRequestHanlder(LoggedUser m_user , Room m_room);
+	RoomAdminRequestHandler* createRoomAdminRequestHanlder(LoggedUser m_user, Room m_room);
+	RoomMemberRequestHandler* createRoomMemberRequestHanlder(LoggedUser m_user, Room m_room);
 	GameRequestHandler* createGameRequestHandler(Game m_game, LoggedUser m_user);
 
 	LoginManager& getLoginManager();

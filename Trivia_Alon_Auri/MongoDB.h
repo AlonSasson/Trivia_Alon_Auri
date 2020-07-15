@@ -38,5 +38,6 @@ public:
 	int getNumOfPlayerGames(std::string username);
 	int getScore(std::string username);
 	virtual std::vector<std::string> getHighScores();
+	void updateStaticsDB(std::string username, double averegeAnswerTime, int numOfCorrectAnswers, int numOfTotalAnswers, int numOfGamesPlayed, int score);
 
 };

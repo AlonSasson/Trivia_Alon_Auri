@@ -26,7 +26,7 @@ namespace Trivia_Client
             public String Message { get; set; }
         }
         public class LogoutResponse : Response
-        { 
+        {
             public int Status { get; set; }
         }
         public class GetStatisticsResponse : Response
@@ -36,19 +36,19 @@ namespace Trivia_Client
             public String Statistics { get; set; }
         }
         public class JoinRoomResponse : Response
-        { 
+        {
             public int Status { get; set; }
         }
         public class LeaveRoomResponse : Response
-        { 
+        {
             public int Status { get; set; }
         }
         public class CloseRoomResponse : Response
-        { 
+        {
             public int Status { get; set; }
         }
         public class CreateRoomResponse : Response
-        { 
+        {
             public int Status { get; set; }
         }
         public class GetRoomsResponse : Response
@@ -57,7 +57,7 @@ namespace Trivia_Client
             public int Status { get; set; }
         }
         public class GetPlayersInRoomResponse : Response
-        { 
+        {
             public List<string> Players { get; set; }
         }
         public class GetRoomStateResponse : Response
@@ -107,6 +107,7 @@ namespace Trivia_Client
             public int TimePerQuestion { get; set; }
             public int IsActive { get; set; }
 
+        }
         public class PlayerResults
         {
             private String Username { get; set; }
@@ -115,7 +116,5 @@ namespace Trivia_Client
             private int AverageAnswerTime { get; set; }
             private int Score { get; set; }
         }
-
-
     }
 }

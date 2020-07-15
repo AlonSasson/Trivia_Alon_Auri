@@ -36,19 +36,19 @@
             this.LoginButton = new System.Windows.Forms.Button();
             this.SignupButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.errorTextBox = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.batsek = new System.Windows.Forms.PictureBox();
             this.PasswordPic = new System.Windows.Forms.PictureBox();
             this.UsernamePic = new System.Windows.Forms.PictureBox();
-            this.Batzek = new System.Windows.Forms.PictureBox();
             this.Crown = new System.Windows.Forms.PictureBox();
-            this.errorTextBox = new System.Windows.Forms.TextBox();
+            this.batsek = new System.Windows.Forms.PictureBox();
+            this.Batzek = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batsek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PasswordPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UsernamePic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Batzek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Crown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.batsek)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Batzek)).BeginInit();
             this.SuspendLayout();
             // 
             // UserPanel
@@ -144,28 +144,31 @@
             this.textBox1.Text = "Dont have an account?";
             this.textBox1.Click += new System.EventHandler(this.PasswordBox_Click);
             // 
+            // errorTextBox
+            // 
+            this.errorTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(50)))));
+            this.errorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.errorTextBox.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorTextBox.ForeColor = System.Drawing.Color.Red;
+            this.errorTextBox.Location = new System.Drawing.Point(56, 350);
+            this.errorTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.errorTextBox.Name = "errorTextBox";
+            this.errorTextBox.Size = new System.Drawing.Size(543, 34);
+            this.errorTextBox.TabIndex = 8;
+            this.errorTextBox.Text = "error";
+            this.errorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.errorTextBox.Visible = false;
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Trivia_Client.Properties.Resources.trivia;
             this.pictureBox2.Location = new System.Drawing.Point(75, 389);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(499, 231);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
-            // 
-            // batsek
-            // 
-            this.batsek.Image = global::Trivia_Client.Properties.Resources.batsek;
-            this.batsek.Location = new System.Drawing.Point(301, 46);
-            this.batsek.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.batsek.Name = "batsek";
-            this.batsek.Size = new System.Drawing.Size(119, 135);
-            this.batsek.TabIndex = 6;
-            this.batsek.TabStop = false;
-            this.batsek.MouseLeave += new System.EventHandler(this.Batzek_MouseLeave);
-            this.batsek.MouseHover += new System.EventHandler(this.Batzek_MouseHover);
             // 
             // PasswordPic
             // 
@@ -189,19 +192,6 @@
             this.UsernamePic.TabIndex = 3;
             this.UsernamePic.TabStop = false;
             // 
-            // Batzek
-            // 
-            this.Batzek.Image = global::Trivia_Client.Properties.Resources.batsek;
-            this.Batzek.Location = new System.Drawing.Point(301, 43);
-            this.Batzek.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Batzek.Name = "Batzek";
-            this.Batzek.Size = new System.Drawing.Size(119, 135);
-            this.Batzek.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Batzek.TabIndex = 2;
-            this.Batzek.TabStop = false;
-            this.Batzek.MouseLeave += new System.EventHandler(this.Batzek_MouseLeave);
-            this.Batzek.MouseHover += new System.EventHandler(this.Batzek_MouseHover);
-            // 
             // Crown
             // 
             this.Crown.Image = global::Trivia_Client.Properties.Resources.IdoMeleh;
@@ -215,20 +205,30 @@
             this.Crown.Visible = false;
             this.Crown.Click += new System.EventHandler(this.Crown_Click);
             // 
-            // errorTextBox
+            // batsek
             // 
-            this.errorTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(50)))));
-            this.errorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.errorTextBox.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorTextBox.ForeColor = System.Drawing.Color.Red;
-            this.errorTextBox.Location = new System.Drawing.Point(56, 350);
-            this.errorTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.errorTextBox.Name = "errorTextBox";
-            this.errorTextBox.Size = new System.Drawing.Size(543, 34);
-            this.errorTextBox.TabIndex = 8;
-            this.errorTextBox.Text = "error";
-            this.errorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.errorTextBox.Visible = false;
+            this.batsek.Image = global::Trivia_Client.Properties.Resources.batsek;
+            this.batsek.Location = new System.Drawing.Point(301, 46);
+            this.batsek.Margin = new System.Windows.Forms.Padding(4);
+            this.batsek.Name = "batsek";
+            this.batsek.Size = new System.Drawing.Size(119, 135);
+            this.batsek.TabIndex = 6;
+            this.batsek.TabStop = false;
+            this.batsek.MouseLeave += new System.EventHandler(this.Batzek_MouseLeave);
+            this.batsek.MouseHover += new System.EventHandler(this.Batzek_MouseHover);
+            // 
+            // Batzek
+            // 
+            this.Batzek.Image = global::Trivia_Client.Properties.Resources.batsek;
+            this.Batzek.Location = new System.Drawing.Point(301, 43);
+            this.Batzek.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Batzek.Name = "Batzek";
+            this.Batzek.Size = new System.Drawing.Size(119, 135);
+            this.Batzek.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Batzek.TabIndex = 2;
+            this.Batzek.TabStop = false;
+            this.Batzek.MouseLeave += new System.EventHandler(this.Batzek_MouseLeave);
+            this.Batzek.MouseHover += new System.EventHandler(this.Batzek_MouseHover);
             // 
             // LoginMenu
             // 
@@ -260,11 +260,11 @@
             this.Load += new System.EventHandler(this.LoginMenu_Load);
             this.Click += new System.EventHandler(this.LoginMenu_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batsek)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PasswordPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UsernamePic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Batzek)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Crown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.batsek)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Batzek)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

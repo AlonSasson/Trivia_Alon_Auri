@@ -12,7 +12,7 @@ namespace Trivia_Client
     class RequestHandler
     {
         private static int getRoomId(String roomName)
-            {
+        {
             byte[] buffer = new byte[Serializer.CODE_SIZE + Serializer.LEN_SIZE];
             buffer[0] = (byte)Serializer.codeId.GET_ROOMS;
             Responses.ResponseInfo responseInfo = Communicator.sendRequest(buffer);
@@ -25,8 +25,8 @@ namespace Trivia_Client
                         return response.Rooms[i].Id;
                 }
             }
-             return -1; // if no room was found
-            
+            return -1; // if no room was found
+
         }
         private static void HandleRequest(byte[] buffer, Form form)
         {
@@ -41,11 +41,18 @@ namespace Trivia_Client
         }
         public static void Signup(String username, String password, String email, String phone, String address, String birthdate, Form form)
         {
-            Requests.SignupRequest request = new Requests.SignupRequest { Username = username, Password = password, PhoneNumber = phone,
-                                                                          Email = email, Address = address , BirthDate = birthdate};
+            Requests.SignupRequest request = new Requests.SignupRequest
+            {
+                Username = username,
+                Password = password,
+                PhoneNumber = phone,
+                Email = email,
+                Address = address,
+                BirthDate = birthdate
+            };
             HandleRequest(Serializer.SerializeRequest(request), form);
         }
-        public static void Login(String username, String password , Form form)
+        public static void Login(String username, String password, Form form)
         {
             Requests.LoginRequest request = new Requests.LoginRequest { Username = username, Password = password };
             HandleRequest(Serializer.SerializeRequest(request), form);
@@ -74,7 +81,7 @@ namespace Trivia_Client
         }
         public static void CreateRoom(String roomName, int maxUsers, int questionCount, int answerTimeout, Form form)
         {
-            Requests.CreateRoomRequest request = new Requests.CreateRoomRequest { RoomName = roomName, MaxUsers = maxUsers, QuestionCount = questionCount, AnswerTimeout = answerTimeout};
+            Requests.CreateRoomRequest request = new Requests.CreateRoomRequest { RoomName = roomName, MaxUsers = maxUsers, QuestionCount = questionCount, AnswerTimeout = answerTimeout };
             HandleRequest(Serializer.SerializeRequest(request), form);
         }
         public static void CloseRoom(Form form)

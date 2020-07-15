@@ -8,7 +8,7 @@
 class JsonResponsePacketSerializer
 {
 private:
-	
+
 	enum returnCodeId
 	{
 		ERROR_MSG_ID,
@@ -116,7 +116,7 @@ public:
 		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
 		return buffer;
 	}
-		
+
 	static unsigned char* serializeHighScoreResponse(getStaticsResponse response)
 	{
 		nlohmann::json j = response;
@@ -185,7 +185,7 @@ public:
 		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
 		return buffer;
 	}
-	
+
 	static unsigned char* serializeGetSubmitAnswerResponse(SubmitAnswerResponse response)
 	{
 		nlohmann::json j = response;
@@ -194,7 +194,7 @@ public:
 		std::memcpy((buffer + 1), convertToGetLength(j.dump().length()), 4);
 		std::memcpy((buffer + 5), j.dump().c_str(), j.dump().length());
 		return buffer;
-	}	
+	}
 	static unsigned char* serializeGetGameResultsResponse(GetGameResultResponse response)
 	{
 		nlohmann::json j = response;

@@ -30,7 +30,7 @@ public:
 	unsigned int isActive();
 	void setRoomState(unsigned int newState);
 
-	Room(RoomData roomData , LoggedUser user); //C'tor
+	Room(RoomData roomData, LoggedUser user); //C'tor
 
 	enum RoomState
 	{
@@ -39,4 +39,3 @@ public:
 		ROOM_GAME_ENDED
 	};
 };
-

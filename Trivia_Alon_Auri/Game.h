@@ -19,7 +19,7 @@ private:
 	std::map<LoggedUser, GameData>	m_players;
 
 public:
-	Game(std::vector<Question> questions , std::map<LoggedUser , GameData> players);
+	Game(std::vector<Question> questions, std::map<LoggedUser, GameData> players);
 	Question getQuestionForUser(LoggedUser user);
 	unsigned int submitAnswer(LoggedUser user, unsigned int id, double answerTime);
 	void removePlayer(LoggedUser user);
@@ -30,4 +30,3 @@ public:
 	GameData& getPlayerData(LoggedUser user);
 	std::vector<PlayerResults> getGameResults();
 };
-

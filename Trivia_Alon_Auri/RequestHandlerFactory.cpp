@@ -18,7 +18,7 @@ MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler(LoggedUser m
 RoomAdminRequestHandler* RequestHandlerFactory::createRoomAdminRequestHanlder(LoggedUser m_user, Room m_room)
 {
 	RequestHandlerFactory* handlerFactory = this;
-	return new RoomAdminRequestHandler(*handlerFactory , m_user, m_room.getRoomData().id);
+	return new RoomAdminRequestHandler(*handlerFactory, m_user, m_room.getRoomData().id);
 }
 RoomMemberRequestHandler* RequestHandlerFactory::createRoomMemberRequestHanlder(LoggedUser m_user, Room m_room)
 {
@@ -29,7 +29,7 @@ RoomMemberRequestHandler* RequestHandlerFactory::createRoomMemberRequestHanlder(
 GameRequestHandler* RequestHandlerFactory::createGameRequestHandler(Game m_game, LoggedUser m_user)
 {
 	RequestHandlerFactory* handlerFactory = this;
-	return new GameRequestHandler(*handlerFactory, m_user,m_game);
+	return new GameRequestHandler(*handlerFactory, m_user, m_game);
 }
 
 // gets the login manager

@@ -20,7 +20,7 @@ public:
 	bool deleteRoom(int ID);
 	unsigned int getRoomState(unsigned int roomId);
 	std::vector<RoomData> getRooms();
-	Room &getRoom(unsigned int roomId);
+	Room& getRoom(unsigned int roomId);
 	unsigned int getNextRoomId();
 	bool doesRoomExist(std::string room_name);
 

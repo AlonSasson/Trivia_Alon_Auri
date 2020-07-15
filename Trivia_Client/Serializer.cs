@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Trivia_Client
 {
-    class Serializer
-    {
+	class Serializer
+	{
 		public enum codeId
 		{
 			LOGOUT = 0,
@@ -51,10 +51,10 @@ namespace Trivia_Client
 				throw new Exception("Request type is invalid.");
 		}
 
-		
+
 		// serializes a request into a byte array
 		public static byte[] SerializeRequest(Requests.Request request)
-		{ 
+		{
 			String jsonStr = JsonConvert.SerializeObject(request);
 			byte[] jsonBuffer = new ASCIIEncoding().GetBytes(jsonStr);
 			byte[] buffer = new byte[CODE_SIZE + LEN_SIZE + jsonBuffer.Length];

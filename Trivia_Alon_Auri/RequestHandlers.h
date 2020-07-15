@@ -45,7 +45,7 @@ private:
 	RequestHandlerFactory& m_handlerFactory;
 
 public:
-	MenuRequestHandler(RequestHandlerFactory& handlerFactory , LoggedUser user);
+	MenuRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser user);
 	bool isRequestRelevant(RequestInfo request);
 	RequestResult handleRequest(RequestInfo request);
 	RequestResult signout(RequestInfo request);

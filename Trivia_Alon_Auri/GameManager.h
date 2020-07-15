@@ -5,7 +5,7 @@
 class GameManager
 {
 private:
-	IDatabase *m_database;
+	IDatabase* m_database;
 	std::vector<Game> m_games;
 	GameManager(IDatabase* database) { m_database = database; }
 public:

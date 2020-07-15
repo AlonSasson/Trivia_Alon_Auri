@@ -129,7 +129,7 @@ void to_json(json& j, const GetRoomsResponse& respone)
 {
 	json structHold;
 	std::vector<json> addToJson;
-	for (auto it = respone.rooms.begin();it != respone.rooms.end();it++)
+	for (auto it = respone.rooms.begin(); it != respone.rooms.end(); it++)
 	{
 		structHold["Id"] = it->id;
 		structHold["HasGameBegun"] = it->isActive;
@@ -196,7 +196,7 @@ void to_json(json& j, const GetGameResultResponse& response)
 {
 	json structHold;
 	std::vector<json> addToJson;
-	for (auto it = response.results.begin();it != response.results.end();it++)
+	for (auto it = response.results.begin(); it != response.results.end(); it++)
 	{
 		structHold["Username"] = it->username;
 		structHold["Score"] = it->score;

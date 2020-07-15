@@ -17,7 +17,7 @@ namespace Trivia_Client
             Communicator Com = new Communicator();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginMenu());
+            Application.Run(new GameMenu(10, 30));
         }
     }
 }

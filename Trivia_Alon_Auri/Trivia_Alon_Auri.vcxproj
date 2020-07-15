@@ -133,7 +133,6 @@
     <ClInclude Include="LoggedUser.h" />
     <ClInclude Include="LoginManager.h" />
     <ClInclude Include="MongoDB.h" />
-    <ClInclude Include="PlayerResult.h" />
     <ClInclude Include="PlayerResults.h" />
     <ClInclude Include="Questions.h" />
     <ClInclude Include="RequestHandlerFactory.h" />
@@ -148,7 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Communicator.cpp" />
-    <ClCompile Include="GAME.CPP" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="JsonRequestPacketDeserializer.cpp" />
     <ClCompile Include="LoggedUser.cpp" />

@@ -317,8 +317,8 @@ namespace Trivia_Client
                 {
                     ((GameMenu)form).QuitWorked();
                 }
-               // else if (typeof(ResultsMenu).IsInstanceOfType(form))
-                    // ((ResultsMenu)form).LeaveWorked();
+                // else if (typeof(ResultsMenu).IsInstanceOfType(form))
+                // ((ResultsMenu)form).LeaveWorked();
             }
         }
         private static void GetQuestion(Responses.GetQuestionResponse response, Form form)
@@ -343,7 +343,7 @@ namespace Trivia_Client
         {
             if (response.Status == (int)ResultCodes.OK)
             {
-               // ((GameMenu)form).leaveRoomWorked();
+                // ((GameMenu)form).leaveRoomWorked();
             }
         }
 

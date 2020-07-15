@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> players)
-	: m_players(players) , m_questions(questions)
+	: m_players(players), m_questions(questions)
 {
 }
 
@@ -22,7 +22,7 @@ Question Game::getQuestionForUser(LoggedUser user)
 unsigned int Game::submitAnswer(LoggedUser user, unsigned int id, double answerTime)
 {
 	int answerId = m_questions[m_players[user].currentQuestion].getCorrectAnswerId();
-	
+
 	if (id == answerId)
 	{
 		m_players[user].correctAnswerCount++;
@@ -44,7 +44,7 @@ void Game::removePlayer(LoggedUser user)
 bool Game::operator==(const Game& other)
 {
 	auto it1 = m_players.begin();
-	for (auto it2 = other.m_players.begin();it1 != m_players.end() && it2 != other.m_players.end();it1++, it2++)
+	for (auto it2 = other.m_players.begin(); it1 != m_players.end() && it2 != other.m_players.end(); it1++, it2++)
 	{
 		if (it1->first.getUserName() != it2->first.getUserName())
 		{
@@ -98,7 +98,7 @@ std::vector<PlayerResults> Game::getGameResults()
 	PlayerResults playerResult;
 	std::vector<PlayerResults> results;
 
-	for (auto it = m_players.begin();it != m_players.end();it++) // entering the ata into results
+	for (auto it = m_players.begin(); it != m_players.end(); it++) // entering the ata into results
 	{
 		playerResult.averageAnswerTime = it->second.averageAnswerTime;
 		playerResult.correctAnswerCount = it->second.correctAnswerCount;
@@ -124,14 +124,3 @@ std::vector<PlayerResults> Game::getGameResults()
 	return results;
 
 }
-
-
-
-
-
-
-
-
-
-
-

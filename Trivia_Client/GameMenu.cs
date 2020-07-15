@@ -22,6 +22,7 @@ namespace Trivia_Client
             QuestionsLeft = questionCount;
             AnswerTimeout = answerTimeout;
             TimeLeft = answerTimeout;
+            QuestionTimer.Start();
             RequestHandler.GetQuestion(this);
         }
 
