@@ -33,6 +33,8 @@
             this.leave = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // winners
@@ -40,7 +42,7 @@
             this.winners.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
             this.winners.FormattingEnabled = true;
             this.winners.ItemHeight = 29;
-            this.winners.Location = new System.Drawing.Point(21, 62);
+            this.winners.Location = new System.Drawing.Point(21, 69);
             this.winners.Name = "winners";
             this.winners.Size = new System.Drawing.Size(767, 352);
             this.winners.TabIndex = 0;
@@ -49,7 +51,7 @@
             // 
             // leave
             // 
-            this.leave.Location = new System.Drawing.Point(666, 361);
+            this.leave.Location = new System.Drawing.Point(807, 337);
             this.leave.Name = "leave";
             this.leave.Size = new System.Drawing.Size(122, 77);
             this.leave.TabIndex = 1;
@@ -61,7 +63,7 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.textBox1.Location = new System.Drawing.Point(69, 18);
+            this.textBox1.Location = new System.Drawing.Point(61, 12);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(469, 38);
             this.textBox1.TabIndex = 2;
@@ -74,17 +76,30 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Trivia_Client.Properties.Resources.IdoMeleh;
+            this.pictureBox1.Location = new System.Drawing.Point(21, 26);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(72, 49);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // ResultMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(978, 427);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.leave);
             this.Controls.Add(this.winners);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ResultMenu";
             this.Text = "ResultMenu";
             this.Load += new System.EventHandler(this.ResultMenu_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,5 +111,6 @@
         private System.Windows.Forms.Button leave;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

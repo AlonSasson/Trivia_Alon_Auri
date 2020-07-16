@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Trivia_Client
 {
@@ -37,8 +38,14 @@ namespace Trivia_Client
         private void ResultMenu_Load(object sender, EventArgs e)
         {
         }
+        private void playSimpleSound()
+        {
+            SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\auri\trivia_alon_auri\Trivia_Client\Resources\drum.mp3‬");
+            simpleSound.Play();
+        }
         public void UpdateResults(List<string> results)
         {
+            playSimpleSound();
             winners.Visible = true;
             leave.Visible = true;
             textBox1.Visible = false;

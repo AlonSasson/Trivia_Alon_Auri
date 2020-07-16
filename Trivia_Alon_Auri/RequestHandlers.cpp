@@ -605,7 +605,7 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo request)
 	getGameResults.response = JsonResponsePacketSerializer::serializeGetGameResultsResponse(response);
 
 	getGameResults.newHandler = m_handlerFactory.createGameRequestHandler(m_game, m_user, this->m_packetSendTime);
-
+	waitForResults = 0;
 	return getGameResults;
 }
 

@@ -363,6 +363,7 @@ namespace Trivia_Client
 
                 foreach(PlayerResults result in response.Results)
                 {
+                    result.AverageAnswerTime = Convert.ToDouble(result.AverageAnswerTime.ToString("0.00"));
                     resultStr = result.Username + "\t" + result.CorrectAnswerCount + "\t" + result.WrongAnswerCount + "\t" + result.AverageAnswerTime + "\t" + result.Score;
                     results.Add(resultStr);
                 }

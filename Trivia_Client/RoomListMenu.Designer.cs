@@ -111,12 +111,13 @@
             this.PlayerList.ForeColor = System.Drawing.Color.White;
             this.PlayerList.FormattingEnabled = true;
             this.PlayerList.ItemHeight = 17;
-            this.PlayerList.Location = new System.Drawing.Point(-1, 338);
+            this.PlayerList.Location = new System.Drawing.Point(249, -2);
             this.PlayerList.Margin = new System.Windows.Forms.Padding(2);
             this.PlayerList.Name = "PlayerList";
             this.PlayerList.Size = new System.Drawing.Size(105, 85);
             this.PlayerList.TabIndex = 6;
             this.PlayerList.Visible = false;
+            this.PlayerList.SelectedIndexChanged += new System.EventHandler(this.PlayerList_SelectedIndexChanged);
             // 
             // CreateButton
             // 
@@ -178,6 +179,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // RoomListMenu
             // 
