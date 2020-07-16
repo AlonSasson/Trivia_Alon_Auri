@@ -98,6 +98,10 @@ RequestResult LoginRequestHandler::handleRequest(RequestInfo request)
 	return packetToReturn;
 }
 
+void LoginRequestHandler::quitEarly()
+{
+}
+
 LoginRequestHandler::LoginRequestHandler(RequestHandlerFactory& handlerFactory) :
 	m_handlerFactory(handlerFactory)
 {
@@ -265,9 +269,26 @@ RequestResult MenuRequestHandler::createRoom(RequestInfo request)
 	return createRoomResult;
 }
 
+void MenuRequestHandler::quitEarly()
+{
+	this->m_handlerFactory.getLoginManager().logout(m_user.getUserName());
+
+}
+
 MenuRequestHandler::MenuRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser user) :
 	m_handlerFactory(handlerFactory), m_user(user)
 {
+}
+void RoomAdminRequestHandler::quitEarly()
+{
+	this->m_handlerFactory.getRoomManager().getRoom(m_room.getRoomData().id).removeUser(m_user);
+	m_handlerFactory.getRoomManager().getRoom(m_room.getRoomData().id).setRoomState(Room::RoomState::ROOM_GAME_ENDED);
+	if (m_handlerFactory.getRoomManager().getRoom(m_room.getRoomData().id).getAllUsers().size() == 0)
+	{
+		m_handlerFactory.getRoomManager().deleteRoom(m_room.getRoomData().id);
+	}
+	this->m_handlerFactory.getLoginManager().logout(m_user.getUserName());
+
 }
 RoomAdminRequestHandler::RoomAdminRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, int id)
 	: m_handlerFactory(handlerFactory), m_user(m_user), m_room(handlerFactory.getRoomManager().getRoom(id))
@@ -394,6 +415,16 @@ std::string MenuRequestHandler::getUser()
 	return this->m_user.getUserName();
 }
 
+void RoomMemberRequestHandler::quitEarly()
+{
+	this->m_handlerFactory.getRoomManager().getRoom(m_room.getRoomData().id).removeUser(m_user);
+	if (m_handlerFactory.getRoomManager().getRoom(m_room.getRoomData().id).getAllUsers().size() == 0)
+	{
+		m_handlerFactory.getRoomManager().deleteRoom(m_room.getRoomData().id);
+	}
+	this->m_handlerFactory.getLoginManager().logout(m_user.getUserName());
+}
+
 RoomMemberRequestHandler::RoomMemberRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, int id)
 	: m_handlerFactory(handlerFactory), m_user(m_user), m_room(handlerFactory.getRoomManager().getRoom(id))
 {
@@ -500,6 +531,16 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo request)
 	getRoomStateResult.newHandler = m_handlerFactory.createRoomMemberRequestHanlder(this->m_user, this->m_room);
 
 	return getRoomStateResult;
+}
+
+void GameRequestHandler::quitEarly()
+{
+	this->m_handlerFactory.getGameManager().removePlayerInGame(m_user, m_game);
+	if (m_game.playersInGame() == 0) // if the game is empty
+	{
+		m_handlerFactory.getGameManager().deleteGame(m_game);
+	}
+	this->m_handlerFactory.getLoginManager().logout(m_user.getUserName());
 }
 
 GameRequestHandler::GameRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Game& game, clock_t time)

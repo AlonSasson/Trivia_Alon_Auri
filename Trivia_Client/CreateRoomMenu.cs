@@ -71,12 +71,17 @@ namespace Trivia_Client
         private bool CheckTextBoxInput(string str1, string str2)
         {
             bool bothInt = false;
-            int num;
-            if (int.TryParse(str1, out num) && int.TryParse(str2, out num))
+            int num1;
+            int num2;
+            if (int.TryParse(str1, out num1) && int.TryParse(str2, out num2))
             {
+                if(num1 <= 0 || num2 <= 0)
+                {
+                    return false;
+                }
                 bothInt = true;
             }
-            return bothInt;
+             return bothInt;
         }
 
         private void nameTextBox_TextChanged(object sender, EventArgs e)

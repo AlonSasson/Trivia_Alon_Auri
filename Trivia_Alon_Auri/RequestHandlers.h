@@ -19,6 +19,7 @@ typedef struct RequestResult
 class IRequestHandler
 {
 public:
+	virtual void quitEarly() = 0;
 	virtual bool isRequestRelevant(RequestInfo request) = 0;
 	virtual RequestResult handleRequest(RequestInfo request) = 0;
 };
@@ -28,10 +29,10 @@ class LoginRequestHandler : public IRequestHandler
 {
 private:
 	RequestHandlerFactory& m_handlerFactory;
-
 	RequestResult login(RequestInfo request);
 	RequestResult signup(RequestInfo request);
 public:
+	void quitEarly();
 	LoginRequestHandler(RequestHandlerFactory& handlerFactory);
 	bool isRequestRelevant(RequestInfo request);
 	RequestResult handleRequest(RequestInfo request);
@@ -45,6 +46,7 @@ private:
 	RequestHandlerFactory& m_handlerFactory;
 
 public:
+	void quitEarly();
 	MenuRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser user);
 	bool isRequestRelevant(RequestInfo request);
 	RequestResult handleRequest(RequestInfo request);
@@ -66,6 +68,7 @@ private:
 	RequestHandlerFactory& m_handlerFactory;
 
 public:
+	void quitEarly();
 	RoomAdminRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, int id);
 	bool isRequestRelevant(RequestInfo request);
 	RequestResult handleRequest(RequestInfo request);
@@ -84,6 +87,7 @@ private:
 	RequestHandlerFactory& m_handlerFactory;
 
 public:
+	void quitEarly();
 	RoomMemberRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, int id);
 	bool isRequestRelevant(RequestInfo request);
 	RequestResult handleRequest(RequestInfo request);
@@ -100,6 +104,7 @@ private:
 	RequestHandlerFactory& m_handlerFactory;
 	clock_t m_packetSendTime;
 public:
+	void quitEarly();
 	GameRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Game& game, clock_t time);
 	bool isRequestRelevant(RequestInfo request);
 	RequestResult handleRequest(RequestInfo request);

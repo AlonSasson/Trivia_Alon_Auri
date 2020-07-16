@@ -54,10 +54,10 @@
             // UserPanel
             // 
             this.UserPanel.BackColor = System.Drawing.Color.Silver;
-            this.UserPanel.Location = new System.Drawing.Point(83, 258);
-            this.UserPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.UserPanel.Location = new System.Drawing.Point(62, 210);
+            this.UserPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.UserPanel.Name = "UserPanel";
-            this.UserPanel.Size = new System.Drawing.Size(493, 1);
+            this.UserPanel.Size = new System.Drawing.Size(370, 1);
             this.UserPanel.TabIndex = 1;
             // 
             // UsernameBox
@@ -66,22 +66,22 @@
             this.UsernameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.UsernameBox.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UsernameBox.ForeColor = System.Drawing.Color.CadetBlue;
-            this.UsernameBox.Location = new System.Drawing.Point(141, 223);
-            this.UsernameBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.UsernameBox.Location = new System.Drawing.Point(106, 181);
+            this.UsernameBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.UsernameBox.Name = "UsernameBox";
-            this.UsernameBox.Size = new System.Drawing.Size(404, 33);
+            this.UsernameBox.Size = new System.Drawing.Size(303, 26);
             this.UsernameBox.TabIndex = 0;
-            this.UsernameBox.Text = "Alon";
+            this.UsernameBox.Text = "Username";
             this.UsernameBox.Click += new System.EventHandler(this.UsernameBox_Click);
             this.UsernameBox.TextChanged += new System.EventHandler(this.UsernameBox_TextChanged);
             // 
             // PassPanel
             // 
             this.PassPanel.BackColor = System.Drawing.Color.Silver;
-            this.PassPanel.Location = new System.Drawing.Point(77, 326);
-            this.PassPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PassPanel.Location = new System.Drawing.Point(58, 265);
+            this.PassPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PassPanel.Name = "PassPanel";
-            this.PassPanel.Size = new System.Drawing.Size(493, 1);
+            this.PassPanel.Size = new System.Drawing.Size(370, 1);
             this.PassPanel.TabIndex = 1;
             // 
             // PasswordBox
@@ -90,12 +90,12 @@
             this.PasswordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PasswordBox.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordBox.ForeColor = System.Drawing.Color.CadetBlue;
-            this.PasswordBox.Location = new System.Drawing.Point(136, 286);
-            this.PasswordBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PasswordBox.Location = new System.Drawing.Point(104, 232);
+            this.PasswordBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PasswordBox.Name = "PasswordBox";
-            this.PasswordBox.Size = new System.Drawing.Size(404, 33);
+            this.PasswordBox.Size = new System.Drawing.Size(303, 26);
             this.PasswordBox.TabIndex = 0;
-            this.PasswordBox.Text = "Passw0rd!";
+            this.PasswordBox.Text = "Password";
             this.PasswordBox.Click += new System.EventHandler(this.PasswordBox_Click);
             // 
             // LoginButton
@@ -104,10 +104,10 @@
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginButton.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.LoginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
-            this.LoginButton.Location = new System.Drawing.Point(84, 667);
-            this.LoginButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LoginButton.Location = new System.Drawing.Point(63, 542);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(492, 62);
+            this.LoginButton.Size = new System.Drawing.Size(369, 50);
             this.LoginButton.TabIndex = 4;
             this.LoginButton.Text = "Log in";
             this.LoginButton.UseVisualStyleBackColor = false;
@@ -119,10 +119,10 @@
             this.SignupButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SignupButton.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.SignupButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.SignupButton.Location = new System.Drawing.Point(83, 795);
-            this.SignupButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.SignupButton.Location = new System.Drawing.Point(62, 646);
+            this.SignupButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.SignupButton.Name = "SignupButton";
-            this.SignupButton.Size = new System.Drawing.Size(493, 62);
+            this.SignupButton.Size = new System.Drawing.Size(370, 50);
             this.SignupButton.TabIndex = 4;
             this.SignupButton.Text = "Sign up";
             this.SignupButton.UseVisualStyleBackColor = false;
@@ -135,11 +135,11 @@
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox1.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.LightSkyBlue;
-            this.textBox1.Location = new System.Drawing.Point(165, 735);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox1.Location = new System.Drawing.Point(124, 597);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(365, 33);
+            this.textBox1.Size = new System.Drawing.Size(274, 26);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Dont have an account?";
             this.textBox1.Click += new System.EventHandler(this.PasswordBox_Click);
@@ -150,10 +150,10 @@
             this.errorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.errorTextBox.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorTextBox.ForeColor = System.Drawing.Color.Red;
-            this.errorTextBox.Location = new System.Drawing.Point(56, 350);
-            this.errorTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.errorTextBox.Location = new System.Drawing.Point(42, 284);
+            this.errorTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.errorTextBox.Name = "errorTextBox";
-            this.errorTextBox.Size = new System.Drawing.Size(543, 34);
+            this.errorTextBox.Size = new System.Drawing.Size(407, 27);
             this.errorTextBox.TabIndex = 8;
             this.errorTextBox.Text = "error";
             this.errorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -162,10 +162,9 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Trivia_Client.Properties.Resources.trivia;
-            this.pictureBox2.Location = new System.Drawing.Point(75, 389);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Location = new System.Drawing.Point(56, 316);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(499, 231);
+            this.pictureBox2.Size = new System.Drawing.Size(374, 188);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
@@ -173,10 +172,10 @@
             // PasswordPic
             // 
             this.PasswordPic.Image = global::Trivia_Client.Properties.Resources.pass1;
-            this.PasswordPic.Location = new System.Drawing.Point(77, 273);
-            this.PasswordPic.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PasswordPic.Location = new System.Drawing.Point(58, 222);
+            this.PasswordPic.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PasswordPic.Name = "PasswordPic";
-            this.PasswordPic.Size = new System.Drawing.Size(51, 47);
+            this.PasswordPic.Size = new System.Drawing.Size(38, 38);
             this.PasswordPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PasswordPic.TabIndex = 3;
             this.PasswordPic.TabStop = false;
@@ -184,10 +183,10 @@
             // UsernamePic
             // 
             this.UsernamePic.Image = global::Trivia_Client.Properties.Resources.username;
-            this.UsernamePic.Location = new System.Drawing.Point(83, 204);
-            this.UsernamePic.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.UsernamePic.Location = new System.Drawing.Point(62, 166);
+            this.UsernamePic.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.UsernamePic.Name = "UsernamePic";
-            this.UsernamePic.Size = new System.Drawing.Size(51, 47);
+            this.UsernamePic.Size = new System.Drawing.Size(38, 38);
             this.UsernamePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.UsernamePic.TabIndex = 3;
             this.UsernamePic.TabStop = false;
@@ -195,10 +194,10 @@
             // Crown
             // 
             this.Crown.Image = global::Trivia_Client.Properties.Resources.IdoMeleh;
-            this.Crown.Location = new System.Drawing.Point(301, 14);
-            this.Crown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Crown.Location = new System.Drawing.Point(226, 11);
+            this.Crown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Crown.Name = "Crown";
-            this.Crown.Size = new System.Drawing.Size(83, 43);
+            this.Crown.Size = new System.Drawing.Size(62, 35);
             this.Crown.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Crown.TabIndex = 5;
             this.Crown.TabStop = false;
@@ -208,10 +207,9 @@
             // batsek
             // 
             this.batsek.Image = global::Trivia_Client.Properties.Resources.batsek;
-            this.batsek.Location = new System.Drawing.Point(301, 46);
-            this.batsek.Margin = new System.Windows.Forms.Padding(4);
+            this.batsek.Location = new System.Drawing.Point(226, 37);
             this.batsek.Name = "batsek";
-            this.batsek.Size = new System.Drawing.Size(119, 135);
+            this.batsek.Size = new System.Drawing.Size(89, 110);
             this.batsek.TabIndex = 6;
             this.batsek.TabStop = false;
             this.batsek.MouseLeave += new System.EventHandler(this.Batzek_MouseLeave);
@@ -220,10 +218,10 @@
             // Batzek
             // 
             this.Batzek.Image = global::Trivia_Client.Properties.Resources.batsek;
-            this.Batzek.Location = new System.Drawing.Point(301, 43);
-            this.Batzek.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Batzek.Location = new System.Drawing.Point(226, 35);
+            this.Batzek.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Batzek.Name = "Batzek";
-            this.Batzek.Size = new System.Drawing.Size(119, 135);
+            this.Batzek.Size = new System.Drawing.Size(89, 110);
             this.Batzek.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Batzek.TabIndex = 2;
             this.Batzek.TabStop = false;
@@ -232,11 +230,11 @@
             // 
             // LoginMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(50)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(725, 875);
+            this.ClientSize = new System.Drawing.Size(544, 711);
             this.Controls.Add(this.errorTextBox);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.SignupButton);
@@ -253,7 +251,7 @@
             this.Controls.Add(this.Batzek);
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "LoginMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoginMenu";

@@ -130,6 +130,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		}
 		this->handleRequest(requestInfo, clientSocket);
 	}
+	m_clients[clientSocket]->quitEarly();
 	this->m_clients.erase(clientSocket); // remove client from client list
 	for (auto it = this->m_users.begin(); it != this->m_users.end(); it++)
 	{
