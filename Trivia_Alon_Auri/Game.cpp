@@ -114,7 +114,7 @@ std::vector<PlayerResults> Game::getGameResults()
 		// Last i elements are already in place  
 		for (j = 0; j < results.size() - i - 1; j++)
 		{
-			if (results[j].score > results[j + 1].score)
+			if (results[j].score < results[j + 1].score)
 			{
 				temp = results[j];
 				results[j] = results[j + 1];

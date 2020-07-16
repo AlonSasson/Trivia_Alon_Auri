@@ -51,7 +51,8 @@ namespace Trivia_Client
 
             ROOM_WAITING_FOR_PLAYERS = 0,
             ROOM_WHILE_GAME,
-            ROOM_GAME_ENDED
+            ROOM_GAME_ENDED,
+            ROOM_FULL
         }
         /*
          *  handel the response from server 

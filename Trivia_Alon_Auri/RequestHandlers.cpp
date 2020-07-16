@@ -232,17 +232,23 @@ RequestResult MenuRequestHandler::joinRoom(RequestInfo request)
 
 	JoinRoomRequest joinRoomRequest = JsonRequestPacketDeserializer::deserializeJoinRoomRequest(request.buffer);
 	response.status = (RoomManager::getInstance()).getRoomState(joinRoomRequest.roomId);
-	joinRoomResult.response = JsonResponsePacketSerializer::serializeJoinRoomResponse(response);
 
-	if (response.status == Room::ROOM_WHILE_GAME || response.status == Room::ROOM_GAME_ENDED)
+	if (response.status == Room::ROOM_WHILE_GAME || response.status == Room::ROOM_GAME_ENDED) 
 	{
 		joinRoomResult.newHandler = m_handlerFactory.createMenuRequestHandler(m_user); // stay in the same state
 	}
-	else
+	else if (m_handlerFactory.getRoomManager().getRoom(joinRoomRequest.roomId).getAllUsers().size() == m_handlerFactory.getRoomManager().getRoom(joinRoomRequest.roomId).getRoomData().maxPlayers) // if the room is full
+	{
+		response.status = Room::ROOM_FULL;
+		joinRoomResult.newHandler = m_handlerFactory.createMenuRequestHandler(m_user); // stay in the same state
+	}
+	else // if the room is waiting
 	{
 		m_handlerFactory.getRoomManager().getRoom(joinRoomRequest.roomId).addUser(m_user);
 		joinRoomResult.newHandler = m_handlerFactory.createRoomMemberRequestHanlder(m_user, m_handlerFactory.getRoomManager().getRoom(joinRoomRequest.roomId)); // move on to next state
 	}
+	joinRoomResult.response = JsonResponsePacketSerializer::serializeJoinRoomResponse(response);
+
 	return joinRoomResult;
 
 }
