@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <iostream>
 
 Game::Game(std::vector<Question> questions, std::map<LoggedUser, GameData> players)
 	: m_players(players), m_questions(questions)
@@ -32,7 +33,8 @@ unsigned int Game::submitAnswer(LoggedUser user, unsigned int id, double answerT
 		m_players[user].wrongAnswerCount++;
 	}
 	m_players[user].currentQuestion++;
-	m_players[user].averageAnswerTime = ((m_players[user].averageAnswerTime * m_players[user].currentQuestion) + answerTime) / (m_players[user].currentQuestion + 1);
+	std::cout << ((m_players[user].averageAnswerTime * m_players[user].currentQuestion) + answerTime) / (double)(m_players[user].currentQuestion + 1);
+	m_players[user].averageAnswerTime = ((m_players[user].averageAnswerTime * m_players[user].currentQuestion) + answerTime) / (double)(m_players[user].currentQuestion + 1);
 	return answerId;
 }
 
@@ -54,11 +56,11 @@ bool Game::operator==(const Game& other)
 	return m_players.size() == other.m_players.size();
 }
 
-int Game::getScore(double PlayerAverageAnswerTime, int NumOfTotalAnswers, int NumOfPlayerGames)
+int Game::getScore(double PlayerAverageAnswerTime, int numOfCorrectAnswers, int NumOfPlayerGames)
 {
 	int score = 0;
 	const int QUESTIONS_PER_GAME = 10;
-	double avgCorrectAnswers = (double)NumOfTotalAnswers / (QUESTIONS_PER_GAME * NumOfPlayerGames);
+	double avgCorrectAnswers = (double)numOfCorrectAnswers / (QUESTIONS_PER_GAME * NumOfPlayerGames);
 
 	// the formula for the score : 5000(0.2 + avgCorrectAnswers)/(0.5 + (log(avgTime + 1)+1)/10)
 	score = 5000 * (0.2 + avgCorrectAnswers) / (0.5 + (log10(PlayerAverageAnswerTime + 1) + 1) / 10.0);
@@ -104,7 +106,7 @@ std::vector<PlayerResults> Game::getGameResults()
 		playerResult.correctAnswerCount = it->second.correctAnswerCount;
 		playerResult.wrongAnswerCount = it->second.wrongAnswerCount;
 		playerResult.username = it->first.getUserName();
-		playerResult.score = getScore(playerResult.averageAnswerTime, 10, 1);
+		playerResult.score = getScore(playerResult.averageAnswerTime, playerResult.correctAnswerCount, 1);
 		results.push_back(playerResult);
 	}
 

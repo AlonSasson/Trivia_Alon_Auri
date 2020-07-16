@@ -1,6 +1,6 @@
 #pragma once
 #include "json.hpp"
-
+#include <time.h>
 #include <string>
 typedef struct LoginRequest
 {
@@ -23,7 +23,7 @@ typedef struct SignupRequest
 typedef struct RequestInfo
 {
 	int id;
-	time_t receivalTime;
+	clock_t receivalTime;
 	unsigned char* buffer;
 } RequestInfo;
 
@@ -47,7 +47,7 @@ typedef struct JoinRoomRequest
 
 typedef struct SubmitAnswerReqest
 {
-	unsigned int answerId;
+	int answerId;
 }SubmitAnswerReqest;
 
 // convert json data to a request struct

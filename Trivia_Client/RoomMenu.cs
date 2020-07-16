@@ -14,6 +14,7 @@ namespace Trivia_Client
 {
     public partial class RoomMenu : Form
     {
+        private int timeForQuestion = -1;
         private BackgroundWorker updateThread = new BackgroundWorker();
        
         public RoomMenu()
@@ -78,9 +79,11 @@ namespace Trivia_Client
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            StopUpdate();
-            RequestHandler.StartGame(this);
-
+            if (timeForQuestion != -1)
+            {
+                StopUpdate();
+                RequestHandler.StartGame(this);
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -118,6 +121,7 @@ namespace Trivia_Client
         }
         public void SetParameters(string time)
         {
+            this.timeForQuestion = int.Parse(time);
             Action action = () => this.answerTimeout.Text = "Time for each question: " + time;
             this.answerTimeout.Invoke(action);
 
@@ -152,6 +156,21 @@ namespace Trivia_Client
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        public void StartGameWorked()
+        {
+            if (this.InvokeRequired)
+            {
+                Invoke(new MethodInvoker(delegate () { StartGameWorked(); }));
+            }
+            else 
+            {
+                StopUpdate();
+                this.Hide();
+                GameMenu gameMenu = new GameMenu(10, timeForQuestion);
+                gameMenu.ShowDialog();
+                this.Close();
+            }
         }
     }
 }

@@ -96,7 +96,7 @@ struct GetQuestionsResponse
 struct SubmitAnswerResponse
 {
 	unsigned int status;
-	unsigned int correctAnswerId;
+	int correctAnswerId;
 }typedef SubmitAnswerResponse;
 
 struct GetGameResultResponse
@@ -186,11 +186,17 @@ void to_json(json& j, const LeaveGameResponse& response)
 
 void to_json(json& j, const GetQestionResponse& response)
 {
-	j = json{ {"Status" , response.status , "Question" , response.question , "Answers" , response.answers} };
+	
+	json addToJson;
+	for (auto it = response.answers.begin();it != response.answers.end();it++)
+	{
+		addToJson[std::to_string(it->first)] = it->second;
+	}
+	j = json{ {"Status" , response.status } , { "Question" , response.question } ,{ "Answers" , addToJson } };
 }
 void to_json(json& j, const SubmitAnswerResponse& response)
 {
-	j = json{ {"Status" , response.status , "CorrectAnswerId" , response.correctAnswerId} };
+	j = json{ {"Status" , response.status },{ "CorrectAnswerId" , response.correctAnswerId } };
 }
 void to_json(json& j, const GetGameResultResponse& response)
 {

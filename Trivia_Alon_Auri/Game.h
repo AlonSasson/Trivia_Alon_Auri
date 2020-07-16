@@ -9,7 +9,7 @@ typedef struct GameData
 	unsigned int currentQuestion;
 	unsigned int correctAnswerCount;
 	unsigned int wrongAnswerCount;
-	unsigned int averageAnswerTime;
+	double averageAnswerTime;
 }GameData;
 
 class Game
@@ -24,7 +24,7 @@ public:
 	unsigned int submitAnswer(LoggedUser user, unsigned int id, double answerTime);
 	void removePlayer(LoggedUser user);
 	bool operator==(const Game& other);
-	static int getScore(double PlayerAverageAnswerTime, int NumOfTotalAnswers, int NumOfPlayerGames);
+	static int getScore(double PlayerAverageAnswerTime, int numOfCorrectAnswers, int NumOfPlayerGames);
 	bool isPlayerInGame(std::string username);
 	unsigned int playersInGame();
 	GameData& getPlayerData(LoggedUser user);

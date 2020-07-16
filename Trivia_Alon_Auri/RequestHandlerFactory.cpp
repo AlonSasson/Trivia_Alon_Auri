@@ -26,10 +26,11 @@ RoomMemberRequestHandler* RequestHandlerFactory::createRoomMemberRequestHanlder(
 	return new RoomMemberRequestHandler(*handlerFactory, m_user, m_room.getRoomData().id);
 }
 
-GameRequestHandler* RequestHandlerFactory::createGameRequestHandler(Game m_game, LoggedUser m_user)
+GameRequestHandler* RequestHandlerFactory::createGameRequestHandler(Game& m_game, LoggedUser m_user, clock_t time)
 {
+	std::cout << "create game: " << &m_game;
 	RequestHandlerFactory* handlerFactory = this;
-	return new GameRequestHandler(*handlerFactory, m_user, m_game);
+	return new GameRequestHandler(*handlerFactory, m_user, m_game, time);
 }
 
 // gets the login manager

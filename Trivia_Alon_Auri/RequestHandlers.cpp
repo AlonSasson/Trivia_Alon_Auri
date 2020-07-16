@@ -344,12 +344,12 @@ RequestResult RoomAdminRequestHandler::startGame(RequestInfo request)
 	StartGameResponse response;
 	response.status = OK;
 
-	//	m_handlerFactory.getGameManager().createGame(this->m_room);
+		m_handlerFactory.getGameManager().createGame(this->m_room);
 	try
 	{
-		//		Game game = m_handlerFactory.getGameManager().getGameForPlayer(this->m_user.getUserName());
-		m_room.setRoomState(Room::ROOM_WHILE_GAME);
-		//startGameResult.newHandler = m_handlerFactory.createGameRequestHandler(game, this->m_user); // move to next state
+		Game& game = m_handlerFactory.getGameManager().getGameForPlayer(this->m_user.getUserName());
+		m_handlerFactory.getRoomManager().getRoom(m_room.getRoomData().id).setRoomState(Room::ROOM_WHILE_GAME);
+		startGameResult.newHandler = m_handlerFactory.createGameRequestHandler(game, this->m_user, 0); // move to next state
 	}
 	catch (std::exception& e) // if no game has been found
 	{
@@ -464,8 +464,8 @@ RequestResult RoomMemberRequestHandler::startGame(RequestInfo request)
 	response.status = OK;
 	try
 	{
-		//		Game game = m_handlerFactory.getGameManager().getGameForPlayer(this->m_user.getUserName());
-		//		startGameResult.newHandler = m_handlerFactory.createGameRequestHandler(game, this->m_user); // move to next state
+		Game& game = m_handlerFactory.getGameManager().getGameForPlayer(this->m_user.getUserName());
+		startGameResult.newHandler = m_handlerFactory.createGameRequestHandler(game, this->m_user, 0); // move to next state
 	}
 	catch (std::exception& e) // if no game has been found
 	{
@@ -502,8 +502,8 @@ RequestResult RoomMemberRequestHandler::getRoomState(RequestInfo request)
 	return getRoomStateResult;
 }
 
-GameRequestHandler::GameRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Game game)
-	: m_game(game), m_user(m_user), m_handlerFactory(handlerFactory)
+GameRequestHandler::GameRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Game& game, clock_t time)
+	: m_game(game), m_user(m_user), m_handlerFactory(handlerFactory) , m_packetSendTime(time)
 {
 }
 
@@ -539,7 +539,7 @@ RequestResult GameRequestHandler::handleRequest(RequestInfo request)
 		ErrorResponse e;
 		e.message = "ERROR";
 		packetToReturn.response = JsonResponsePacketSerializer::serializeResponse(e);
-		packetToReturn.newHandler = m_handlerFactory.createGameRequestHandler(this->m_game, this->m_user);
+		packetToReturn.newHandler = m_handlerFactory.createGameRequestHandler(this->m_game, this->m_user, this->m_packetSendTime);
 	}
 	return packetToReturn;
 }
@@ -551,7 +551,6 @@ RequestResult GameRequestHandler::getQuestion(RequestInfo request)
 	Question question;
 	std::vector<std::string> answers;
 	response.status = OK;
-
 	question = this->m_game.getQuestionForUser(this->m_user);
 	response.question = question.getQuestion();
 	if (question.getQuestion() == "") // if there are no question left
@@ -567,9 +566,9 @@ RequestResult GameRequestHandler::getQuestion(RequestInfo request)
 	}
 
 	getQuestionResult.response = JsonResponsePacketSerializer::serializeGetQuestionResponse(response);
+	this->m_packetSendTime = clock();
 
-	getQuestionResult.newHandler = m_handlerFactory.createGameRequestHandler(this->m_game, this->m_user); // stay in same handler
-	this->m_packetSendTime = time(&this->m_packetSendTime);
+	getQuestionResult.newHandler = m_handlerFactory.createGameRequestHandler(this->m_game, this->m_user, this->m_packetSendTime); // stay in same handler
 	return getQuestionResult;
 }
 
@@ -579,15 +578,15 @@ RequestResult GameRequestHandler::submitAnswer(RequestInfo request)
 	SubmitAnswerResponse response;
 	SubmitAnswerReqest submitAnswerReqest;
 	response.status = OK;
-
+	response.correctAnswerId = 0;
 	submitAnswerReqest = JsonRequestPacketDeserializer::deserializerSubmitAnswerRequest(request.buffer);
 
-	time_t time = this->m_packetSendTime - request.receivalTime;
+	clock_t time = request.receivalTime -this->m_packetSendTime;
 
-	m_game.submitAnswer(m_user, submitAnswerReqest.answerId, (double)time);
+	response.correctAnswerId = m_game.submitAnswer(m_user, submitAnswerReqest.answerId, ((double)time) / CLOCKS_PER_SEC);
 	submitAnswerResult.response = JsonResponsePacketSerializer::serializeGetSubmitAnswerResponse(response);
 
-	submitAnswerResult.newHandler = m_handlerFactory.createGameRequestHandler(m_game, m_user); // stay in the same state
+	submitAnswerResult.newHandler = m_handlerFactory.createGameRequestHandler(m_game, m_user, this->m_packetSendTime); // stay in the same state
 
 	return submitAnswerResult;
 }
@@ -605,7 +604,7 @@ RequestResult GameRequestHandler::getGameResults(RequestInfo request)
 	response.results = m_game.getGameResults();
 	getGameResults.response = JsonResponsePacketSerializer::serializeGetGameResultsResponse(response);
 
-	getGameResults.newHandler = m_handlerFactory.createGameRequestHandler(m_game, m_user);
+	getGameResults.newHandler = m_handlerFactory.createGameRequestHandler(m_game, m_user, this->m_packetSendTime);
 
 	return getGameResults;
 }

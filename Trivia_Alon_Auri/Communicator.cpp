@@ -89,7 +89,6 @@ void Communicator::startHandleRequests(const int port)
 void Communicator::handleNewClient(SOCKET clientSocket)
 {
 	unsigned int len = 0;
-	time_t receivalTime;
 	unsigned char * buffer;
 	RequestInfo requestInfo;
 	
@@ -102,7 +101,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 			delete[] buffer;
 			break;
 		}	
-		requestInfo.receivalTime = time(&receivalTime);
+		requestInfo.receivalTime = clock();
 		requestInfo.id = buffer[0];
 
 		buffer = new unsigned char[LEN_SIZE];

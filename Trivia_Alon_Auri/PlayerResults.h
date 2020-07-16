@@ -6,6 +6,6 @@ typedef struct PlayerResults
 	unsigned int score;
 	unsigned int correctAnswerCount;
 	unsigned int wrongAnswerCount;
-	unsigned int averageAnswerTime;
+	double averageAnswerTime;
 
 } PlayerResults;

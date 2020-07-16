@@ -33,12 +33,13 @@ void Question::setAnswers(std::vector<std::string> answers)
 
 int Question::getCorrectAnswerId()
 {
-	int id;
-	for (int i = 0; i < m_possibleAnswers.size(); i++)
+	int id = 0;
+	int i = 0;
+	for (i = 0; i < m_possibleAnswers.size(); i++)
 	{
 		if (m_possibleAnswers[i] == m_correctAnswer)
 		{
-			id = i;
+			id = i + 1;
 		}
 	}
 	return id;

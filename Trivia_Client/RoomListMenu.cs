@@ -109,7 +109,7 @@ namespace Trivia_Client
         {
             while (true)
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(1000);
                 if (updateThread.CancellationPending)
                     break;
                 RequestHandler.GetRooms(this);

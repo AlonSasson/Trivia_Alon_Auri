@@ -18,8 +18,8 @@ void GameManager::createGame(Room room)
 	data.correctAnswerCount = 0;
 	data.currentQuestion = 0;
 	data.wrongAnswerCount = 0;
-
-	for (auto player = room.getAllUsers().begin(); player != room.getAllUsers().end(); player++)
+	std::vector<std::string> usersInRooms = room.getAllUsers();
+	for (auto player = usersInRooms.begin(); player != usersInRooms.end(); player++)
 	{
 		players.insert(std::pair<LoggedUser, GameData>(LoggedUser(*player), data));
 	}
@@ -40,7 +40,7 @@ void GameManager::deleteGame(Game game)
 	}
 }
 
-void GameManager::removePlayerInGame(LoggedUser user, Game game)
+void GameManager::removePlayerInGame(LoggedUser user, Game& game)
 {
 	GameData data = game.getPlayerData(user);
 
@@ -51,17 +51,18 @@ void GameManager::removePlayerInGame(LoggedUser user, Game game)
 	int NumOfTotalAnswers = this->m_database->getNumOfTotalAnswers(user.getUserName()) + 10;
 	double PlayerAverageAnswerTime = (this->m_database->getPlayerAverageAnswerTime(user.getUserName()) * (NumOfPlayerGames - 1) + data.averageAnswerTime) / NumOfPlayerGames;
 
-	this->m_database->updateStaticsDB(user.getUserName(), PlayerAverageAnswerTime, NumOfCorrectAnswers, NumOfTotalAnswers, NumOfPlayerGames, Game::getScore(PlayerAverageAnswerTime, NumOfTotalAnswers, NumOfPlayerGames));
+	this->m_database->updateStaticsDB(user.getUserName(), PlayerAverageAnswerTime, NumOfCorrectAnswers, NumOfTotalAnswers, NumOfPlayerGames, Game::getScore(PlayerAverageAnswerTime, NumOfCorrectAnswers, NumOfPlayerGames));
 }
 
 // gets the game which the player is in
 Game& GameManager::getGameForPlayer(std::string username)
 {
-	for (auto it = this->m_games.begin(); it != this->m_games.end(); it++)
+
+	for (int i = 0; i < m_games.size(); i++)
 	{
-		if (it->isPlayerInGame(username)) // if the player is in this game
+		if (m_games[i].isPlayerInGame(username)) // if the player is in this game
 		{
-			return *it;
+			return m_games[i];
 		}
 	}
 	throw std::exception("Game Not Found");

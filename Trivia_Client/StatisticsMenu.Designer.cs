@@ -56,7 +56,7 @@
             this.BackButton.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.BackButton.ForeColor = System.Drawing.Color.Black;
             this.BackButton.Location = new System.Drawing.Point(293, 385);
-            this.BackButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BackButton.Margin = new System.Windows.Forms.Padding(2);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(193, 58);
             this.BackButton.TabIndex = 3;
@@ -72,7 +72,7 @@
             this.Names.FormattingEnabled = true;
             this.Names.ItemHeight = 29;
             this.Names.Location = new System.Drawing.Point(61, 97);
-            this.Names.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Names.Margin = new System.Windows.Forms.Padding(2);
             this.Names.Name = "Names";
             this.Names.Size = new System.Drawing.Size(143, 145);
             this.Names.TabIndex = 6;
@@ -83,7 +83,7 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textBox1.Location = new System.Drawing.Point(61, 9);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(193, 43);
             this.textBox1.TabIndex = 7;
@@ -97,7 +97,7 @@
             this.Scores.FormattingEnabled = true;
             this.Scores.ItemHeight = 29;
             this.Scores.Location = new System.Drawing.Point(218, 97);
-            this.Scores.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Scores.Margin = new System.Windows.Forms.Padding(2);
             this.Scores.Name = "Scores";
             this.Scores.Size = new System.Drawing.Size(143, 145);
             this.Scores.TabIndex = 6;
@@ -116,7 +116,7 @@
             "4#",
             "5#"});
             this.Positions.Location = new System.Drawing.Point(21, 97);
-            this.Positions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Positions.Margin = new System.Windows.Forms.Padding(2);
             this.Positions.Name = "Positions";
             this.Positions.Size = new System.Drawing.Size(35, 145);
             this.Positions.TabIndex = 6;
@@ -127,7 +127,7 @@
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.ErrorImage = global::Trivia_Client.Properties.Resources.IdoMeleh;
             this.pictureBox1.Location = new System.Drawing.Point(61, 67);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 26);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -139,12 +139,12 @@
             this.NameBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(147)))), ((int)(((byte)(164)))));
             this.NameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.NameBox.Location = new System.Drawing.Point(550, 20);
-            this.NameBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NameBox.Location = new System.Drawing.Point(466, 20);
+            this.NameBox.Margin = new System.Windows.Forms.Padding(2);
             this.NameBox.Name = "NameBox";
-            this.NameBox.Size = new System.Drawing.Size(75, 30);
+            this.NameBox.Size = new System.Drawing.Size(159, 30);
             this.NameBox.TabIndex = 9;
-            this.NameBox.Text = "Name";
+            this.NameBox.Text = "Your stats";
             // 
             // textBox2
             // 
@@ -152,7 +152,7 @@
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textBox2.Location = new System.Drawing.Point(389, 97);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(219, 30);
             this.textBox2.TabIndex = 9;
@@ -164,7 +164,7 @@
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textBox3.Location = new System.Drawing.Point(389, 134);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(231, 30);
             this.textBox3.TabIndex = 9;
@@ -176,7 +176,7 @@
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textBox4.Location = new System.Drawing.Point(389, 168);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(220, 30);
             this.textBox4.TabIndex = 9;
@@ -188,7 +188,7 @@
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textBox5.Location = new System.Drawing.Point(389, 204);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(202, 30);
             this.textBox5.TabIndex = 9;
@@ -200,7 +200,7 @@
             this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textBox6.Location = new System.Drawing.Point(389, 240);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(202, 30);
             this.textBox6.TabIndex = 9;
@@ -212,7 +212,7 @@
             this.TimeBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TimeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.TimeBox.Location = new System.Drawing.Point(630, 97);
-            this.TimeBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TimeBox.Margin = new System.Windows.Forms.Padding(2);
             this.TimeBox.Name = "TimeBox";
             this.TimeBox.Size = new System.Drawing.Size(105, 30);
             this.TimeBox.TabIndex = 9;
@@ -223,7 +223,7 @@
             this.CorrectAnsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CorrectAnsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.CorrectAnsBox.Location = new System.Drawing.Point(630, 132);
-            this.CorrectAnsBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CorrectAnsBox.Margin = new System.Windows.Forms.Padding(2);
             this.CorrectAnsBox.Name = "CorrectAnsBox";
             this.CorrectAnsBox.Size = new System.Drawing.Size(105, 30);
             this.CorrectAnsBox.TabIndex = 9;
@@ -234,7 +234,7 @@
             this.TotalAnsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TotalAnsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.TotalAnsBox.Location = new System.Drawing.Point(630, 168);
-            this.TotalAnsBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TotalAnsBox.Margin = new System.Windows.Forms.Padding(2);
             this.TotalAnsBox.Name = "TotalAnsBox";
             this.TotalAnsBox.Size = new System.Drawing.Size(105, 30);
             this.TotalAnsBox.TabIndex = 9;
@@ -245,7 +245,7 @@
             this.GamesBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GamesBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.GamesBox.Location = new System.Drawing.Point(630, 204);
-            this.GamesBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GamesBox.Margin = new System.Windows.Forms.Padding(2);
             this.GamesBox.Name = "GamesBox";
             this.GamesBox.Size = new System.Drawing.Size(105, 30);
             this.GamesBox.TabIndex = 9;
@@ -256,7 +256,7 @@
             this.ScoreBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ScoreBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.ScoreBox.Location = new System.Drawing.Point(630, 240);
-            this.ScoreBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ScoreBox.Margin = new System.Windows.Forms.Padding(2);
             this.ScoreBox.Name = "ScoreBox";
             this.ScoreBox.Size = new System.Drawing.Size(105, 30);
             this.ScoreBox.TabIndex = 9;
@@ -285,7 +285,7 @@
             this.Controls.Add(this.Names);
             this.Controls.Add(this.BackButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "StatisticsMenu";
             this.Text = "Trivia!";
             this.Load += new System.EventHandler(this.StatisticsMenu_Load);

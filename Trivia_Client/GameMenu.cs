@@ -7,11 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Trivia_Client
 {
+    
     public partial class GameMenu : Form
     {
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,     // x-coordinate of upper-left corner
+            int nTopRect,      // y-coordinate of upper-left corner
+            int nRightRect,    // x-coordinate of lower-right corner
+            int nBottomRect,   // y-coordinate of lower-right corner
+            int nWidthEllipse, // height of ellipse
+            int nHeightEllipse // width of ellipse
+        );
         private int TimeLeft = 0;
         private int QuestionsLeft = 0;
         private int AnswerTimeout = 0;
@@ -19,10 +31,11 @@ namespace Trivia_Client
         public GameMenu(int questionCount, int answerTimeout)
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             QuestionsLeft = questionCount;
             AnswerTimeout = answerTimeout;
             TimeLeft = answerTimeout;
-            QuestionTimer.Start();
             RequestHandler.GetQuestion(this);
         }
 
@@ -47,6 +60,10 @@ namespace Trivia_Client
             QuestionsLeftBox.Text = QuestionsLeft.ToString();
             QuestionBox.Text = Question;
             TimeLeft = AnswerTimeout;
+            this.AnswerBox1.Text = Answers[1];
+            this.AnswerBox2.Text = Answers[2];
+            this.AnswerBox3.Text = Answers[3];
+            this.AnswerBox4.Text = Answers[4];
             ResetAnswers();
             QuestionTimer.Start();
         }
@@ -63,6 +80,7 @@ namespace Trivia_Client
 
         private void ResultTimer_Tick(object sender, EventArgs e)
         {
+            TimeLeft--;
             if(TimeLeft == 0)
             {
                 ResultTimer.Stop();
@@ -72,6 +90,7 @@ namespace Trivia_Client
 
         public void UpdateAnswerColor(int AnswerId, bool IsRight)
         {
+            Console.WriteLine(AnswerId);
             Button answer = null;
             PictureBox VButton = null;
 
@@ -93,6 +112,7 @@ namespace Trivia_Client
                     answer = AnswerBox4;
                     VButton = V4;
                     break;
+
             }
             VButton.Visible = true;
 
@@ -167,6 +187,7 @@ namespace Trivia_Client
 
         private void QuitButton_Click(object sender, EventArgs e)
         {
+            QuestionTimer.Stop();
             RequestHandler.LeaveGame(this);
         }
 
@@ -176,6 +197,11 @@ namespace Trivia_Client
             RoomListMenu roomListMenu = new RoomListMenu();
             roomListMenu.ShowDialog();
             this.Close();
+        }
+
+        private void GameMenu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

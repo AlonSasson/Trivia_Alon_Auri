@@ -103,6 +103,9 @@ namespace Trivia_Client
                 case (int)Codes.CLOSE_ROOM:
                     CloseRoom(Deserializer.DeserialiseResponse<CloseRoomResponse>(response.Buffer), form);
                     break;
+                case (int)Codes.START_GAME:
+                    StartGame(Deserializer.DeserialiseResponse<StartGameResponse>(response.Buffer), form);
+                    break;
                 case (int)Codes.GET_PLAYERS_IN_ROOM:
                     GetPlayersInRoom(Deserializer.DeserialiseResponse<GetPlayersInRoomResponse>(response.Buffer), form);
                     break;
@@ -255,6 +258,18 @@ namespace Trivia_Client
                 ((RoomMenu)form).showErrorBox(error);
             }
         }
+        private static void StartGame(Responses.StartGameResponse response, Form form)
+        {
+            string error = "Failed to start game";
+            if(response.Status == (int)ResultCodes.OK)
+            {
+                ((RoomMenu)form).StartGameWorked();
+            }
+            else
+            {
+                ((RoomMenu)form).showErrorBox(error);
+            }
+        }
         private static void GetPlayersInRoom(Responses.GetPlayersInRoomResponse response, Form form)
         {
             string error = "Failed to Get players in room";
@@ -313,7 +328,7 @@ namespace Trivia_Client
         {
             if (response.Status == (int)ResultCodes.OK)
             {
-                if (typeof(SignupMenu).IsInstanceOfType(form))
+                if (typeof(GameMenu).IsInstanceOfType(form))
                 {
                     ((GameMenu)form).QuitWorked();
                 }

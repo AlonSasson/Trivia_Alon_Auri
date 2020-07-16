@@ -47,6 +47,10 @@ namespace Trivia_Client
         {
             public int Status { get; set; }
         }
+        public class StartGameResponse : Response
+        { 
+            public int Status { get; set; }
+        }
         public class CreateRoomResponse : Response
         {
             public int Status { get; set; }

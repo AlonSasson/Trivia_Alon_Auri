@@ -95,12 +95,12 @@ class RequestHandlerFactory;
 class GameRequestHandler : public IRequestHandler
 {
 private:
-	Game m_game;
+	Game& m_game;
 	LoggedUser m_user;
 	RequestHandlerFactory& m_handlerFactory;
-	time_t m_packetSendTime;
+	clock_t m_packetSendTime;
 public:
-	GameRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Game game);
+	GameRequestHandler(RequestHandlerFactory& handlerFactory, LoggedUser m_user, Game& game, clock_t time);
 	bool isRequestRelevant(RequestInfo request);
 	RequestResult handleRequest(RequestInfo request);
 	RequestResult getQuestion(RequestInfo);
