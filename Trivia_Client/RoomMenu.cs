@@ -19,8 +19,13 @@ namespace Trivia_Client
        
         public RoomMenu()
         {
+            
             updateThread.WorkerSupportsCancellation = true;
             InitializeComponent();
+            if(!this.IsHandleCreated)
+            {
+                this.CreateHandle();
+            }
             updateThread.DoWork += UpdateScreen;
             updateThread.RunWorkerAsync();
 
@@ -109,6 +114,7 @@ namespace Trivia_Client
         }
         public void addPlayers(List<string> list)
         {
+
             Action action = () => PlayerList.Items.Clear();
             PlayerList.Invoke(action);
             foreach (string roomName in list)

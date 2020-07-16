@@ -185,7 +185,6 @@ void Communicator::handleRequest(RequestInfo requestInfo, SOCKET clientSocket)
 	
 
 	len = CODE_SIZE + LEN_SIZE + decodeRequestLen(&requestResult.response[CODE_SIZE]); // get response length
-	std::cout << requestResult.response << "\n";
 
 	if (send(clientSocket, (char*)requestResult.response, len, NULL) == INVALID_SOCKET) // if sending the data failed
 		cerr << "Failed to send data to client";
