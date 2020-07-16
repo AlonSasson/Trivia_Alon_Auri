@@ -49,7 +49,7 @@ namespace Trivia_Client
         public void ShowStatistics(String Statistics)
         {
             Dictionary<String, double> Stats = JsonConvert.DeserializeObject<Dictionary<String, double>>(Statistics);
-            this.TimeBox.Text = Stats["avg_answer_time"].ToString();
+            this.TimeBox.Text = Stats["avg_answer_time"].ToString("0.00");
             this.CorrectAnsBox.Text = Stats["correct_answers"].ToString();
             this.TotalAnsBox.Text = Stats["total_answers"].ToString();
             this.GamesBox.Text = Stats["games_played"].ToString();

@@ -130,6 +130,7 @@ void Communicator::handleNewClient(SOCKET clientSocket)
 		}
 		this->handleRequest(requestInfo, clientSocket);
 	}
+	m_clients[clientSocket]->quitEarly();
 	this->m_clients.erase(clientSocket); // remove client from client list
 	for (auto it = this->m_users.begin(); it != this->m_users.end(); it++)
 	{
@@ -185,7 +186,6 @@ void Communicator::handleRequest(RequestInfo requestInfo, SOCKET clientSocket)
 	
 
 	len = CODE_SIZE + LEN_SIZE + decodeRequestLen(&requestResult.response[CODE_SIZE]); // get response length
-	std::cout << requestResult.response << "\n";
 
 	if (send(clientSocket, (char*)requestResult.response, len, NULL) == INVALID_SOCKET) // if sending the data failed
 		cerr << "Failed to send data to client";

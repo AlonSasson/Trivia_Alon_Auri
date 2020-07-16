@@ -114,11 +114,11 @@ namespace Trivia_Client
         }
         public class PlayerResults
         {
-            private String Username { get; set; }
-            private int CorrectAnswerCount { get; set; }
-            private int WrongAnswerCount { get; set; }
-            private int AverageAnswerTime { get; set; }
-            private int Score { get; set; }
+            public String Username { get; set; }
+            public int CorrectAnswerCount { get; set; }
+            public int WrongAnswerCount { get; set; }
+            public double AverageAnswerTime { get; set; }
+            public int Score { get; set; }
         }
     }
 }

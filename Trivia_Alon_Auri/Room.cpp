@@ -12,9 +12,7 @@ bool Room::addUser(LoggedUser user)
 		}
 	}
 	m_users.push_back(user);
-	for (int i = 0; i < m_users.size(); i++) {
-		std::cout << m_users.at(i).getUserName() << ' ';
-	}
+
 	return true;
 }
 

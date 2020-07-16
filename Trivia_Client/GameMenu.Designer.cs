@@ -62,7 +62,7 @@
             this.AnswerBox1.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.AnswerBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.AnswerBox1.Location = new System.Drawing.Point(23, 124);
-            this.AnswerBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AnswerBox1.Margin = new System.Windows.Forms.Padding(2);
             this.AnswerBox1.Name = "AnswerBox1";
             this.AnswerBox1.Size = new System.Drawing.Size(369, 50);
             this.AnswerBox1.TabIndex = 5;
@@ -78,7 +78,7 @@
             this.AnswerBox2.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.AnswerBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.AnswerBox2.Location = new System.Drawing.Point(23, 178);
-            this.AnswerBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AnswerBox2.Margin = new System.Windows.Forms.Padding(2);
             this.AnswerBox2.Name = "AnswerBox2";
             this.AnswerBox2.Size = new System.Drawing.Size(369, 50);
             this.AnswerBox2.TabIndex = 5;
@@ -94,7 +94,7 @@
             this.AnswerBox3.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.AnswerBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.AnswerBox3.Location = new System.Drawing.Point(23, 232);
-            this.AnswerBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AnswerBox3.Margin = new System.Windows.Forms.Padding(2);
             this.AnswerBox3.Name = "AnswerBox3";
             this.AnswerBox3.Size = new System.Drawing.Size(369, 50);
             this.AnswerBox3.TabIndex = 5;
@@ -110,7 +110,7 @@
             this.AnswerBox4.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.AnswerBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(184)))), ((int)(((byte)(206)))));
             this.AnswerBox4.Location = new System.Drawing.Point(23, 285);
-            this.AnswerBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AnswerBox4.Margin = new System.Windows.Forms.Padding(2);
             this.AnswerBox4.Name = "AnswerBox4";
             this.AnswerBox4.Size = new System.Drawing.Size(369, 50);
             this.AnswerBox4.TabIndex = 5;
@@ -123,7 +123,7 @@
             // 
             this.QuestionBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(36)))), ((int)(((byte)(50)))));
             this.QuestionBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.QuestionBox.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.QuestionBox.Font = new System.Drawing.Font("David", 16F);
             this.QuestionBox.ForeColor = System.Drawing.Color.White;
             this.QuestionBox.Location = new System.Drawing.Point(23, 54);
             this.QuestionBox.Multiline = true;
@@ -137,7 +137,7 @@
             // 
             this.pictureBox1.Image = global::Trivia_Client.Properties.Resources.Timer;
             this.pictureBox1.Location = new System.Drawing.Point(668, 18);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(66, 78);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -151,7 +151,7 @@
             this.TimeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.TimeBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.TimeBox.Location = new System.Drawing.Point(680, 46);
-            this.TimeBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TimeBox.Margin = new System.Windows.Forms.Padding(2);
             this.TimeBox.Name = "TimeBox";
             this.TimeBox.ReadOnly = true;
             this.TimeBox.Size = new System.Drawing.Size(42, 30);
@@ -171,7 +171,7 @@
             this.CorrectAnswersBox.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CorrectAnswersBox.ForeColor = System.Drawing.Color.CadetBlue;
             this.CorrectAnswersBox.Location = new System.Drawing.Point(680, 190);
-            this.CorrectAnswersBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CorrectAnswersBox.Margin = new System.Windows.Forms.Padding(2);
             this.CorrectAnswersBox.Name = "CorrectAnswersBox";
             this.CorrectAnswersBox.ReadOnly = true;
             this.CorrectAnswersBox.Size = new System.Drawing.Size(38, 26);
@@ -185,7 +185,7 @@
             this.QuestionsLeftBox.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.QuestionsLeftBox.ForeColor = System.Drawing.Color.CadetBlue;
             this.QuestionsLeftBox.Location = new System.Drawing.Point(680, 136);
-            this.QuestionsLeftBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.QuestionsLeftBox.Margin = new System.Windows.Forms.Padding(2);
             this.QuestionsLeftBox.Name = "QuestionsLeftBox";
             this.QuestionsLeftBox.ReadOnly = true;
             this.QuestionsLeftBox.Size = new System.Drawing.Size(42, 26);
@@ -199,7 +199,7 @@
             this.textBox1.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.CadetBlue;
             this.textBox1.Location = new System.Drawing.Point(459, 136);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(182, 26);
@@ -213,7 +213,7 @@
             this.textBox2.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.ForeColor = System.Drawing.Color.CadetBlue;
             this.textBox2.Location = new System.Drawing.Point(459, 190);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(182, 26);
@@ -227,7 +227,7 @@
             this.QuitButton.Font = new System.Drawing.Font("David", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.QuitButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(49)))));
             this.QuitButton.Location = new System.Drawing.Point(566, 376);
-            this.QuitButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.QuitButton.Margin = new System.Windows.Forms.Padding(2);
             this.QuitButton.Name = "QuitButton";
             this.QuitButton.Size = new System.Drawing.Size(157, 50);
             this.QuitButton.TabIndex = 29;
@@ -304,7 +304,7 @@
             this.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GameMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trivia!";

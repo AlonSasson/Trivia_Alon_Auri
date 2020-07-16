@@ -132,10 +132,10 @@
             this.errorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.errorTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.errorTextBox.ForeColor = System.Drawing.Color.Red;
-            this.errorTextBox.Location = new System.Drawing.Point(99, 331);
+            this.errorTextBox.Location = new System.Drawing.Point(28, 331);
             this.errorTextBox.Name = "errorTextBox";
             this.errorTextBox.ReadOnly = true;
-            this.errorTextBox.Size = new System.Drawing.Size(100, 22);
+            this.errorTextBox.Size = new System.Drawing.Size(338, 22);
             this.errorTextBox.TabIndex = 10;
             this.errorTextBox.Text = "error";
             this.errorTextBox.Visible = false;

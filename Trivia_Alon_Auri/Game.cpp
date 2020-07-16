@@ -33,7 +33,6 @@ unsigned int Game::submitAnswer(LoggedUser user, unsigned int id, double answerT
 		m_players[user].wrongAnswerCount++;
 	}
 	m_players[user].currentQuestion++;
-	std::cout << ((m_players[user].averageAnswerTime * m_players[user].currentQuestion) + answerTime) / (double)(m_players[user].currentQuestion + 1);
 	m_players[user].averageAnswerTime = ((m_players[user].averageAnswerTime * m_players[user].currentQuestion) + answerTime) / (double)(m_players[user].currentQuestion + 1);
 	return answerId;
 }

@@ -203,5 +203,12 @@ namespace Trivia_Client
         {
 
         }
+        public void NeedResults()
+        {
+            this.Hide();
+            ResultMenu resultMenu = new ResultMenu();
+            resultMenu.ShowDialog();
+            this.Close();
+        }
     }
 }

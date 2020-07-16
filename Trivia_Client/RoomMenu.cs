@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Runtime.InteropServices;
 
 namespace Trivia_Client
 {
@@ -16,11 +16,27 @@ namespace Trivia_Client
     {
         private int timeForQuestion = -1;
         private BackgroundWorker updateThread = new BackgroundWorker();
-       
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+ (
+      int nLeftRect,     // x-coordinate of upper-left corner
+      int nTopRect,      // y-coordinate of upper-left corner
+      int nRightRect,    // x-coordinate of lower-right corner
+      int nBottomRect,   // y-coordinate of lower-right corner
+      int nWidthEllipse, // height of ellipse
+      int nHeightEllipse // width of ellipse
+ );
         public RoomMenu()
         {
+            
             updateThread.WorkerSupportsCancellation = true;
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            if (!this.IsHandleCreated)
+            {
+                this.CreateHandle();
+            }
             updateThread.DoWork += UpdateScreen;
             updateThread.RunWorkerAsync();
 
@@ -109,6 +125,7 @@ namespace Trivia_Client
         }
         public void addPlayers(List<string> list)
         {
+
             Action action = () => PlayerList.Items.Clear();
             PlayerList.Invoke(action);
             foreach (string roomName in list)

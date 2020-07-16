@@ -148,22 +148,7 @@ namespace Trivia_Client
         {
             bool nameNotInList = true;
 
-            foreach(object name in PlayerList.Items)
-            {
-                nameNotInList = true;
-                foreach(string playerName in list)
-                {
-                    if(name.ToString().Equals(playerName))
-                    {
-                        nameNotInList = false;
-                    }
-                    
-                }
-                if(nameNotInList)
-                {
-                    PlayerList.Items.Remove(name);   
-                }
-            }
+            PlayerList.Items.Clear();
             nameNotInList = true;
             foreach (string playerName in list)
            {
@@ -186,7 +171,9 @@ namespace Trivia_Client
 
         private void RoomList_MouseClick(object sender, MouseEventArgs e)
         {
-            PlayerList.Location = e.Location;
+            Point mouseLocation = e.Location;
+            mouseLocation.Y = mouseLocation.Y + 38;
+            PlayerList.Location = mouseLocation;
         }
 
         private void errorTextBox_TextChanged(object sender, EventArgs e)
@@ -229,6 +216,16 @@ namespace Trivia_Client
             StatisticsMenu StatsMenu = new StatisticsMenu();
             StatsMenu.ShowDialog();
             this.Close();
+        }
+
+        private void PlayerList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

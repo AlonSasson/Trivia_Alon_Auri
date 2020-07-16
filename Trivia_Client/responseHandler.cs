@@ -332,8 +332,8 @@ namespace Trivia_Client
                 {
                     ((GameMenu)form).QuitWorked();
                 }
-                // else if (typeof(ResultsMenu).IsInstanceOfType(form))
-                // ((ResultsMenu)form).LeaveWorked();
+                 else if (typeof(ResultMenu).IsInstanceOfType(form))
+                    ((ResultMenu)form).QuitWorked();
             }
         }
         private static void GetQuestion(Responses.GetQuestionResponse response, Form form)
@@ -344,7 +344,7 @@ namespace Trivia_Client
             }
             else // if there are no more questions, the game ended
             {
-                RequestHandler.GetGameResults(form);
+                ((GameMenu)form).NeedResults();
             }
         }
         private static void SubmitAnswer(Responses.SubmitAnswerResponse response, Form form)
@@ -356,9 +356,18 @@ namespace Trivia_Client
         }
         private static void GetGameResults(Responses.GetGameResultsResponse response, Form form)
         {
+            List<string> results = new List<string>();
+            string resultStr;
             if (response.Status == (int)ResultCodes.OK)
             {
-                // ((GameMenu)form).leaveRoomWorked();
+
+                foreach(PlayerResults result in response.Results)
+                {
+                    result.AverageAnswerTime = Convert.ToDouble(result.AverageAnswerTime.ToString("0.00"));
+                    resultStr = result.Username + "\t   " + result.CorrectAnswerCount + "\t\t" + result.WrongAnswerCount + "\t   " + result.AverageAnswerTime + "\t\t" + result.Score;
+                    results.Add(resultStr);
+                }
+                ((ResultMenu)form).UpdateResults(results);
             }
         }
 
